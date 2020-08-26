@@ -2,50 +2,14 @@ BufferManager::BufferManager
 ParseQuery::clear
 
 Reading New Command: 
-LT TABLES
-doCommand
-syntacticParse
-ParseQuery::clear
-
-Reading New Command: 
-LIST TABLES;
+LIST TABLES
 doCommand
 syntacticParse
 syntacticParseLIST
-ParseQuery::clear
-
-Reading New Command: 
-LIST TABLES;
-doCommand
-syntacticParse
-syntacticParseLIST
-ParseQuery::clear
-
-Reading New Command: 
-LIST TABLES;
-doCommand
-syntacticParse
-syntacticParseLIST
-ParseQuery::clear
-
-Reading New Command: 
-LOAD A;
-doCommand
-syntacticParse
-syntacticParseLOAD
 semanticParse
-semanticParseLOAD
-TableCatalogue::isTable
-ParseQuery::clear
-
-Reading New Command: 
-LOAD A.csv
-doCommand
-syntacticParse
-syntacticParseLOAD
-semanticParse
-semanticParseLOAD
-TableCatalogue::isTable
+semanticParseLIST
+executeLIST
+TableCatalogue::print
 ParseQuery::clear
 
 Reading New Command: 
@@ -141,16 +105,6 @@ Table::printRow
 ParseQuery::clear
 
 Reading New Command: 
-LOAD EMPLOYEES
-doCommand
-syntacticParse
-syntacticParseLOAD
-semanticParse
-semanticParseLOAD
-TableCatalogue::isTable
-ParseQuery::clear
-
-Reading New Command: 
 LOAD EMPLOYEE
 doCommand
 syntacticParse
@@ -173,183 +127,7 @@ TableCatalogue::~insertTable
 ParseQuery::clear
 
 Reading New Command: 
-LOAD DEPARTMENT
-doCommand
-syntacticParse
-syntacticParseLOAD
-semanticParse
-semanticParseLOAD
-TableCatalogue::isTable
-executeLOAD
-Table::Table
-Table::load
-Table::extractColumnNames
-Table::blockify
-BufferManager::writePage
-Page::Page
-Page::writePage
-TableCatalogue::~insertTable
-ParseQuery::clear
-
-Reading New Command: 
-LOAD PROJECT
-doCommand
-syntacticParse
-syntacticParseLOAD
-semanticParse
-semanticParseLOAD
-TableCatalogue::isTable
-executeLOAD
-Table::Table
-Table::load
-Table::extractColumnNames
-Table::blockify
-BufferManager::writePage
-Page::Page
-Page::writePage
-TableCatalogue::~insertTable
-ParseQuery::clear
-
-Reading New Command: 
-LOAD WORKS_ON
-doCommand
-syntacticParse
-syntacticParseLOAD
-semanticParse
-semanticParseLOAD
-TableCatalogue::isTable
-executeLOAD
-Table::Table
-Table::load
-Table::extractColumnNames
-Table::blockify
-BufferManager::writePage
-Page::Page
-Page::writePage
-BufferManager::writePage
-Page::Page
-Page::writePage
-TableCatalogue::~insertTable
-ParseQuery::clear
-
-Reading New Command: 
-LIST TABLES
-doCommand
-syntacticParse
-syntacticParseLIST
-semanticParse
-semanticParseLIST
-executeLIST
-TableCatalogue::print
-ParseQuery::clear
-
-Reading New Command: 
-ANNARA <- PROJECT Super_ssn FROM EMPLOYWW
-doCommand
-syntacticParse
-syntacticParsePROJECTION
-semanticParse
-semanticParsePROJECTION
-TableCatalogue::isTable
-TableCatalogue::isTable
-ParseQuery::clear
-
-Reading New Command: 
- ANNARA <- PROJECT Super_ssn FROM EMPLOYEE
-doCommand
-syntacticParse
-syntacticParsePROJECTION
-semanticParse
-semanticParsePROJECTION
-TableCatalogue::isTable
-TableCatalogue::isTable
-TableCatalogue::getTable
-Table::isColumn
-executePROJECTION
-Table::Table
-Table::printRow
-Table::printRow
-TableCatalogue::getTable
-Table::getCursor
-Cursor::Cursor
-BufferManager::getPage
-BufferManager::inPool
-BufferManager::insertIntoPool
-Page::Page
-TableCatalogue::getTable
-Table::getColumnIndex
-Cursor::geNext
-Page::getRow
-Table::printRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-TableCatalogue::getTable
-Table::getNext
-Cursor::nextPage
-BufferManager::getPage
-BufferManager::inPool
-BufferManager::insertIntoPool
-Page::Page
-TableCatalogue::getTable
-Page::getRow
-Table::printRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-TableCatalogue::getTable
-Table::getNext
-Table::blockify
-BufferManager::writePage
-Page::Page
-Page::writePage
-TableCatalogue::~insertTable
-ParseQuery::clear
-
-Reading New Command: 
-LIST ANNARA
-doCommand
-syntacticParse
-syntacticParseLIST
-ParseQuery::clear
-
-Reading New Command: 
-LIST TABLES
-doCommand
-syntacticParse
-syntacticParseLIST
-semanticParse
-semanticParseLIST
-executeLIST
-TableCatalogue::print
-ParseQuery::clear
-
-Reading New Command: 
-PRINT ANNARA
+PRINT A
 doCommand
 syntacticParse
 syntacticParsePRINT
@@ -363,22 +141,33 @@ Table::printRow
 Cursor::Cursor
 BufferManager::getPage
 BufferManager::inPool
-BufferManager::insertIntoPool
-Page::Page
+BufferManager::getFromPool
+Cursor::geNext
+Page::getRow
+Table::printRow
+Cursor::geNext
+Page::getRow
+Table::printRow
+Cursor::geNext
+Page::getRow
+Table::printRow
+Cursor::geNext
+Page::getRow
+Table::printRow
+Cursor::geNext
+Page::getRow
+Table::printRow
+Cursor::geNext
+Page::getRow
+Table::printRow
+Cursor::geNext
+Page::getRow
 TableCatalogue::getTable
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
+Table::getNext
+Cursor::nextPage
+BufferManager::getPage
+BufferManager::inPool
+BufferManager::getFromPool
 Page::getRow
 Table::printRow
 Cursor::geNext
@@ -393,3 +182,29 @@ Table::printRow
 ParseQuery::clear
 
 Reading New Command: 
+CLEAR A
+doCommand
+syntacticParse
+syntacticParseCLEAR
+semanticParse
+semanticParseCLEAR
+TableCatalogue::isTable
+executeCLEAR
+TableCatalogue::deleteTable
+Table::~unload
+BufferManager::deleteFile
+BufferManager::deleteFile: Success
+BufferManager::deleteFile
+BufferManager::deleteFile: Success
+Table::isPermanent
+ParseQuery::clear
+
+Reading New Command: 
+QUIT
+TableCatalogue::~TableCatalogue
+Table::~unload
+BufferManager::deleteFile
+BufferManager::deleteFile: Success
+BufferManager::deleteFile
+BufferManager::deleteFile: Success
+Table::isPermanent
