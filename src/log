@@ -2,17 +2,6 @@ BufferManager::BufferManager
 ParseQuery::clear
 
 Reading New Command: 
-LIST TABLES
-doCommand
-syntacticParse
-syntacticParseLIST
-semanticParse
-semanticParseLIST
-executeLIST
-TableCatalogue::print
-ParseQuery::clear
-
-Reading New Command: 
 LOAD A
 doCommand
 syntacticParse
@@ -35,73 +24,22 @@ TableCatalogue::~insertTable
 ParseQuery::clear
 
 Reading New Command: 
-LIST TABLES
+LOAD B
 doCommand
 syntacticParse
-syntacticParseLIST
+syntacticParseLOAD
 semanticParse
-semanticParseLIST
-executeLIST
-TableCatalogue::print
-ParseQuery::clear
-
-Reading New Command: 
-PRINT A
-doCommand
-syntacticParse
-syntacticParsePRINT
-semanticParse
-semanticParsePRINT
+semanticParseLOAD
 TableCatalogue::isTable
-executePRINT
-TableCatalogue::getTable
-Table::print
-Table::printRow
-Cursor::Cursor
-BufferManager::getPage
-BufferManager::inPool
-BufferManager::insertIntoPool
+executeLOAD
+Table::Table
+Table::load
+Table::extractColumnNames
+Table::blockify
+BufferManager::writePage
 Page::Page
-TableCatalogue::getTable
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-TableCatalogue::getTable
-Table::getNext
-Cursor::nextPage
-BufferManager::getPage
-BufferManager::inPool
-BufferManager::insertIntoPool
-Page::Page
-TableCatalogue::getTable
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
+Page::writePage
+TableCatalogue::~insertTable
 ParseQuery::clear
 
 Reading New Command: 
@@ -141,7 +79,9 @@ Table::printRow
 Cursor::Cursor
 BufferManager::getPage
 BufferManager::inPool
-BufferManager::getFromPool
+BufferManager::insertIntoPool
+Page::Page
+TableCatalogue::getTable
 Cursor::geNext
 Page::getRow
 Table::printRow
@@ -167,7 +107,9 @@ Table::getNext
 Cursor::nextPage
 BufferManager::getPage
 BufferManager::inPool
-BufferManager::getFromPool
+BufferManager::insertIntoPool
+Page::Page
+TableCatalogue::getTable
 Page::getRow
 Table::printRow
 Cursor::geNext
@@ -179,24 +121,6 @@ Table::printRow
 Cursor::geNext
 Page::getRow
 Table::printRow
-ParseQuery::clear
-
-Reading New Command: 
-CLEAR A
-doCommand
-syntacticParse
-syntacticParseCLEAR
-semanticParse
-semanticParseCLEAR
-TableCatalogue::isTable
-executeCLEAR
-TableCatalogue::deleteTable
-Table::~unload
-BufferManager::deleteFile
-BufferManager::deleteFile: Success
-BufferManager::deleteFile
-BufferManager::deleteFile: Success
-Table::isPermanent
 ParseQuery::clear
 
 Reading New Command: 
@@ -205,6 +129,16 @@ TableCatalogue::~TableCatalogue
 Table::~unload
 BufferManager::deleteFile
 BufferManager::deleteFile: Success
+BufferManager::deleteFile
+BufferManager::deleteFile: Success
+Table::isPermanent
+Table::~unload
+BufferManager::deleteFile
+BufferManager::deleteFile: Success
+BufferManager::deleteFile
+BufferManager::deleteFile: Success
+Table::isPermanent
+Table::~unload
 BufferManager::deleteFile
 BufferManager::deleteFile: Success
 Table::isPermanent

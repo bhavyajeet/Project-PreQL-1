@@ -1,4 +1,5 @@
 #include "tableCatalogue.h"
+#include "matrixCatalogue.h"
 
 using namespace std;
 
@@ -122,4 +123,5 @@ bool syntacticParseSORT();
 bool syntacticParseSOURCE();
 
 bool isFileExists(string tableName);
+bool isFileExists(string MatrixName);
 bool isQueryFile(string fileName);
