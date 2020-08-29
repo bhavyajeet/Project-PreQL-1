@@ -18,11 +18,14 @@ public:
     string MatrixName = "";
     vector<string> columns;
     vector<uint> distinctValuesPerColumnCount;
+    vector<uint> distinctValuesPerRowCount;
     uint columnCount = 0;
     long long int rowCount = 0;
     uint blockCount = 0;
     uint maxRowsPerBlock = 0;
+    uint maxColumnsPerBlock = 0;
     vector<uint> rowsPerBlockCount;
+    vector<uint> columnsPerBlockCount;
     bool indexed = false;
     string indexedColumn = "";
     

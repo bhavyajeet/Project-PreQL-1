@@ -7,6 +7,7 @@ Page::Page()
 {
     this->pageName = "";
     this->tableName = "";
+    this->MatrixName = "";
     this->pageIndex = -1;
     this->rowCount = 0;
     this->columnCount = 0;

@@ -4,6 +4,19 @@ bool syntacticParse()
 {
     logger.log("syntacticParse");
     string possibleQueryType = tokenizedQuery[0];
+    string parametersQuery = "";
+    if(tokenizedQuery[1] != "")
+    {
+        parametersQuery = tokenizedQuery[1];
+    }
+    if(parametersQuery == "MATRIX" && possibleQueryType == "LOAD")
+    {
+        possibleQueryType = "LOADMATRIX";
+    }
+    else if(parametersQuery == "MATRIX" && possibleQueryType == "EXPORT")
+    {
+        possibleQueryType = "EXPORTMATRIX";
+    }
 
     if (tokenizedQuery.size() < 2)
     {
@@ -27,6 +40,12 @@ bool syntacticParse()
         return syntacticParseEXPORT();
     else if(possibleQueryType == "SOURCE")
         return syntacticParseSOURCE();
+    else if(possibleQueryType == "LOADMATRIX")
+        return syntacticParseLOADMATRIX();
+    else if(possibleQueryType == "EXPORTMATRIX")
+        return syntacticParseEXPORTMATRIX();
+    else if(possibleQueryType == "TRANSPOSE")
+        return syntacticParseTRANSPOSE();
     else
     {
         string resultantRelationName = possibleQueryType;

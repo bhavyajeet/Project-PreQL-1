@@ -13,6 +13,7 @@
 class Page{
 
     string tableName;
+    string MatrixName;
     string pageIndex;
     int columnCount;
     int rowCount;

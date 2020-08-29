@@ -2,143 +2,31 @@ BufferManager::BufferManager
 ParseQuery::clear
 
 Reading New Command: 
-LOAD A
+LOAD MATRIX ANNA
 doCommand
 syntacticParse
-syntacticParseLOAD
+syntacticParseLOADMATRIX
 semanticParse
-semanticParseLOAD
-TableCatalogue::isTable
-executeLOAD
-Table::Table
-Table::load
-Table::extractColumnNames
-Table::blockify
-BufferManager::writePage
-Page::Page
-Page::writePage
-BufferManager::writePage
-Page::Page
-Page::writePage
-TableCatalogue::~insertTable
+semanticParseLOADMATRIX
+executeLOADMATRIX
 ParseQuery::clear
 
 Reading New Command: 
-LOAD B
+TRANPOSE RA
 doCommand
 syntacticParse
-syntacticParseLOAD
-semanticParse
-semanticParseLOAD
-TableCatalogue::isTable
-executeLOAD
-Table::Table
-Table::load
-Table::extractColumnNames
-Table::blockify
-BufferManager::writePage
-Page::Page
-Page::writePage
-TableCatalogue::~insertTable
 ParseQuery::clear
 
 Reading New Command: 
-LOAD EMPLOYEE
+TRANSPOSE RA
 doCommand
 syntacticParse
-syntacticParseLOAD
+syntacticParseTRANSPOSE
 semanticParse
-semanticParseLOAD
-TableCatalogue::isTable
-executeLOAD
-Table::Table
-Table::load
-Table::extractColumnNames
-Table::blockify
-BufferManager::writePage
-Page::Page
-Page::writePage
-BufferManager::writePage
-Page::Page
-Page::writePage
-TableCatalogue::~insertTable
-ParseQuery::clear
-
-Reading New Command: 
-PRINT A
-doCommand
-syntacticParse
-syntacticParsePRINT
-semanticParse
-semanticParsePRINT
-TableCatalogue::isTable
-executePRINT
-TableCatalogue::getTable
-Table::print
-Table::printRow
-Cursor::Cursor
-BufferManager::getPage
-BufferManager::inPool
-BufferManager::insertIntoPool
-Page::Page
-TableCatalogue::getTable
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-TableCatalogue::getTable
-Table::getNext
-Cursor::nextPage
-BufferManager::getPage
-BufferManager::inPool
-BufferManager::insertIntoPool
-Page::Page
-TableCatalogue::getTable
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
+semanticParseTRANSPOSE
+executeTRANSPOSE
 ParseQuery::clear
 
 Reading New Command: 
 QUIT
 TableCatalogue::~TableCatalogue
-Table::~unload
-BufferManager::deleteFile
-BufferManager::deleteFile: Success
-BufferManager::deleteFile
-BufferManager::deleteFile: Success
-Table::isPermanent
-Table::~unload
-BufferManager::deleteFile
-BufferManager::deleteFile: Success
-BufferManager::deleteFile
-BufferManager::deleteFile: Success
-Table::isPermanent
-Table::~unload
-BufferManager::deleteFile
-BufferManager::deleteFile: Success
-Table::isPermanent

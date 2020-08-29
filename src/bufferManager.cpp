@@ -118,3 +118,23 @@ void BufferManager::deleteFile(string tableName, int pageIndex)
     string fileName = "../data/temp/"+tableName + "_Page" + to_string(pageIndex);
     this->deleteFile(fileName);
 }
+
+//////////////////////////    MATRIX METHODS         /////////////////////////////
+/**
+ * @brief Inserts page indicated by matrixName and pageIndex into pool. If the
+ * pool is full, the pool ejects the oldest inserted page from the pool and adds
+ * the current page at the end. It naturally follows a queue data structure. 
+ *
+ * @param MatrixName 
+ * @param pageIndex 
+ * @return Page 
+ */
+Page BufferManager::insertMatrixIntoPool(string matrixName, int pageIndex)
+{
+    logger.log("BufferManager::insertMatrixIntoPool");
+    Page page(matrixName, pageIndex);
+    if (this->pages.size() >= BLOCK_COUNT)
+        pages.pop_front();
+    pages.push_back(page);
+    return page;
+}
