@@ -17,6 +17,8 @@ Page BufferManager::getPage(string tableName, int pageIndex)
 {
     logger.log("BufferManager::getPage");
     string pageName = "../data/temp/"+tableName + "_Page" + to_string(pageIndex);
+    logger.log("searching");
+    logger.log(pageName);
     if (this->inPool(pageName))
         return this->getFromPool(pageName);
     else
@@ -35,6 +37,8 @@ bool BufferManager::inPool(string pageName)
     logger.log("BufferManager::inPool");
     for (auto page : this->pages)
     {
+        logger.log("OO");
+        logger.log(page.pageName);
         if (pageName == page.pageName)
             return true;
     }

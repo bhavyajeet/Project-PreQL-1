@@ -65,6 +65,7 @@ bool Matrix::load()
             return true;
     }
     fin.close();
+    logger.log("YTE KYUN HUA");
     return false;
 }
 
@@ -108,44 +109,57 @@ bool Matrix::blockify()
 {   
     logger.log("Matrix::blockify");
     logger.log(to_string(this->columnCount));
-    ifstream fin(this->sourceFileName, ios::in);
     string line, word;
-    vector<int> row(this->max, 0);
+    vector<int> row(min(this->maxColumnsPerBlock,this->columnCount), -1);
     vector<vector<int>> rowsInPage(this->maxRowsPerBlock, row);
     int pageCounter = 0;
+    int currentColumn = 0;
     unordered_set<int> dummy;
     dummy.clear();
     this->distinctValuesInColumns.assign(this->columnCount, dummy);
     this->distinctValuesPerColumnCount.assign(this->columnCount, 0);
-    getline(fin, line);
-    while (getline(fin, line))
-    {
-        stringstream s(line);
-        for (int columnCounter = 0; columnCounter < this->columnCount; columnCounter++)
+    logger.log(to_string(currentColumn));
+    logger.log(to_string(this->columnCount / this->maxColumnsPerBlock));
+    int limit = this->columnCount / this->maxColumnsPerBlock;
+    if(this->columnCount % this->maxColumnsPerBlock){
+        limit++;
+    }
+    while(currentColumn < limit){
+        logger.log(to_string(currentColumn));
+        ifstream fin(this->sourceFileName, ios::in);
+        while (getline(fin, line))
         {
-            if (!getline(s, word, ','))
-                return false;
-            row[columnCounter] = stoi(word);
-            rowsInPage[pageCounter][columnCounter] = row[columnCounter];
+            stringstream s(line);
+            for (int columnCounter = 0; columnCounter < this->columnCount ; columnCounter++)
+            {
+                if (!getline(s, word, ','))
+                    return false;
+                if(columnCounter/this->maxColumnsPerBlock == currentColumn){
+                    row[columnCounter % this->maxColumnsPerBlock] = stoi(word);
+                    rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
+                }
+            }
+            pageCounter++;
+            logger.log("OK NA");
+            this->updateStatistics(row);
+            if (pageCounter % this->maxRowsPerBlock == 0)
+            {
+                logger.log("RARA");
+                bufferManager.writePage(this->MatrixName, this->blockCount, rowsInPage, this->maxRowsPerBlock);
+                this->blockCount++;
+                this->rowsPerBlockCount.emplace_back(pageCounter);
+            }
+            logger.log("OHOH");
         }
-        pageCounter++;
-        this->updateStatistics(row);
-        if (pageCounter == this->maxRowsPerBlock)
+        if (pageCounter % this->maxRowsPerBlock)
         {
-            bufferManager.writePage(this->MatrixName, this->blockCount, rowsInPage, pageCounter);
+            bufferManager.writePage(this->MatrixName, this->blockCount, rowsInPage, this->maxRowsPerBlock);
             this->blockCount++;
             this->rowsPerBlockCount.emplace_back(pageCounter);
             pageCounter = 0;
         }
+        currentColumn++;        
     }
-    if (pageCounter)
-    {
-        bufferManager.writePage(this->MatrixName, this->blockCount, rowsInPage, pageCounter);
-        this->blockCount++;
-        this->rowsPerBlockCount.emplace_back(pageCounter);
-        pageCounter = 0;
-    }
-
     if (this->rowCount == 0)
         return false;
     this->distinctValuesInColumns.clear();
@@ -351,4 +365,12 @@ void Matrix::transpose(){
     logger.log("Matrix::transpose");
     logger.log("MAINE TRANSPOSE LIYA HAI");
     logger.log("OK NA");
+    logger.log(to_string(this->blockCount));
+    for (int variable = 0; variable < this->blockCount/2; variable++)
+    {
+        // swap Page i and Page N*N - i
+        Page pagei = bufferManager.getPage(this->MatrixName,variable);
+        pagei.swapElements();
+    }
+    
 }

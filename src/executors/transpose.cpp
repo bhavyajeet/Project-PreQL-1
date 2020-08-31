@@ -19,6 +19,16 @@ bool syntacticParseTRANSPOSE()
 bool semanticParseTRANSPOSE()
 {
     logger.log("semanticParseTRANSPOSE");
+    if(!matrixCatalogue.isMatrix(parsedQuery.transposeRelationName)){
+        cout << "MATRIX DOES NOT EXIST" << endl;
+        return false;        
+    }
+    if (!isFileExists(parsedQuery.transposeRelationName))
+    {
+        cout << "SEMANTIC ERROR: Data file doesn't exist" << endl;
+        return false;
+    }
+
     return true;
 }
 

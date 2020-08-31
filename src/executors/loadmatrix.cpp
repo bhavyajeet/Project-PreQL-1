@@ -39,6 +39,7 @@ void executeLOADMATRIX()
     Matrix *matrix = new Matrix(parsedQuery.loadMatrixRelationName);
     if (matrix->load())
     {
+        matrixCatalogue.insertMatrix(matrix);
         cout << "Loaded Matrix. Column Count: " << matrix->columnCount << " Row Count: " << matrix->rowCount << endl;
     }
     logger.log("executeLOADMATRIX");

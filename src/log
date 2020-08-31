@@ -2,35 +2,210 @@ BufferManager::BufferManager
 ParseQuery::clear
 
 Reading New Command: 
-LOAD A
+LOAD MATRIX MATRIX
 doCommand
 syntacticParse
-syntacticParseLOAD
+syntacticParseLOADMATRIX
 semanticParse
-semanticParseLOAD
-TableCatalogue::isTable
-executeLOAD
-Table::Table
-Table::load
-../data/A.csv
-Table::extractColumnNames
-Table::blockify
+semanticParseLOADMATRIX
+MatrixCatalogue::isMatrix
+Matrix::Matrix2
+Matrix::load
+../data/MATRIX.csv
+Matrix::extractColumnNames
+Matrix::blockify
+6
+0
+3
+0
+OK NA
+OHOH
+OK NA
+RARA
 BufferManager::writePage
 Page::Page
+../data/temp/MATRIX_Page0
 Page::writePage
+0
+0
+1
+1
+0
+1
+HO GAYA
+OHOH
+OK NA
+OHOH
+OK NA
+RARA
 BufferManager::writePage
 Page::Page
+../data/temp/MATRIX_Page1
 Page::writePage
-TableCatalogue::~insertTable
+0
+0
+1
+1
+0
+1
+HO GAYA
+OHOH
+OK NA
+OHOH
+OK NA
+RARA
+BufferManager::writePage
+Page::Page
+../data/temp/MATRIX_Page2
+Page::writePage
+0
+0
+1
+1
+0
+1
+HO GAYA
+OHOH
+1
+OK NA
+OHOH
+OK NA
+RARA
+BufferManager::writePage
+Page::Page
+../data/temp/MATRIX_Page3
+Page::writePage
+0
+0
+1
+1
+0
+1
+HO GAYA
+OHOH
+OK NA
+OHOH
+OK NA
+RARA
+BufferManager::writePage
+Page::Page
+../data/temp/MATRIX_Page4
+Page::writePage
+0
+0
+1
+1
+0
+1
+HO GAYA
+OHOH
+OK NA
+OHOH
+OK NA
+RARA
+BufferManager::writePage
+Page::Page
+../data/temp/MATRIX_Page5
+Page::writePage
+0
+0
+1
+1
+0
+1
+HO GAYA
+OHOH
+2
+OK NA
+OHOH
+OK NA
+RARA
+BufferManager::writePage
+Page::Page
+../data/temp/MATRIX_Page6
+Page::writePage
+0
+0
+1
+1
+0
+1
+HO GAYA
+OHOH
+OK NA
+OHOH
+OK NA
+RARA
+BufferManager::writePage
+Page::Page
+../data/temp/MATRIX_Page7
+Page::writePage
+0
+0
+1
+1
+0
+1
+HO GAYA
+OHOH
+OK NA
+OHOH
+OK NA
+RARA
+BufferManager::writePage
+Page::Page
+../data/temp/MATRIX_Page8
+Page::writePage
+0
+0
+1
+1
+0
+1
+HO GAYA
+OHOH
+MatrixCatalogue::~insertMatrix
+executeLOADMATRIX
 ParseQuery::clear
 
 Reading New Command: 
-QUIT
-MatrixCatalogue::~MatrixCatalogue
-TableCatalogue::~TableCatalogue
-Table::~unload
-BufferManager::deleteFile
-BufferManager::deleteFile: Success
-BufferManager::deleteFile
-BufferManager::deleteFile: Success
-Table::isPermanent
+TRANSPOSE MATRIX
+doCommand
+syntacticParse
+syntacticParseTRANSPOSE
+semanticParse
+semanticParseTRANSPOSE
+MatrixCatalogue::isMatrix
+executeTRANSPOSE
+MatrixCatalogue::getMatrix
+Matrix::transpose
+MAINE TRANSPOSE LIYA HAI
+OK NA
+9
+BufferManager::getPage
+searching
+../data/temp/MATRIX_Page0
+BufferManager::inPool
+BufferManager::insertIntoPool
+Page::Page
+TableCatalogue::isTable
+MatrixCatalogue::isMatrix
+ACHHA MATRIX HAI
+MatrixCatalogue::getMatrix
+Page::swapElements
+../data/temp/_Page0
+2
+6
+HO GAYA SWAP
+BufferManager::getPage
+searching
+../data/temp/MATRIX_Page1
+BufferManager::inPool
+OO
+../data/temp/_Page0
+BufferManager::insertIntoPool
+Page::Page
+TableCatalogue::isTable
+MatrixCatalogue::isMatrix
+ACHHA MATRIX HAI
+MatrixCatalogue::getMatrix
