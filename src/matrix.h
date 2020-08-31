@@ -28,6 +28,7 @@ public:
     vector<uint> columnsPerBlockCount;
     bool indexed = false;
     string indexedColumn = "";
+    string indexedRow = "";
     
     bool extractColumnNames(string firstLine);
     bool blockify();
@@ -45,6 +46,7 @@ public:
     Cursor getCursor();
     int getColumnIndex(string columnName);
     void unload();
+    void transpose();
 
     /**
  * @brief Static function that takes a vector of valued and prints them out in a

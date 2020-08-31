@@ -29,27 +29,53 @@ Page::Page()
 Page::Page(string tableName, int pageIndex)
 {
     logger.log("Page::Page");
-    this->tableName = tableName;
     this->pageIndex = pageIndex;
     this->pageName = "../data/temp/" + this->tableName + "_Page" + to_string(pageIndex);
-    Table table = *tableCatalogue.getTable(tableName);
-    this->columnCount = table.columnCount;
-    uint maxRowCount = table.maxRowsPerBlock;
-    vector<int> row(columnCount, 0);
-    this->rows.assign(maxRowCount, row);
+    if (tableCatalogue.isTable(tableName)){
+        // it is table
+        Table table = *tableCatalogue.getTable(tableName);
+        this->tableName = tableName;
+        this->columnCount = table.columnCount;
+        uint maxRowCount = table.maxRowsPerBlock;
+        vector<int> row(columnCount, 0);
+        this->rows.assign(maxRowCount, row);
 
-    ifstream fin(pageName, ios::in);
-    this->rowCount = table.rowsPerBlockCount[pageIndex];
-    int number;
-    for (uint rowCounter = 0; rowCounter < this->rowCount; rowCounter++)
-    {
-        for (int columnCounter = 0; columnCounter < columnCount; columnCounter++)
+        ifstream fin(pageName, ios::in);
+        this->rowCount = table.rowsPerBlockCount[pageIndex];
+        int number;
+        for (uint rowCounter = 0; rowCounter < this->rowCount; rowCounter++)
         {
-            fin >> number;
-            this->rows[rowCounter][columnCounter] = number;
+            for (int columnCounter = 0; columnCounter < columnCount; columnCounter++)
+            {
+                fin >> number;
+                this->rows[rowCounter][columnCounter] = number;
+            }
         }
+        fin.close();
     }
-    fin.close();
+    else if (matrixCatalogue.isMatrix(tableName)){
+        // it is a matrix
+        Matrix matrix = *matrixCatalogue.getMatrix(tableName);
+        this->MatrixName = tableName;
+        this->columnCount = matrix.columnCount;
+        uint maxRowCount = MAX_ROWS_MATRIX;
+        uint maxColCount = MAX_COLS_MATRIX;
+        vector<int> row(columnCount, 0);
+        this->rows.assign(maxRowCount, row);
+
+        ifstream fin(pageName, ios::in);
+        this->rowCount = matrix.rowsPerBlockCount[pageIndex];
+        int number;
+        for (uint rowCounter = 0; rowCounter < this->rowCount; rowCounter++)
+        {
+            for (int columnCounter = 0; columnCounter < columnCount; columnCounter++)
+            {
+                fin >> number;
+                this->rows[rowCounter][columnCounter] = number;
+            }
+        }
+        fin.close();
+    }
 }
 
 /**

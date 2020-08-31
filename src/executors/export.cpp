@@ -22,8 +22,10 @@ bool semanticParseEXPORT()
 {
     logger.log("semanticParseEXPORT");
     //Table should exist
-    if (tableCatalogue.isTable(parsedQuery.exportRelationName))
+    if (tableCatalogue.isTable(parsedQuery.exportRelationName) || matrixCatalogue.isMatrix(parsedQuery.exportRelationName))
+    {
         return true;
+    }
     cout << "SEMANTIC ERROR: No such relation exists" << endl;
     return false;
 }
@@ -31,7 +33,18 @@ bool semanticParseEXPORT()
 void executeEXPORT()
 {
     logger.log("executeEXPORT");
-    Table* table = tableCatalogue.getTable(parsedQuery.exportRelationName);
-    table->makePermanent();
+    if (tableCatalogue.isTable(parsedQuery.exportRelationName))
+    {
+        // EXPORT TABLE
+        Table* table = tableCatalogue.getTable(parsedQuery.exportRelationName);
+        table->makePermanent();            
+    }
+    else if(matrixCatalogue.isMatrix(parsedQuery.exportRelationName))
+    {
+        // EXPORT MATRIX
+        Matrix* matrix = matrixCatalogue.getMatrix(parsedQuery.exportRelationName);
+        matrix->makePermanent();            
+
+    }
     return;
 }

@@ -6,7 +6,7 @@
  */
 Matrix::Matrix()
 {
-    logger.log("Matrix::Matrix");
+    logger.log("Matrix::Matrix1");
 }
 
 /**
@@ -18,7 +18,7 @@ Matrix::Matrix()
  */
 Matrix::Matrix(string MatrixName)
 {
-    logger.log("Matrix::Matrix");
+    logger.log("Matrix::Matrix2");
     this->sourceFileName = "../data/" + MatrixName + ".csv";
     this->MatrixName = MatrixName;
 }
@@ -33,12 +33,13 @@ Matrix::Matrix(string MatrixName)
  */
 Matrix::Matrix(string MatrixName, vector<string> columns)
 {
-    logger.log("Matrix::Matrix");
+    logger.log("Matrix::Matrix3");
     this->sourceFileName = "../data/temp/" + MatrixName + ".csv";
     this->MatrixName = MatrixName;
     this->columns = columns;
     this->columnCount = columns.size();
-    this->maxRowsPerBlock = (uint)((BLOCK_SIZE * 1000) / (32 * columnCount));
+    this->maxRowsPerBlock = (uint)(MAX_ROWS_MATRIX);
+    this->maxColumnsPerBlock = (uint)(MAX_COLS_MATRIX);
     this->writeRow<string>(columns);
 }
 
@@ -53,14 +54,15 @@ Matrix::Matrix(string MatrixName, vector<string> columns)
 bool Matrix::load()
 {
     logger.log("Matrix::load");
+    logger.log(this->sourceFileName);
     fstream fin(this->sourceFileName, ios::in);
     string line;
     if (getline(fin, line))
     {
         fin.close();
-        if (this->extractColumnNames(line))
-            if (this->blockify())
-                return true;
+       if (this->extractColumnNames(line))
+        if (this->blockify())
+            return true;
     }
     fin.close();
     return false;
@@ -90,7 +92,8 @@ bool Matrix::extractColumnNames(string firstLine)
         this->columns.emplace_back(word);
     }
     this->columnCount = this->columns.size();
-    this->maxRowsPerBlock = (uint)((BLOCK_SIZE * 1000) / (32 * this->columnCount));
+    this->maxRowsPerBlock = (uint)(MAX_ROWS_MATRIX);
+    this->maxColumnsPerBlock = (uint)(MAX_COLS_MATRIX);
     return true;
 }
 
@@ -102,11 +105,12 @@ bool Matrix::extractColumnNames(string firstLine)
  * @return false otherwise
  */
 bool Matrix::blockify()
-{
+{   
     logger.log("Matrix::blockify");
+    logger.log(to_string(this->columnCount));
     ifstream fin(this->sourceFileName, ios::in);
     string line, word;
-    vector<int> row(this->columnCount, 0);
+    vector<int> row(this->max, 0);
     vector<vector<int>> rowsInPage(this->maxRowsPerBlock, row);
     int pageCounter = 0;
     unordered_set<int> dummy;
@@ -320,6 +324,7 @@ Cursor Matrix::getCursor()
     Cursor cursor(this->MatrixName, 0);
     return cursor;
 }
+
 /**
  * @brief Function that returns the index of column indicated by columnName
  * 
@@ -334,4 +339,16 @@ int Matrix::getColumnIndex(string columnName)
         if (this->columns[columnCounter] == columnName)
             return columnCounter;
     }
+}
+
+/**
+ * @brief Function that transposes the matrix
+ * 
+ * @param columnName 
+ * @return int 
+ */
+void Matrix::transpose(){
+    logger.log("Matrix::transpose");
+    logger.log("MAINE TRANSPOSE LIYA HAI");
+    logger.log("OK NA");
 }

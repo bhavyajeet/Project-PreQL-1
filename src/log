@@ -2,31 +2,35 @@ BufferManager::BufferManager
 ParseQuery::clear
 
 Reading New Command: 
-LOAD MATRIX ANNA
+LOAD A
 doCommand
 syntacticParse
-syntacticParseLOADMATRIX
+syntacticParseLOAD
 semanticParse
-semanticParseLOADMATRIX
-executeLOADMATRIX
-ParseQuery::clear
-
-Reading New Command: 
-TRANPOSE RA
-doCommand
-syntacticParse
-ParseQuery::clear
-
-Reading New Command: 
-TRANSPOSE RA
-doCommand
-syntacticParse
-syntacticParseTRANSPOSE
-semanticParse
-semanticParseTRANSPOSE
-executeTRANSPOSE
+semanticParseLOAD
+TableCatalogue::isTable
+executeLOAD
+Table::Table
+Table::load
+../data/A.csv
+Table::extractColumnNames
+Table::blockify
+BufferManager::writePage
+Page::Page
+Page::writePage
+BufferManager::writePage
+Page::Page
+Page::writePage
+TableCatalogue::~insertTable
 ParseQuery::clear
 
 Reading New Command: 
 QUIT
+MatrixCatalogue::~MatrixCatalogue
 TableCatalogue::~TableCatalogue
+Table::~unload
+BufferManager::deleteFile
+BufferManager::deleteFile: Success
+BufferManager::deleteFile
+BufferManager::deleteFile: Success
+Table::isPermanent

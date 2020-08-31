@@ -29,9 +29,6 @@ class BufferManager{
     // Table
     Page insertIntoPool(string tableName, int pageIndex);
 
-    // Matrix
-    Page insertMatrixIntoPool(string MatrixName, int pageIndex);
-
     public:
     
     BufferManager();
@@ -44,4 +41,5 @@ class BufferManager{
     void writePage(string tableName, int pageIndex, vector<vector<int>> rows, int rowCount);
 
     // Matrix Methods
+    Page insertMatrixIntoPool(string MatrixName, int pageIndex);
 };
