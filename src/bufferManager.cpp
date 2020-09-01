@@ -102,6 +102,37 @@ void BufferManager::writePage(string tableName, int pageIndex, vector<vector<int
 }
 
 /**
+ * @brief The buffer manager is also responsible for updating pages. This is
+ * called when new tables are created using assignment statements.
+ *
+ * @param tableName 
+ * @param pageIndex 
+ * @param rows 
+ * @param rowCount 
+ */
+void BufferManager::updatePage(string pageName,Page newPage)
+{
+    logger.log("BufferManager::updatePage");
+    int x = 0;
+    cout << endl << pageName << endl;
+    cout << endl << "CALLLME" << endl;
+    cout << this->pages.size() << endl;
+    for (auto page : this->pages)
+        {
+            cout << page.pageName;
+            cout << pageName;
+            cout << endl;
+            if ("../data/temp/" + pageName == page.pageName)
+            {
+                    cout << "ANNA SHIP" << endl;
+                    this->pages[x] = newPage;
+                    page = newPage;
+            }
+            x++;
+        }
+}
+
+/**
  * @brief Deletes file names fileName
  *
  * @param fileName 

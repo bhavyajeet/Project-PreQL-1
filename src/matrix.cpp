@@ -461,6 +461,7 @@ void Matrix::transpose(){
         // swap internally
         Page pagei = bufferManager.getPage(this->MatrixName,variable);
         pagei.swapElements();
+        bufferManager.updatePage(this->MatrixName + "_Page" + to_string(variable),pagei);
     }
     int n;
     for (n = 0; n*n < this->blockCount; n++)
@@ -486,7 +487,9 @@ void Matrix::transpose(){
                     matrix2[i] = page2.getRow(i);
                 }
                 page1.writeToPage(matrix2);
-                page2.writeToPage(matrix1);                
+                page2.writeToPage(matrix1);
+                bufferManager.updatePage(this->MatrixName + "_Page" + to_string(fromint),page1);
+                bufferManager.updatePage(this->MatrixName + "_Page" + to_string(toint),page2);
             }
         }
     } 

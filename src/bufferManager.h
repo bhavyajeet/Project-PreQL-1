@@ -42,4 +42,5 @@ class BufferManager{
 
     // Matrix Methods
     Page insertMatrixIntoPool(string MatrixName, int pageIndex);
+    void updatePage(string pageName,Page newPage);    
 };

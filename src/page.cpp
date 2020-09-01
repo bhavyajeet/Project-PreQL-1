@@ -150,6 +150,8 @@ void Page::swapElements()
     logger.log(to_string(this->rowCount));
     logger.log(to_string(this->columnCount));
     ofstream fout(this->pageName, ios::trunc);
+    vector<int> row(this->rowCount, -1);
+    vector<vector<int>> temp(this->columnCount, row);    
     for (int rowCounter = 0; rowCounter < this->rowCount; rowCounter++)
     {
         logger.log(to_string(rowCounter));
@@ -159,10 +161,20 @@ void Page::swapElements()
             if (columnCounter != 0)
                 fout << " ";
             fout << this->rows[columnCounter][rowCounter];
+            temp[rowCounter][columnCounter] = this->rows[columnCounter][rowCounter];
         }
         fout << endl;
     }
     fout.close();
+    for (int rowCounter = 0; rowCounter < this->rowCount; rowCounter++)
+    {
+        logger.log(to_string(rowCounter));
+        for (int columnCounter = 0; columnCounter < this->columnCount; columnCounter++)
+        {
+            logger.log(to_string(columnCounter));
+            this->rows[rowCounter][columnCounter] = temp[rowCounter][columnCounter];
+        }
+    }
     logger.log("HO GAYA SWAP");
 }
 
@@ -184,9 +196,13 @@ void Page::writeToPage(vector<vector<int>> matrix)
             if (columnCounter != 0)
                 fout << " ";
             fout << matrix[rowCounter][columnCounter];
+            this->rows[rowCounter][columnCounter] = matrix[rowCounter][columnCounter];
         }
         fout << endl;
     }
     fout.close();
     logger.log("HO GAYA SWAP");
 }
+
+// Page 0 -> [2,0,0] "PAge0" "Kundli0" ../temp/Page_0->[2,0,0]
+// Page 1 -> [1,0,0] "Page1" "Kundli1" ../temp/Page_1->[1,0,0]
