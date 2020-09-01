@@ -353,10 +353,16 @@ void Matrix::makePermanent()
         {
             row = cursor.getNext();
             if( (j) % (n) == (i) ){
+                cout << "exporting row " ;
+                   for(int i=0; i < row.size(); i++)
+                    cout << row.at(i) << ' ';
+                    cout << endl;
+                if (row[0]>=0){
                 this->writeRow(row, fout);
                 // fout << to_string(j);
                 if(j/n != (n/MAX_COLS_MATRIX - 1)){
                     fout << ",";
+                }
                 }
                 // fout << to_string(row[0]);
             }        
