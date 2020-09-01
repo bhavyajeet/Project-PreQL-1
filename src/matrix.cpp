@@ -411,6 +411,7 @@ int Matrix::getColumnIndex(string columnName)
 void Matrix::transpose(){
     logger.log("Matrix::transpose");
     logger.log("MAINE TRANSPOSE LIYA HAI");
+    cout << ("MAINE TRANSPOSE LIYA HAI");
     logger.log("OK NA");
     logger.log(this->MatrixName);
     logger.log(to_string(this->blockCount));
@@ -424,25 +425,48 @@ void Matrix::transpose(){
     for (n = 0; n*n < this->blockCount; n++)
     {
         /* code */
-    }    
-    for (int variable = 0; variable < this->blockCount/2;variable++){
-        // swap Page i and Page N*N - i
-        if((variable % (n + 1))){ // not a diagonal number
-            
-            Page page1 = bufferManager.getPage(this->MatrixName,variable); // read i
-            Page page2 = bufferManager.getPage(this->MatrixName,this->blockCount - 1 - variable); // read N*N - i
-            vector<int> row(min(this->maxColumnsPerBlock,this->columnCount), -1);
-            vector<vector<int>> matrix1(this->maxRowsPerBlock, row);
-            vector<vector<int>> matrix2(this->maxRowsPerBlock, row);
-            for (int i = 0; i < MAX_ROWS_MATRIX; i++)
-            {
-                /* code */
-                // iterate over rows to get each row
-                matrix1[i] = page1.getRow(i);
-                matrix2[i] = page2.getRow(i);
+    }   
+    for (int irow =0; irow < n; irow++){
+        for (int icol =0; icol < n; icol++){
+            if (icol < irow ){
+                int fromint = icol*n + irow;
+                int toint = irow*n + icol;
+                cout << "swapping " << toint << " with " << fromint << endl;
+                Page page1 = bufferManager.getPage(this->MatrixName,fromint);
+                Page page2 = bufferManager.getPage(this->MatrixName,toint);
+                vector<int> row(min(this->maxColumnsPerBlock,this->columnCount), -1);
+                vector<vector<int>> matrix1(this->maxRowsPerBlock, row);
+                vector<vector<int>> matrix2(this->maxRowsPerBlock, row);
+                for (int i = 0; i < MAX_ROWS_MATRIX; i++)
+                {
+                    /* code */
+                    // iterate over rows to get each row
+                    matrix1[i] = page1.getRow(i);
+                    matrix2[i] = page2.getRow(i);
+                }
+                page1.writeToPage(matrix2);
+                page2.writeToPage(matrix1);                
             }
-            page1.writeToPage(matrix2);
-            page2.writeToPage(matrix1);
         }
-    }
+    } 
+    // for (int variable = 0; variable < this->blockCount/2;variable++){
+    //     // swap Page i and Page N*N - i
+    //     if((variable % (n + 1))){ // not a diagonal number
+            
+    //         Page page1 = bufferManager.getPage(this->MatrixName,variable); // read i
+    //         Page page2 = bufferManager.getPage(this->MatrixName,this->blockCount - 1 - variable); // read N*N - i
+    //         vector<int> row(min(this->maxColumnsPerBlock,this->columnCount), -1);
+    //         vector<vector<int>> matrix1(this->maxRowsPerBlock, row);
+    //         vector<vector<int>> matrix2(this->maxRowsPerBlock, row);
+    //         for (int i = 0; i < MAX_ROWS_MATRIX; i++)
+    //         {
+    //             /* code */
+    //             // iterate over rows to get each row
+    //             matrix1[i] = page1.getRow(i);
+    //             matrix2[i] = page2.getRow(i);
+    //         }
+    //         page1.writeToPage(matrix2);
+    //         page2.writeToPage(matrix1);
+    //     }
+    // }
 }
