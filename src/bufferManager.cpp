@@ -114,17 +114,10 @@ void BufferManager::updatePage(string pageName,Page newPage)
 {
     logger.log("BufferManager::updatePage");
     int x = 0;
-    cout << endl << pageName << endl;
-    cout << endl << "CALLLME" << endl;
-    cout << this->pages.size() << endl;
     for (auto page : this->pages)
         {
-            cout << page.pageName;
-            cout << pageName;
-            cout << endl;
             if ("../data/temp/" + pageName == page.pageName)
             {
-                    cout << "ANNA SHIP" << endl;
                     this->pages[x] = newPage;
                     page = newPage;
             }

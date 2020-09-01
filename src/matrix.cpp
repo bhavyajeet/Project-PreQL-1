@@ -59,19 +59,14 @@ bool Matrix::load()
     string line;
     if (getline(fin, line))
     {
-        cout << "getting there";
         fin.close();
        if (this->extractColumnNames(line)){
-        cout << "getting there PART 2";
         if (this->blockify())
             return true;
        }
     }
     fin.close();
     logger.log(line);
-    cout << line;
-    cout << "lol";
-    logger.log("YTE KYUN HUA");
     return false;
 }
 
@@ -93,7 +88,6 @@ bool Matrix::extractColumnNames(string firstLine)
     while (getline(s, word, ','))
     {
         word.erase(std::remove_if(word.begin(), word.end(), ::isspace), word.end());
-        cout << word << " HI RA " << columnNames.count(word) << endl;
         columnNames.insert(word);
         this->columns.emplace_back(word);
     }
@@ -114,7 +108,6 @@ bool Matrix::blockify()
 {   
     logger.log("Matrix::blockify");
     logger.log(to_string(this->columnCount));
-    // cout << "col ocunt " << (to_string(this->columnCount))<< endl;
     string line, word;
     vector<int> row(this->maxColumnsPerBlock, -1);
     vector<vector<int>> rowsInPage(this->maxRowsPerBlock, row);
@@ -125,13 +118,10 @@ bool Matrix::blockify()
     this->distinctValuesInColumns.assign(this->columnCount, dummy);
     this->distinctValuesPerColumnCount.assign(this->columnCount, 0);
     logger.log(to_string(currentColumn));
-    cout << "curr col " << (to_string(currentColumn)) << endl;
     logger.log(to_string(this->columnCount / this->maxColumnsPerBlock));
     int limit = this->columnCount / this->maxColumnsPerBlock;
-    cout << "calc col " << (to_string(limit)) << endl;
     if(this->columnCount % this->maxColumnsPerBlock){
         limit++;
-        cout << "gotta -1" << endl;
     }
     while(currentColumn < limit){
         logger.log(to_string(currentColumn));
@@ -141,17 +131,12 @@ bool Matrix::blockify()
         {
             rowcounter++;
             if (!getline(fin, line)){
-                cout << "wanted to row ";
-                cout << line;
             stringstream s(line);
-            cout << rowcounter <<endl;
             for (int columnCounter = 0; columnCounter < limit * this->maxColumnsPerBlock ; columnCounter++)
             {
-                // cout << "debug 1 "  << "at col" << columnCounter<< endl;
                 if (!getline(s, word, ',') && columnCounter/this->maxColumnsPerBlock == currentColumn)
                 {
                     // return false;
-                    cout << word << "added -1 ig \n";
                     row[columnCounter % this->maxColumnsPerBlock] = -1;
                     rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
                 }
@@ -160,22 +145,17 @@ bool Matrix::blockify()
                 if(columnCounter/this->maxColumnsPerBlock == currentColumn){
                     row[columnCounter % this->maxColumnsPerBlock] = stoi(word);
                     rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
-                    cout << word << "notee\n";;
                 }
                 }
             }
             }
             else {
-            cout << line;
             stringstream s(line);
-            cout << rowcounter <<endl;
             for (int columnCounter = 0; columnCounter < limit * this->maxColumnsPerBlock ; columnCounter++)
             {
-                // cout << "debug 1 "  << "at col" << columnCounter<< endl;
                 if (!getline(s, word, ',') && columnCounter/this->maxColumnsPerBlock == currentColumn)
                 {
                     // return false;
-                    cout << word << "added -1 ig \n";
                     row[columnCounter % this->maxColumnsPerBlock] = -1;
                     rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
                 }
@@ -183,7 +163,6 @@ bool Matrix::blockify()
                 if(columnCounter/this->maxColumnsPerBlock == currentColumn){
                     row[columnCounter % this->maxColumnsPerBlock] = stoi(word);
                     rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
-                    cout << word << "notee\n";;
                 }
                 }
             }
@@ -193,7 +172,6 @@ bool Matrix::blockify()
             this->updateStatistics(row);
             if (pageCounter % this->maxRowsPerBlock == 0)
             {
-                logger.log("RARA");
                 bufferManager.writePage(this->MatrixName, this->blockCount, rowsInPage, this->maxRowsPerBlock);
                 this->blockCount++;
                 this->rowsPerBlockCount.emplace_back(pageCounter);
@@ -366,6 +344,7 @@ void Matrix::makePermanent()
     }    
     for (int i = 0; i < n; i++)
     {
+        int flaggyy= 0;
         Cursor cursor(this->MatrixName, 0);
         vector<int> row;
         for (int j = 0; j < this->rowCount;j++)
@@ -378,9 +357,14 @@ void Matrix::makePermanent()
                         fout << ",";
                     }
                 }
+                else {
+                    flaggyy++;
+                    break;
+                }
 
             }        
         }
+        if (!flaggyy)
         fout << endl;
     }
     
@@ -451,8 +435,6 @@ int Matrix::getColumnIndex(string columnName)
  */
 void Matrix::transpose(){
     logger.log("Matrix::transpose");
-    logger.log("MAINE TRANSPOSE LIYA HAI");
-    cout << ("MAINE TRANSPOSE LIYA HAI");
     logger.log("OK NA");
     logger.log(this->MatrixName);
     logger.log(to_string(this->blockCount));
@@ -473,7 +455,6 @@ void Matrix::transpose(){
             if (icol < irow ){
                 int fromint = icol*n + irow;
                 int toint = irow*n + icol;
-                cout << "swapping " << toint << " with " << fromint << endl;
                 Page page1 = bufferManager.getPage(this->MatrixName,fromint);
                 Page page2 = bufferManager.getPage(this->MatrixName,toint);
                 vector<int> row(min(this->maxColumnsPerBlock,this->columnCount), -1);
