@@ -136,7 +136,7 @@ bool Matrix::blockify()
     while(currentColumn < limit){
         logger.log(to_string(currentColumn));
         ifstream fin(this->sourceFileName, ios::in);
-        int rowcounter =0 ;
+        int rowcounter = 0 ;
         while (rowcounter<limit * this->maxRowsPerBlock)
         {
             rowcounter++;
@@ -334,16 +334,37 @@ void Matrix::makePermanent()
     if(!this->isPermanent())
         bufferManager.deleteFile(this->sourceFileName);
     string newSourceFile = "../data/" + this->MatrixName + ".csv";
+    logger.log(newSourceFile);
     ofstream fout(newSourceFile, ios::out);
-
-    Cursor cursor(this->MatrixName, 0);
-    vector<int> row;
-    for (int rowCounter = 0; rowCounter < this->rowCount; rowCounter++)
+    logger.log(to_string(this->rowCount));
+    logger.log("POPPPPPPPPPPPPPPPPPPPp");
+    int num_rows = this->rowCount;
+    int n = 0;
+    for ( n = 0; n*n < this->rowCount * MAX_COLS_MATRIX; n++)
     {
-        row = cursor.getNext();
-        this->writeRow(row, fout);
+        
     }
-    fout.close();
+    logger.log(to_string(n));
+    for (int i = 0; i < n; i++)
+    {
+        Cursor cursor(this->MatrixName, 0);
+        vector<int> row;
+        for (int j = 0; j < this->rowCount;j++)
+        {
+            row = cursor.getNext();
+            if( (j) % (n) == (i) ){
+                this->writeRow(row, fout);
+                // fout << to_string(j);
+                if(j/n != (n/MAX_COLS_MATRIX - 1)){
+                    fout << ",";
+                }
+                // fout << to_string(row[0]);
+            }        
+        }
+        fout << endl;
+    }
+    
+    printRowCount(this->rowCount);
 }
 
 /**
