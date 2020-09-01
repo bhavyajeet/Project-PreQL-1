@@ -287,9 +287,6 @@ void Matrix::makePermanent()
     string newSourceFile = "../data/" + this->MatrixName + ".csv";
     ofstream fout(newSourceFile, ios::out);
 
-    //print headings
-    this->writeRow(this->columns, fout);
-
     Cursor cursor(this->MatrixName, 0);
     vector<int> row;
     for (int rowCounter = 0; rowCounter < this->rowCount; rowCounter++)
@@ -355,6 +352,7 @@ int Matrix::getColumnIndex(string columnName)
     }
 }
 
+
 /**
  * @brief Function that transposes the matrix
  * 
@@ -365,12 +363,28 @@ void Matrix::transpose(){
     logger.log("Matrix::transpose");
     logger.log("MAINE TRANSPOSE LIYA HAI");
     logger.log("OK NA");
+    logger.log(this->MatrixName);
     logger.log(to_string(this->blockCount));
-    for (int variable = 0; variable < this->blockCount/2; variable++)
+    for (int variable = 0; variable < this->blockCount; variable++)
     {
-        // swap Page i and Page N*N - i
+        // swap internally
         Page pagei = bufferManager.getPage(this->MatrixName,variable);
         pagei.swapElements();
     }
-    
+    int n;
+    for (n = 0; n*n < this->blockCount; n++)
+    {
+        /* code */
+    }    
+    for (int variable = 0; variable < this->blockCount/2;variable++){
+        // swap Page i and Page N*N - i
+        if((variable % (n + 1))){ // not a diagonal number
+            Page pagei = bufferManager.getPage(this->MatrixName,variable); // read i
+            Page pagex = bufferManager.getPage(this->MatrixName,this->blockCount - 1 - variable); // read N*N - i
+            pagex.writeToPage(this->MatrixName + "_Page" + to_string(this->blockCount)); // save N*N - i to another 
+            pagei.writeToPage(this->MatrixName + "_Page" + to_string(this->blockCount - 1 - variable)); // assign N*N - i to i
+            Page test =  bufferManager.getPage(this->MatrixName,this->blockCount); // assign i to another
+            test.writeToPage(this->MatrixName + "_Page" + to_string(variable));
+        }
+    }
 }

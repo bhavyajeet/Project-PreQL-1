@@ -22,7 +22,12 @@ Page BufferManager::getPage(string tableName, int pageIndex)
     if (this->inPool(pageName))
         return this->getFromPool(pageName);
     else
-        return this->insertIntoPool(tableName, pageIndex);
+        {
+            logger.log(tableName);
+            logger.log("ANNARA");
+            logger.log("TERERERE");
+            return this->insertIntoPool(tableName, pageIndex);
+        }
 }
 
 /**

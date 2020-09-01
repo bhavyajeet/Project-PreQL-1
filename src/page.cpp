@@ -28,9 +28,10 @@ Page::Page()
  */
 Page::Page(string tableName, int pageIndex)
 {
-    logger.log("Page::Page");
+    logger.log("Page::Pageee");
     this->pageIndex = pageIndex;
-    this->pageName = "../data/temp/" + this->tableName + "_Page" + to_string(pageIndex);
+    this->pageName = "../data/temp/" + tableName + "_Page" + to_string(pageIndex);
+    logger.log(this->pageName);
     if (tableCatalogue.isTable(tableName)){
         // it is table
         Table table = *tableCatalogue.getTable(tableName);
@@ -59,20 +60,25 @@ Page::Page(string tableName, int pageIndex)
         Matrix matrix = *matrixCatalogue.getMatrix(tableName);
         this->MatrixName = tableName;
         this->tableName = tableName;
-        this->columnCount = matrix.columnCount;
+        this->columnCount = MAX_COLS_MATRIX;
         uint maxRowCount = MAX_ROWS_MATRIX;
         uint maxColCount = MAX_COLS_MATRIX;
         vector<int> row(columnCount, 0);
         this->rows.assign(maxRowCount, row);
-
-        ifstream fin(pageName, ios::in);
-        this->rowCount = matrix.rowsPerBlockCount[pageIndex];
+        logger.log("OK");
+        logger.log(this->pageName);
+        ifstream fin(this->pageName, ios::in);
+        this->rowCount = MAX_ROWS_MATRIX;
+        logger.log(to_string(this->rowCount));
+        logger.log(to_string(this->columnCount));
         int number;
         for (uint rowCounter = 0; rowCounter < this->rowCount; rowCounter++)
         {
             for (int columnCounter = 0; columnCounter < columnCount; columnCounter++)
             {
                 fin >> number;
+                logger.log("AARA");
+                logger.log(to_string(number));
                 this->rows[rowCounter][columnCounter] = number;
             }
         }
@@ -98,7 +104,7 @@ vector<int> Page::getRow(int rowIndex)
 
 Page::Page(string tableName, int pageIndex, vector<vector<int>> rows, int rowCount)
 {
-    logger.log("Page::Page");
+    logger.log("Page::Page2");
     this->MatrixName = tableName; // matrix
     this->tableName = tableName; // table
     this->pageIndex = pageIndex;
@@ -143,19 +149,44 @@ void Page::swapElements()
     logger.log(this->pageName);
     logger.log(to_string(this->rowCount));
     logger.log(to_string(this->columnCount));
-    // ofstream fout(this->pageName, ios::trunc);
-    // for (int rowCounter = 0; rowCounter < this->rowCount; rowCounter++)
-    // {
-    //     logger.log(to_string(rowCounter));
-    //     for (int columnCounter = 0; columnCounter < this->columnCount; columnCounter++)
-    //     {
-    //         logger.log(to_string(columnCounter));
-    //         if (columnCounter != 0)
-    //             fout << " ";
-    //         fout << this->rows[columnCounter][rowCounter];
-    //     }
-    //     fout << endl;
-    // }
-    // fout.close();
+    ofstream fout(this->pageName, ios::trunc);
+    for (int rowCounter = 0; rowCounter < this->rowCount; rowCounter++)
+    {
+        logger.log(to_string(rowCounter));
+        for (int columnCounter = 0; columnCounter < this->columnCount; columnCounter++)
+        {
+            logger.log(to_string(columnCounter));
+            if (columnCounter != 0)
+                fout << " ";
+            fout << this->rows[columnCounter][rowCounter];
+        }
+        fout << endl;
+    }
+    fout.close();
+    logger.log("HO GAYA SWAP");
+}
+
+/**
+ * @brief writes current page contents to a specified file.
+ * 
+ */
+void Page::writeToPage(string pagename)
+{
+    logger.log("Page::writeToPage");
+    logger.log((pageName));
+    ofstream fout(this->pageName, ios::trunc);
+    for (int rowCounter = 0; rowCounter < this->rowCount; rowCounter++)
+    {
+        logger.log(to_string(rowCounter));
+        for (int columnCounter = 0; columnCounter < this->columnCount; columnCounter++)
+        {
+            logger.log(to_string(columnCounter));
+            if (columnCounter != 0)
+                fout << " ";
+            fout << this->rows[rowCounter][columnCounter];
+        }
+        fout << endl;
+    }
+    fout.close();
     logger.log("HO GAYA SWAP");
 }
