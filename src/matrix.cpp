@@ -114,6 +114,7 @@ bool Matrix::blockify()
 {   
     logger.log("Matrix::blockify");
     logger.log(to_string(this->columnCount));
+    // cout << "col ocunt " << (to_string(this->columnCount))<< endl;
     string line, word;
     vector<int> row(min(this->maxColumnsPerBlock,this->columnCount), -1);
     vector<vector<int>> rowsInPage(this->maxRowsPerBlock, row);
@@ -124,25 +125,68 @@ bool Matrix::blockify()
     this->distinctValuesInColumns.assign(this->columnCount, dummy);
     this->distinctValuesPerColumnCount.assign(this->columnCount, 0);
     logger.log(to_string(currentColumn));
+    cout << "curr col " << (to_string(currentColumn)) << endl;
     logger.log(to_string(this->columnCount / this->maxColumnsPerBlock));
     int limit = this->columnCount / this->maxColumnsPerBlock;
+    cout << "calc col " << (to_string(limit)) << endl;
     if(this->columnCount % this->maxColumnsPerBlock){
         limit++;
+        cout << "gotta -1" << endl;
     }
     while(currentColumn < limit){
         logger.log(to_string(currentColumn));
         ifstream fin(this->sourceFileName, ios::in);
-        while (getline(fin, line))
+        int rowcounter =0 ;
+        while (rowcounter<limit * this->maxRowsPerBlock)
         {
+            rowcounter++;
+            if (!getline(fin, line)){
+                cout << "wanted to row ";
+                cout << line;
             stringstream s(line);
-            for (int columnCounter = 0; columnCounter < this->columnCount ; columnCounter++)
+            cout << rowcounter <<endl;
+            for (int columnCounter = 0; columnCounter < limit * this->maxColumnsPerBlock ; columnCounter++)
             {
-                if (!getline(s, word, ','))
-                    return false;
+                // cout << "debug 1 "  << "at col" << columnCounter<< endl;
+                if (!getline(s, word, ',') && columnCounter/this->maxColumnsPerBlock == currentColumn)
+                {
+                    // return false;
+                    cout << word << "added -1 ig \n";
+                    row[columnCounter % this->maxColumnsPerBlock] = -1;
+                    rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
+                }
+                else {
+                    word = "-1";
                 if(columnCounter/this->maxColumnsPerBlock == currentColumn){
                     row[columnCounter % this->maxColumnsPerBlock] = stoi(word);
                     rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
+                    cout << word << "notee\n";;
                 }
+                }
+            }
+            }
+            else {
+            cout << line;
+            stringstream s(line);
+            cout << rowcounter <<endl;
+            for (int columnCounter = 0; columnCounter < limit * this->maxColumnsPerBlock ; columnCounter++)
+            {
+                // cout << "debug 1 "  << "at col" << columnCounter<< endl;
+                if (!getline(s, word, ',') && columnCounter/this->maxColumnsPerBlock == currentColumn)
+                {
+                    // return false;
+                    cout << word << "added -1 ig \n";
+                    row[columnCounter % this->maxColumnsPerBlock] = -1;
+                    rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
+                }
+                else {
+                if(columnCounter/this->maxColumnsPerBlock == currentColumn){
+                    row[columnCounter % this->maxColumnsPerBlock] = stoi(word);
+                    rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
+                    cout << word << "notee\n";;
+                }
+                }
+            }
             }
             pageCounter++;
             logger.log("OK NA");
