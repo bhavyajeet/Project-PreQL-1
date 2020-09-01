@@ -21,7 +21,7 @@ We have taken the block size to be 8Kb, and block count to be 16.
     and then swap the rows of pages which are diagonally mirror of matrix.
     This would require a total of 
 
-    **(N/32) x (N/32)** + **(N/32) x (N/32) - (N/32)**
+    **(N/32) x (N/32)** + **(N/32) x (N/32) x 1/2 - (N/32)**
 
     data block accesses.
 - EXPORT MATRIX: To export a matrix,we need to print row by row.
