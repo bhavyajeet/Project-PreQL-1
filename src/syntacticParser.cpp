@@ -13,10 +13,6 @@ bool syntacticParse()
     {
         possibleQueryType = "LOADMATRIX";
     }
-    else if(parametersQuery == "MATRIX" && possibleQueryType == "EXPORT")
-    {
-        possibleQueryType = "EXPORTMATRIX";
-    }
 
     if (tokenizedQuery.size() < 2)
     {

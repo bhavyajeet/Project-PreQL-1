@@ -63,9 +63,8 @@ void writeRow(vector<T> row, ostream &fout)
     {
         if (columnCounter != 0)
             fout << ", ";
-        fout << row[columnCounter];
+            fout << row[columnCounter];
     }
-    fout << endl;
 }
 
 /**

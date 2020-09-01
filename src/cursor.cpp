@@ -18,7 +18,7 @@ Cursor::Cursor(string tableName, int pageIndex)
  */
 vector<int> Cursor::getNext()
 {
-    logger.log("Cursor::geNext");
+    logger.log("Cursor::getNext");
     vector<int> result = this->page.getRow(this->pagePointer);
     this->pagePointer++;
     if(result.empty()){
@@ -31,6 +31,7 @@ vector<int> Cursor::getNext()
             }
         }
         else{
+            logger.log("MATRIX UTHA RAHA HUN");
             matrixCatalogue.getMatrix(this->tableName)->getNextPage(this);
             if(!this->pagePointer){
                 result = this->page.getRow(this->pagePointer);
