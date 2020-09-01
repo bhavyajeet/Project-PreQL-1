@@ -20,6 +20,7 @@ public:
     vector<uint> distinctValuesPerColumnCount;
     vector<uint> distinctValuesPerRowCount;
     uint columnCount = 0;
+    uint actualColumn = 0;
     long long int rowCount = 0;
     uint blockCount = 0;
     uint maxRowsPerBlock = 0;
@@ -56,9 +57,34 @@ public:
  * @param row 
  */
 template <typename T>
+void writeRow(vector<T> row, ostream &fout, int colIndex, int actualColumn)
+{
+    logger.log("Matrix::printRow");
+    logger.log(to_string(this->columnCount));
+    logger.log(to_string(colIndex));
+    logger.log(to_string(actualColumn));
+    for (int columnCounter = 0; columnCounter < row.size(); columnCounter++)
+    {
+        if(colIndex*this->maxColumnsPerBlock + columnCounter < actualColumn){
+            if (columnCounter != 0)
+                fout << ", ";
+                fout << row[columnCounter];
+        }
+    }
+}
+
+    /**
+ * @brief Static function that takes a vector of valued and prints them out in a
+ * comma seperated format.
+ *
+ * @tparam T current usaages include int and string
+ * @param row 
+ */
+template <typename T>
 void writeRow(vector<T> row, ostream &fout)
 {
     logger.log("Matrix::printRow");
+    logger.log(to_string(this->columnCount));
     for (int columnCounter = 0; columnCounter < row.size(); columnCounter++)
     {
         if (columnCounter != 0)

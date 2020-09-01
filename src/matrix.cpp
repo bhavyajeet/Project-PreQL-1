@@ -345,6 +345,8 @@ void Matrix::makePermanent()
         
     }
     logger.log(to_string(n));
+    int actualColumn = 0;
+    // Over all n, 
     for (int i = 0; i < n; i++)
     {
         Cursor cursor(this->MatrixName, 0);
@@ -353,18 +355,30 @@ void Matrix::makePermanent()
         {
             row = cursor.getNext();
             if( (j) % (n) == (i) ){
-                cout << "exporting row " ;
-                   for(int i=0; i < row.size(); i++)
-                    cout << row.at(i) << ' ';
-                    cout << endl;
+                if( j/n == 0){
+                    if (row[0]>=0){
+                        actualColumn++;   
+                    }
+                }
+
+            }        
+        }
+    }    
+    for (int i = 0; i < n; i++)
+    {
+        Cursor cursor(this->MatrixName, 0);
+        vector<int> row;
+        for (int j = 0; j < this->rowCount;j++)
+        {
+            row = cursor.getNext();
+            if( (j) % (n) == (i) ){
                 if (row[0]>=0){
-                this->writeRow(row, fout);
-                // fout << to_string(j);
-                if(j/n != (n/MAX_COLS_MATRIX - 1)){
-                    fout << ",";
+                    this->writeRow(row, fout,j / n,actualColumn);
+                    if(j/n != (n/MAX_COLS_MATRIX - 1)){
+                        fout << ",";
+                    }
                 }
-                }
-                // fout << to_string(row[0]);
+
             }        
         }
         fout << endl;

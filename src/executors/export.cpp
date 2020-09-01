@@ -24,7 +24,6 @@ bool semanticParseEXPORT()
     //Table should exist
     if (tableCatalogue.isTable(parsedQuery.exportRelationName) || matrixCatalogue.isMatrix(parsedQuery.exportRelationName))
     {
-        logger.log("HAI NA");
         return true;
     }
     cout << "SEMANTIC ERROR: No such relation exists" << endl;
