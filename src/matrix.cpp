@@ -116,7 +116,7 @@ bool Matrix::blockify()
     logger.log(to_string(this->columnCount));
     // cout << "col ocunt " << (to_string(this->columnCount))<< endl;
     string line, word;
-    vector<int> row(min(this->maxColumnsPerBlock,this->columnCount), -1);
+    vector<int> row(this->maxColumnsPerBlock, -1);
     vector<vector<int>> rowsInPage(this->maxRowsPerBlock, row);
     int pageCounter = 0;
     int currentColumn = 0;
