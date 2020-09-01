@@ -61,11 +61,12 @@ bool Matrix::load()
     {
         cout << "getting there";
         fin.close();
-       if (this->extractColumnNames(line)){
-        cout << "getting there PART 2";
-        if (this->blockify())
-            return true;
-       }
+        if (this->extractColumnNames(line))
+        {
+            cout << "getting there PART 2";
+            if (this->blockify())
+                return true;
+        }
     }
     fin.close();
     logger.log(line);
@@ -111,12 +112,12 @@ bool Matrix::extractColumnNames(string firstLine)
  * @return false otherwise
  */
 bool Matrix::blockify()
-{   
+{
     logger.log("Matrix::blockify");
     logger.log(to_string(this->columnCount));
     // cout << "col ocunt " << (to_string(this->columnCount))<< endl;
     string line, word;
-    vector<int> row(min(this->maxColumnsPerBlock,this->columnCount), -1);
+    vector<int> row(min(this->maxColumnsPerBlock, this->columnCount), -1);
     vector<vector<int>> rowsInPage(this->maxRowsPerBlock, row);
     int pageCounter = 0;
     int currentColumn = 0;
@@ -129,64 +130,74 @@ bool Matrix::blockify()
     logger.log(to_string(this->columnCount / this->maxColumnsPerBlock));
     int limit = this->columnCount / this->maxColumnsPerBlock;
     cout << "calc col " << (to_string(limit)) << endl;
-    if(this->columnCount % this->maxColumnsPerBlock){
+    if (this->columnCount % this->maxColumnsPerBlock)
+    {
         limit++;
         cout << "gotta -1" << endl;
     }
-    while(currentColumn < limit){
+    while (currentColumn < limit)
+    {
         logger.log(to_string(currentColumn));
         ifstream fin(this->sourceFileName, ios::in);
-        int rowcounter =0 ;
-        while (rowcounter<limit * this->maxRowsPerBlock)
+        int rowcounter = 0;
+        while (rowcounter < limit * this->maxRowsPerBlock)
         {
             rowcounter++;
-            if (!getline(fin, line)){
+            if (!getline(fin, line))
+            {
                 cout << "wanted to row ";
                 cout << line;
-            stringstream s(line);
-            cout << rowcounter <<endl;
-            for (int columnCounter = 0; columnCounter < limit * this->maxColumnsPerBlock ; columnCounter++)
-            {
-                // cout << "debug 1 "  << "at col" << columnCounter<< endl;
-                if (!getline(s, word, ',') && columnCounter/this->maxColumnsPerBlock == currentColumn)
+                stringstream s(line);
+                cout << rowcounter << endl;
+                for (int columnCounter = 0; columnCounter < limit * this->maxColumnsPerBlock; columnCounter++)
                 {
-                    // return false;
-                    cout << word << "added -1 ig \n";
-                    row[columnCounter % this->maxColumnsPerBlock] = -1;
-                    rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
-                }
-                else {
-                    word = "-1";
-                if(columnCounter/this->maxColumnsPerBlock == currentColumn){
-                    row[columnCounter % this->maxColumnsPerBlock] = stoi(word);
-                    rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
-                    cout << word << "notee\n";;
-                }
+                    // cout << "debug 1 "  << "at col" << columnCounter<< endl;
+                    if (!getline(s, word, ',') && columnCounter / this->maxColumnsPerBlock == currentColumn)
+                    {
+                        // return false;
+                        cout << word << "added -1 ig \n";
+                        row[columnCounter % this->maxColumnsPerBlock] = -1;
+                        rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
+                    }
+                    else
+                    {
+                        word = "-1";
+                        if (columnCounter / this->maxColumnsPerBlock == currentColumn)
+                        {
+                            row[columnCounter % this->maxColumnsPerBlock] = stoi(word);
+                            rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
+                            cout << word << "notee\n";
+                            ;
+                        }
+                    }
                 }
             }
-            }
-            else {
-            cout << line;
-            stringstream s(line);
-            cout << rowcounter <<endl;
-            for (int columnCounter = 0; columnCounter < limit * this->maxColumnsPerBlock ; columnCounter++)
+            else
             {
-                // cout << "debug 1 "  << "at col" << columnCounter<< endl;
-                if (!getline(s, word, ',') && columnCounter/this->maxColumnsPerBlock == currentColumn)
+                cout << line;
+                stringstream s(line);
+                cout << rowcounter << endl;
+                for (int columnCounter = 0; columnCounter < limit * this->maxColumnsPerBlock; columnCounter++)
                 {
-                    // return false;
-                    cout << word << "added -1 ig \n";
-                    row[columnCounter % this->maxColumnsPerBlock] = -1;
-                    rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
+                    // cout << "debug 1 "  << "at col" << columnCounter<< endl;
+                    if (!getline(s, word, ',') && columnCounter / this->maxColumnsPerBlock == currentColumn)
+                    {
+                        // return false;
+                        cout << word << "added -1 ig \n";
+                        row[columnCounter % this->maxColumnsPerBlock] = -1;
+                        rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
+                    }
+                    else
+                    {
+                        if (columnCounter / this->maxColumnsPerBlock == currentColumn)
+                        {
+                            row[columnCounter % this->maxColumnsPerBlock] = stoi(word);
+                            rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
+                            cout << word << "notee\n";
+                            ;
+                        }
+                    }
                 }
-                else {
-                if(columnCounter/this->maxColumnsPerBlock == currentColumn){
-                    row[columnCounter % this->maxColumnsPerBlock] = stoi(word);
-                    rowsInPage[pageCounter % this->maxRowsPerBlock][columnCounter % this->maxColumnsPerBlock] = row[columnCounter % this->maxColumnsPerBlock];
-                    cout << word << "notee\n";;
-                }
-                }
-            }
             }
             pageCounter++;
             logger.log("OK NA");
@@ -207,7 +218,7 @@ bool Matrix::blockify()
             this->rowsPerBlockCount.emplace_back(pageCounter);
             pageCounter = 0;
         }
-        currentColumn++;        
+        currentColumn++;
     }
     if (this->rowCount == 0)
         return false;
@@ -302,8 +313,6 @@ void Matrix::print()
     printRowCount(this->rowCount);
 }
 
-
-
 /**
  * @brief This function returns one row of the Matrix using the cursor object. It
  * returns an empty row is all rows have been read.
@@ -315,13 +324,11 @@ void Matrix::getNextPage(Cursor *cursor)
 {
     logger.log("Matrix::getNext");
 
-        if (cursor->pageIndex < this->blockCount - 1)
-        {
-            cursor->nextPage(cursor->pageIndex+1);
-        }
+    if (cursor->pageIndex < this->blockCount - 1)
+    {
+        cursor->nextPage(cursor->pageIndex + 1);
+    }
 }
-
-
 
 /**
  * @brief called when EXPORT command is invoked to move source file to "data"
@@ -331,7 +338,7 @@ void Matrix::getNextPage(Cursor *cursor)
 void Matrix::makePermanent()
 {
     logger.log("Matrix::makePermanent");
-    if(!this->isPermanent())
+    if (!this->isPermanent())
         bufferManager.deleteFile(this->sourceFileName);
     string newSourceFile = "../data/" + this->MatrixName + ".csv";
     ofstream fout(newSourceFile, ios::out);
@@ -359,7 +366,7 @@ bool Matrix::isPermanent()
 {
     logger.log("Matrix::isPermanent");
     if (this->sourceFileName == "../data/" + this->MatrixName + ".csv")
-    return true;
+        return true;
     return false;
 }
 
@@ -368,7 +375,8 @@ bool Matrix::isPermanent()
  * all temporary files created as part of this Matrix
  *
  */
-void Matrix::unload(){
+void Matrix::unload()
+{
     logger.log("Matrix::~unload");
     for (int pageCounter = 0; pageCounter < this->blockCount; pageCounter++)
         bufferManager.deleteFile(this->MatrixName, pageCounter);
@@ -410,16 +418,16 @@ int Matrix::getColumnIndex(string columnName)
  * @param columnName 
  * @return int 
  */
-void Matrix::transpose(){
+void Matrix::transpose()
+{
     logger.log("Matrix::transpose");
     logger.log("MAINE TRANSPOSE LIYA HAI");
     logger.log("OK NA");
     logger.log(to_string(this->blockCount));
-    for (int variable = 0; variable < this->blockCount/2; variable++)
+    for (int variable = 0; variable < this->blockCount / 2; variable++)
     {
         // swap Page i and Page N*N - i
-        Page pagei = bufferManager.getPage(this->MatrixName,variable);
+        Page pagei = bufferManager.getPage(this->MatrixName, variable);
         pagei.swapElements();
     }
-    
 }
