@@ -17,10 +17,17 @@ Page BufferManager::getPage(string tableName, int pageIndex)
 {
     logger.log("BufferManager::getPage");
     string pageName = "../data/temp/"+tableName + "_Page" + to_string(pageIndex);
+    logger.log("searching");
+    logger.log(pageName);
     if (this->inPool(pageName))
         return this->getFromPool(pageName);
     else
-        return this->insertIntoPool(tableName, pageIndex);
+        {
+            logger.log(tableName);
+            logger.log("ANNARA");
+            logger.log("TERERERE");
+            return this->insertIntoPool(tableName, pageIndex);
+        }
 }
 
 /**
@@ -35,6 +42,8 @@ bool BufferManager::inPool(string pageName)
     logger.log("BufferManager::inPool");
     for (auto page : this->pages)
     {
+        logger.log("OO");
+        logger.log(page.pageName);
         if (pageName == page.pageName)
             return true;
     }
@@ -93,6 +102,30 @@ void BufferManager::writePage(string tableName, int pageIndex, vector<vector<int
 }
 
 /**
+ * @brief The buffer manager is also responsible for updating pages. This is
+ * called when new tables are created using assignment statements.
+ *
+ * @param tableName 
+ * @param pageIndex 
+ * @param rows 
+ * @param rowCount 
+ */
+void BufferManager::updatePage(string pageName,Page newPage)
+{
+    logger.log("BufferManager::updatePage");
+    int x = 0;
+    for (auto page : this->pages)
+        {
+            if ("../data/temp/" + pageName == page.pageName)
+            {
+                    this->pages[x] = newPage;
+                    page = newPage;
+            }
+            x++;
+        }
+}
+
+/**
  * @brief Deletes file names fileName
  *
  * @param fileName 
@@ -117,4 +150,24 @@ void BufferManager::deleteFile(string tableName, int pageIndex)
     logger.log("BufferManager::deleteFile");
     string fileName = "../data/temp/"+tableName + "_Page" + to_string(pageIndex);
     this->deleteFile(fileName);
+}
+
+//////////////////////////    MATRIX METHODS         /////////////////////////////
+/**
+ * @brief Inserts page indicated by matrixName and pageIndex into pool. If the
+ * pool is full, the pool ejects the oldest inserted page from the pool and adds
+ * the current page at the end. It naturally follows a queue data structure. 
+ *
+ * @param MatrixName 
+ * @param pageIndex 
+ * @return Page 
+ */
+Page BufferManager::insertMatrixIntoPool(string matrixName, int pageIndex)
+{
+    logger.log("BufferManager::insertMatrixIntoPool");
+    Page page(matrixName, pageIndex);
+    if (this->pages.size() >= BLOCK_COUNT)
+        pages.pop_front();
+    pages.push_back(page);
+    return page;
 }

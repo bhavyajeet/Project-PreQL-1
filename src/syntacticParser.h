@@ -1,4 +1,5 @@
 #include "tableCatalogue.h"
+#include "matrixCatalogue.h"
 
 using namespace std;
 
@@ -8,16 +9,19 @@ enum QueryType
     CROSS,
     DISTINCT,
     EXPORT,
+    EXPORTMATRIX,
     INDEX,
     JOIN,
     LIST,
     LOAD,
+    LOADMATRIX,
     PRINT,
     PROJECTION,
     RENAME,
     SELECTION,
     SORT,
     SOURCE,
+    TRANSPOSE,
     UNDETERMINED
 };
 
@@ -62,6 +66,7 @@ public:
     string distinctRelationName = "";
 
     string exportRelationName = "";
+    string exportMatrixRelationName = "";
 
     IndexingStrategy indexingStrategy = NOTHING;
     string indexColumnName = "";
@@ -75,6 +80,7 @@ public:
     string joinSecondColumnName = "";
 
     string loadRelationName = "";
+    string loadMatrixRelationName = "";
 
     string printRelationName = "";
 
@@ -101,6 +107,8 @@ public:
 
     string sourceFileName = "";
 
+    string transposeRelationName = "";
+    string transposeNewRelationName = "";
     ParsedQuery();
     void clear();
 };
@@ -120,6 +128,10 @@ bool syntacticParseRENAME();
 bool syntacticParseSELECTION();
 bool syntacticParseSORT();
 bool syntacticParseSOURCE();
+bool syntacticParseTRANSPOSE();
+bool syntacticParseLOADMATRIX();
+bool syntacticParseEXPORTMATRIX();
 
 bool isFileExists(string tableName);
+bool isFileExists(string MatrixName);
 bool isQueryFile(string fileName);

@@ -53,6 +53,7 @@ Table::Table(string tableName, vector<string> columns)
 bool Table::load()
 {
     logger.log("Table::load");
+    logger.log(this->sourceFileName);
     fstream fin(this->sourceFileName, ios::in);
     string line;
     if (getline(fin, line))

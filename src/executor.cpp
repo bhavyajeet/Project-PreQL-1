@@ -7,16 +7,19 @@ void executeCommand(){
         case CROSS: executeCROSS(); break;
         case DISTINCT: executeDISTINCT(); break;
         case EXPORT: executeEXPORT(); break;
+        case EXPORTMATRIX: executeEXPORTMATRIX(); break;
         case INDEX: executeINDEX(); break;
         case JOIN: executeJOIN(); break;
         case LIST: executeLIST(); break;
         case LOAD: executeLOAD(); break;
+        case LOADMATRIX: executeLOADMATRIX(); break;
         case PRINT: executePRINT(); break;
         case PROJECTION: executePROJECTION(); break;
         case RENAME: executeRENAME(); break;
         case SELECTION: executeSELECTION(); break;
         case SORT: executeSORT(); break;
         case SOURCE: executeSOURCE(); break;
+        case TRANSPOSE: executeTRANSPOSE(); break;
         default: cout<<"PARSING ERROR"<<endl;
     }
 

@@ -13,6 +13,7 @@
 class Page{
 
     string tableName;
+    string MatrixName;
     string pageIndex;
     int columnCount;
     int rowCount;
@@ -26,4 +27,6 @@ class Page{
     Page(string tableName, int pageIndex, vector<vector<int>> rows, int rowCount);
     vector<int> getRow(int rowIndex);
     void writePage();
+    void writeToPage(vector<vector<int>> matrix);
+    void swapElements();
 };
