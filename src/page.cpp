@@ -170,7 +170,7 @@ void Page::swapElements()
  * @brief writes current page contents to a specified file.
  * 
  */
-void Page::writeToPage(string pagename)
+void Page::writeToPage(vector<vector<int>> matrix)
 {
     logger.log("Page::writeToPage");
     logger.log((pageName));
@@ -183,7 +183,7 @@ void Page::writeToPage(string pagename)
             logger.log(to_string(columnCounter));
             if (columnCounter != 0)
                 fout << " ";
-            fout << this->rows[rowCounter][columnCounter];
+            fout << matrix[rowCounter][columnCounter];
         }
         fout << endl;
     }
