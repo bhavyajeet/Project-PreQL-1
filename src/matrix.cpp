@@ -59,12 +59,18 @@ bool Matrix::load()
     string line;
     if (getline(fin, line))
     {
+        cout << "getting there";
         fin.close();
-       if (this->extractColumnNames(line))
+       if (this->extractColumnNames(line)){
+        cout << "getting there PART 2";
         if (this->blockify())
             return true;
+       }
     }
     fin.close();
+    logger.log(line);
+    cout << line;
+    cout << "lol";
     logger.log("YTE KYUN HUA");
     return false;
 }
@@ -87,8 +93,7 @@ bool Matrix::extractColumnNames(string firstLine)
     while (getline(s, word, ','))
     {
         word.erase(std::remove_if(word.begin(), word.end(), ::isspace), word.end());
-        if (columnNames.count(word))
-            return false;
+        cout << word << " HI RA " << columnNames.count(word) << endl;
         columnNames.insert(word);
         this->columns.emplace_back(word);
     }
