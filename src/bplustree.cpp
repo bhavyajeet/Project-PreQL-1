@@ -5,10 +5,24 @@ bplusTree::bplusTree()
     logger.log("bplusTree::bplusTree");
 }
 
-#define N 4  
-  
+bplusTree::bplusTree(string tableName, int fanOut){
+
+}
+
+// #define N 4  
+//   1,21,31
+//   1,2,3
+//   4,5,6
+//   10,11,12
+
+
+// bufferManager -> page(pageNumber);
+// vector v = page()->getRow(rownumber);
+
+// {pagenumber,(rownumber)}
+
 struct node { 
-  
+
     // key of N-1 nodes 
     int key[N - 1]; 
       
@@ -26,58 +40,58 @@ struct node {
     struct node* parent; 
 }; 
 
-// This function searches for the leaf  
-// into which to insert element 'k' 
-struct node* searchforleaf(struct node* root, int k,  
-                     struct node* parent, int chindex) 
-{ 
-    if (root) { 
+// // This function searches for the leaf  
+// // into which to insert element 'k' 
+// struct node* searchforleaf(struct node* root, int k,  
+//                      struct node* parent, int chindex) 
+// { 
+//     if (root) { 
   
-        // If the passed root is a leaf node, then 
-        // k can be inserted in this node itself 
-        if (root->isleaf == 1) 
-            return root; 
+//         // If the passed root is a leaf node, then 
+//         // k can be inserted in this node itself 
+//         if (root->isleaf == 1) 
+//             return root; 
               
-        // If the passed root is not a leaf node,  
-        // implying there are one or more children 
-        else { 
-            int i; 
+//         // If the passed root is not a leaf node,  
+//         // implying there are one or more children 
+//         else { 
+//             int i; 
               
-          /*If passed root's initial key is itself g 
-            reater than the element to be inserted, 
-            we need to insert to a new leaf left of the root*/
-            if (k < root->key[0]) 
-                root = searchforleaf(root->child[0], k, root, 0); 
+//           /*If passed root's initial key is itself g 
+//             reater than the element to be inserted, 
+//             we need to insert to a new leaf left of the root*/
+//             if (k < root->key[0]) 
+//                 root = searchforleaf(root->child[0], k, root, 0); 
                   
-            else 
-            { 
-                // Find the first key whose value is greater  
-                // than the insertion value 
-                // and insert into child of that key 
-                for (i = 0; i < root->n; i++) 
-                    if (root->key[i] > k) 
-                        root = searchforleaf(root->child[i], k, root, i); 
+//             else 
+//             { 
+//                 // Find the first key whose value is greater  
+//                 // than the insertion value 
+//                 // and insert into child of that key 
+//                 for (i = 0; i < root->n; i++) 
+//                     if (root->key[i] > k) 
+//                         root = searchforleaf(root->child[i], k, root, i); 
                           
-                // If all the keys are less than the insertion  
-                // key value, insert to the right of last key 
-                if (root->key[i - 1] < k) 
-                    root = searchforleaf(root->child[i], k, root, i); 
-            } 
-        } 
-    } 
-    else { 
+//                 // If all the keys are less than the insertion  
+//                 // key value, insert to the right of last key 
+//                 if (root->key[i - 1] < k) 
+//                     root = searchforleaf(root->child[i], k, root, i); 
+//             } 
+//         } 
+//     } 
+//     else { 
           
-        // If the passed root is NULL (there is no such  
-        // child node to search), then create a new leaf  
-        // node in that location 
-        struct node* newleaf = new struct node; 
-        newleaf->isleaf = 1; 
-        newleaf->n = 0; 
-        parent->child[chindex] = newleaf; 
-        newleaf->parent = parent; 
-        return newleaf; 
-    } 
-} 
+//         // If the passed root is NULL (there is no such  
+//         // child node to search), then create a new leaf  
+//         // node in that location 
+//         struct node* newleaf = new struct node; 
+//         newleaf->isleaf = 1; 
+//         newleaf->n = 0; 
+//         parent->child[chindex] = newleaf; 
+//         newleaf->parent = parent; 
+//         return newleaf; 
+//     } 
+// } 
   
 struct node* insert(struct node* root, int k) 
 { 
@@ -93,7 +107,7 @@ struct node* insert(struct node* root, int k)
                 p->key[0] = e; 
                 p->n = 1; 
                 return root; 
-            } 
+            }
             // If number of filled keys is less than maximum 
             if (p->n < N - 1) { 
                 int i; 
@@ -197,17 +211,18 @@ struct node* insert(struct node* root, int k)
             } 
         } 
   
-        /*Cases of root splitting, etc. are omitted  
-         as this implementation is just to demonstrate  
-         the two-three split operation*/
-    } 
-    else 
-    { 
-        // Create new node if root is NULL 
-        struct node* root = new struct node; 
-        root->key[0] = k; 
-        root->isleaf = 1; 
-        root->n = 1; 
-        root->parent = NULL; 
-    } 
-} 
+//         /*Cases of root splitting, etc. are omitted  
+//          as this implementation is just to demonstrate  
+//          the two-three split operation*/
+//     } 
+//     else 
+//     { 
+//         // Create new node if root is NULL 
+//         struct node* root = new struct node; 
+//         root->key[0] = k; 
+//         root->isleaf = 1; 
+//         root->n = 1; 
+//         root->parent = NULL; 
+//     } 
+// } 
+

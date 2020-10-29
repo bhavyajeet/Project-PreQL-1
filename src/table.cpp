@@ -356,13 +356,13 @@ int Table::indexTable(string columnName,IndexingStrategy indexingStrategy,int th
         this->indexedColumn = columnName;
         if(indexingStrategy == BTREE){
             // construct a btree
-            // thirdParam -> number of leaves            
-            //this->bplusTree.construct(this->rows,thirdParam);   
+            // thirdParam -> fanout
+            this->BplusTree = bplusTree(this->tableName,thirdParam);
         }
         else{
             // construct a hash
             // thirdParam -> number of buckets
-
+            this->Hashing = hashing(this->tableName,thirdParam);
         }
     }
 }

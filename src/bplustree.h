@@ -21,6 +21,6 @@
  *
  */
 class bplusTree{
-    int order;
-    int numLeaves;
+    int fanOut;
+    int tableName;
 };

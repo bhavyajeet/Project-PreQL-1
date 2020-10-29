@@ -33,7 +33,7 @@ public:
     bool indexed = false;
     string indexedColumn = "";
     IndexingStrategy indexingStrategy = NOTHING;
-    bplusTree BPlusTree;
+    bplusTree BplusTree;
     hashing Hashing;
     
     bool extractColumnNames(string firstLine);
