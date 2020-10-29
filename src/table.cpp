@@ -321,6 +321,7 @@ Cursor Table::getCursor()
     Cursor cursor(this->tableName, 0);
     return cursor;
 }
+
 /**
  * @brief Function that returns the index of column indicated by columnName
  * 
@@ -334,5 +335,34 @@ int Table::getColumnIndex(string columnName)
     {
         if (this->columns[columnCounter] == columnName)
             return columnCounter;
+    }
+}
+
+/**
+ * @brief Function that returns the index of column indicated by indexName
+ * 
+ * @param  indexingStrategy
+ * @return int 
+ */
+int Table::indexTable(string columnName,IndexingStrategy indexingStrategy,int thirdParam)
+{
+    logger.log("Index::creatingIndex");
+    if(indexingStrategy == NOTHING){
+        this->indexed = false;
+        this->indexedColumn = "";
+    }
+    else{
+        this->indexed = true;
+        this->indexedColumn = columnName;
+        if(indexingStrategy == BTREE){
+            // construct a btree
+            // thirdParam -> number of leaves            
+            //this->bplusTree.construct(this->rows,thirdParam);   
+        }
+        else{
+            // construct a hash
+            // thirdParam -> number of buckets
+
+        }
     }
 }
