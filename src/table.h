@@ -29,6 +29,7 @@ public:
     vector<string> columns;
     vector<uint> distinctValuesPerColumnCount;
     uint columnCount = 0;
+    uint indexedColumnNumber = 0;
     long long int rowCount = 0;
     uint blockCount = 0;
     uint maxRowsPerBlock = 0;

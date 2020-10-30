@@ -5,7 +5,7 @@ bplusTree::bplusTree()
     logger.log("bplusTree::bplusTree");
 }
 
-bplusTree::bplusTree(string tableName, string fanOut, int rowCount){
+bplusTree::bplusTree(string tableName, string fanOut, int rowCount, int indexedColumnNumber){
     logger.log("bplusTree::bplusTreeInitialization");
     for (int i = 0; i < rowCount; i++)
     {

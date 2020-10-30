@@ -26,6 +26,6 @@ public:
     int fanOut;
 
     bplusTree();
-    bplusTree(string tableName, string fanOut, int rowCount);
+    bplusTree(string tableName, string fanOut, int rowCount, int indexedColumnNumber);
 };
 };

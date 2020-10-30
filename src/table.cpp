@@ -113,8 +113,19 @@ bool Table::blockify()
     unordered_set<int> dummy;
     dummy.clear();
     this->distinctValuesInColumns.assign(this->columnCount, dummy);
+    this->columns.assign(this->columnCount,"");
     this->distinctValuesPerColumnCount.assign(this->columnCount, 0);
     getline(fin, line);
+    stringstream s(line);
+    for (int columnCounter = 0; columnCounter < this->columnCount; columnCounter++)
+    {
+        if (!getline(s, word, ','))
+            return false;
+        this->columns[columnCounter] = word;
+        logger.log("ANNARA");
+        logger.log(word);
+        logger.log("OOPOPOP");
+    }
     while (getline(fin, line))
     {
         stringstream s(line);
@@ -354,15 +365,21 @@ int Table::indexTable(string columnName,IndexingStrategy indexingStrategy, strin
     else{
         this->indexed = true;
         this->indexedColumn = columnName;
+        for (int i = 0; i < this->columnCount; i++)
+        {
+            if(this->columns[i] == this->indexedColumn){
+                this->indexedColumnNumber = i;
+            }
+        }
         if(indexingStrategy == BTREE){
             // construct a btree
             // thirdParam -> fanout
-            this->BplusTree = bplusTree(this->tableName, thirdParam, this->rowCount);
+            this->BplusTree = bplusTree(this->tableName, thirdParam, this->rowCount, this->indexedColumnNumber);
         }
         else{
             // construct a hash
             // thirdParam -> number of buckets
-            this->Hashing = hashing(this->tableName, thirdParam, this->rowCount);
+            this->Hashing = hashing(this->tableName, thirdParam, this->rowCount, this->indexedColumnNumber);
         }
     }
 }

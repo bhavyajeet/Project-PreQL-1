@@ -25,5 +25,5 @@ public:
     int buckets;
 
     hashing();
-    hashing(string tableName, string fanOut, int rowCount);
+    hashing(string tableName, string fanOut, int rowCount, int indexedColumnNumber);
 };
