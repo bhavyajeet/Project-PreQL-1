@@ -1,5 +1,5 @@
-#include"page.h"
-
+namespace std
+{
 /**
  * @brief The BufferManager is responsible for reading pages to the main memory.
  * Recall that large files are broken and stored as blocks in the hard disk. The
@@ -20,7 +20,12 @@
  * </p>
  *
  */
-class bplusTree{
+class bplusTree
+{
+public:
     int fanOut;
-    int tableName;
+
+    bplusTree();
+    bplusTree(string tableName, string fanOut, int rowCount);
+};
 };

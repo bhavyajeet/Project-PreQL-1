@@ -344,7 +344,7 @@ int Table::getColumnIndex(string columnName)
  * @param  indexingStrategy
  * @return int 
  */
-int Table::indexTable(string columnName,IndexingStrategy indexingStrategy,int thirdParam)
+int Table::indexTable(string columnName,IndexingStrategy indexingStrategy, string thirdParam)
 {
     logger.log("Index::creatingIndex");
     if(indexingStrategy == NOTHING){
@@ -357,12 +357,12 @@ int Table::indexTable(string columnName,IndexingStrategy indexingStrategy,int th
         if(indexingStrategy == BTREE){
             // construct a btree
             // thirdParam -> fanout
-            this->BplusTree = bplusTree(this->tableName,thirdParam);
+            this->BplusTree = bplusTree(this->tableName, thirdParam, this->rowCount);
         }
         else{
             // construct a hash
             // thirdParam -> number of buckets
-            this->Hashing = hashing(this->tableName,thirdParam);
+            this->Hashing = hashing(this->tableName, thirdParam, this->rowCount);
         }
     }
 }

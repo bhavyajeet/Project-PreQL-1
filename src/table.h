@@ -1,4 +1,7 @@
 #include "cursor.h"
+#include "bplustree.h"
+#include "hashing.h"
+
 
 enum IndexingStrategy
 {
@@ -52,6 +55,7 @@ public:
     Cursor getCursor();
     int getColumnIndex(string columnName);
     void unload();
+    int indexTable(string columnName,IndexingStrategy indexingStrategy, string thirdParam);
 
     /**
  * @brief Static function that takes a vector of valued and prints them out in a

@@ -107,6 +107,8 @@ public:
 
     string sourceFileName = "";
 
+    string thirdParam = "";
+
     string transposeRelationName = "";
     string transposeNewRelationName = "";
     ParsedQuery();

@@ -1,13 +1,13 @@
 #include "global.h"
 /**
  * @brief 
- * SYNTAX: INDEX ON column_name FROM relation_name USING indexing_strategy
+ * SYNTAX: INDEX ON column_name FROM relation_name USING indexing_strategy FANOUT/BUCKETS thirdParam
  * indexing_strategy: ASC | DESC | NOTHING
  */
 bool syntacticParseINDEX()
 {
     logger.log("syntacticParseINDEX");
-    if (tokenizedQuery.size() != 7 || tokenizedQuery[1] != "ON" || tokenizedQuery[3] != "FROM" || tokenizedQuery[5] != "USING")
+    if (tokenizedQuery.size() != 9 || tokenizedQuery[1] != "ON" || tokenizedQuery[3] != "FROM" || tokenizedQuery[5] != "USING")
     {
         cout << "SYNTAX ERROR" << endl;
         return false;
@@ -16,6 +16,7 @@ bool syntacticParseINDEX()
     parsedQuery.indexColumnName = tokenizedQuery[2];
     parsedQuery.indexRelationName = tokenizedQuery[4];
     string indexingStrategy = tokenizedQuery[6];
+    parsedQuery.thirdParam = tokenizedQuery[8];
     if (indexingStrategy == "BTREE")
         parsedQuery.indexingStrategy = BTREE;
     else if (indexingStrategy == "HASH")
@@ -54,5 +55,7 @@ bool semanticParseINDEX()
 void executeINDEX()
 {
     logger.log("executeINDEX");
+    Table *table = tableCatalogue.getTable(parsedQuery.indexRelationName);
+    int a = table->indexTable(parsedQuery.indexColumnName,parsedQuery.indexingStrategy,parsedQuery.thirdParam);
     return;
 }
