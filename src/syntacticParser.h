@@ -22,6 +22,7 @@ enum QueryType
     SORT,
     SOURCE,
     TRANSPOSE,
+    INSERT,
     UNDETERMINED
 };
 
@@ -131,6 +132,7 @@ bool syntacticParseSELECTION();
 bool syntacticParseSORT();
 bool syntacticParseSOURCE();
 bool syntacticParseTRANSPOSE();
+bool syntacticParseINSERT();
 bool syntacticParseLOADMATRIX();
 bool syntacticParseEXPORTMATRIX();
 
