@@ -2,7 +2,6 @@
 #include "bplustree.h"
 #include "hashing.h"
 
-
 enum IndexingStrategy
 {
     BTREE,
@@ -50,6 +49,7 @@ public:
     bool isColumn(string columnName);
     void renameColumn(string fromColumnName, string toColumnName);
     void print();
+    int insertRow( vector<int> values);
     void makePermanent();
     bool isPermanent();
     void getNextPage(Cursor *cursor);

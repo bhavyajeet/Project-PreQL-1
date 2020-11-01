@@ -112,6 +112,7 @@ void BufferManager::writePage(string tableName, int pageIndex, vector<vector<int
  */
 void BufferManager::updatePage(string pageName,Page newPage)
 {
+    cout << "trying to update page " << newPage.pageName << " with rows " << newPage.getRowCount() << endl;
     logger.log("BufferManager::updatePage");
     int x = 0;
     for (auto page : this->pages)

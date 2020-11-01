@@ -112,6 +112,10 @@ public:
 
     string transposeRelationName = "";
     string transposeNewRelationName = "";
+
+    string insertRelationName = "";
+    vector<int> insertValues; 
+
     ParsedQuery();
     void clear();
 };

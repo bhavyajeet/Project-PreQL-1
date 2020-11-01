@@ -57,6 +57,7 @@ bool semanticParseSORT(){
 
 void executeSORT(){
     logger.log("executeSORT");
+    
     cout << "sorting aint so easy bruh";
     return;
 }

@@ -383,3 +383,44 @@ int Table::indexTable(string columnName,IndexingStrategy indexingStrategy, strin
         }
     }
 }
+
+
+int Table::insertRow(vector<int> values){
+    logger.log("Table::insert");
+    uint count = this->rowCount;
+
+    //print headings
+    // this->writeRow(this->columns, cout);
+    // Cursor cursor(this->tableName, 0);
+    // vector<int> row;
+    // for (int rowCounter = 0; rowCounter < count; rowCounter++)
+    // {
+    //     row = cursor.getNext();
+    //     this->writeRow(row, cout);
+    // }
+    // string FileName = "../data/temp/" + this->tableName + "_Page" + to_string(this->blockCount-1);
+    
+    cout << "row count of this table is "<< this->rowCount <<endl;
+    this->rowCount++;
+    for (auto d: this->rowsPerBlockCount){
+        cout << d <<" " ;
+    }
+    cout << endl;
+    this->rowsPerBlockCount[this->blockCount-1]++;
+    cout << "row count of this table is "<< this->rowCount <<endl;
+    for (auto d: this->rowsPerBlockCount){
+        cout << d <<" " ;
+    }
+    cout << endl;
+    Page lastPage =  bufferManager.getPage(this->tableName,this->blockCount-1);
+    lastPage.insertPageRow(values);
+    bufferManager.updatePage(this->tableName+"_Page"+to_string(this->blockCount-1),lastPage);
+
+
+
+
+    // ofstream fout(FileName, ios::out);
+    // this->writeRow(values,fout);
+    // this->writeRow(values,cout);
+    printRowCount(this->rowCount);   
+}
