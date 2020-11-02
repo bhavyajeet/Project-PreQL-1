@@ -44,6 +44,9 @@ public:
     // inserts a key into hash table 
     void insertItem(int key, int pagePtr, int rowPtr);
   
+    // searches a key into hash table 
+    int searchElement(int key);
+
     // deletes a key from hash table 
     void deleteItem(int key); 
   

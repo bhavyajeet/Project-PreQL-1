@@ -58,5 +58,9 @@ void executeINDEX()
     logger.log("executeINDEX");
     Table *table = tableCatalogue.getTable(parsedQuery.indexRelationName);
     int a = table->indexTable(parsedQuery.indexColumnName,parsedQuery.indexingStrategy,parsedQuery.thirdParam);
+    for (int i = 0; i < table->blockCount; i++)
+    {
+        bufferManager.deleteFile(parsedQuery.indexRelationName,i);
+    }
     return;
 }
