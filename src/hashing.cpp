@@ -14,7 +14,7 @@ hashing::hashing(int b, string tableName)
       bt* buk = (bt*) malloc(sizeof(bt));
       buk->next = NULL;
       buk->prev = NULL;
-      buk-> data = -1;
+      buk->data = -1;
       this->bucks.push_back(buk);
     }
     this->pointerBucket = 0;
