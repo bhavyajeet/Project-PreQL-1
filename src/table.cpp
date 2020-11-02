@@ -379,7 +379,7 @@ int Table::indexTable(string columnName,IndexingStrategy indexingStrategy, strin
         else{
             // construct a hash
             // thirdParam -> number of buckets
-            this->Hashing = hashing(this->tableName, thirdParam, this->rowCount, this->indexedColumnNumber);
+            this->Hashing = hashing(this->tableName, stoi(thirdParam), this->rowCount, this->indexedColumnNumber);
         }
     }
 }

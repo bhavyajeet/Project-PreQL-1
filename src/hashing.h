@@ -21,6 +21,8 @@
  */
 typedef struct bucket{
     int data;
+    int pagePtr;
+    int rowPtr;    
     struct bucket* next;
     struct bucket* prev;
 }bt;
@@ -32,18 +34,13 @@ class hashing
 public: 
     int BUCKET;    // No. of buckets 
   
-    BUCKET *= 2;
     // Pointer to an array containing buckets 
-    vector< vector <bt*> > bucks; 
+    vector< bt* > bucks; 
     int pointerBucket;
-//     [] *head1 -> -> -> -> -> |
-//     [] *head2 -> -> -> | 
-//     [] *head3 -> -> -> -> -> | ->
-//  -> [] *head4 -> -> -> -> -> |
-//     [] *head5 -> -> 
+    string tableName;
 
     // inserts a key into hash table 
-    void insertItem(int x); 
+    void insertItem(int key, int pagePtr, int rowPtr);
   
     // deletes a key from hash table 
     void deleteItem(int key); 
@@ -52,6 +49,9 @@ public:
     int hashFunction(int x) { 
         return (x % BUCKET); 
     } 
+
+    hashing();
+    hashing(string tableName, int b,int rowCount, int indexedColumnNumber );
   
     void displayHash(); 
 }; 

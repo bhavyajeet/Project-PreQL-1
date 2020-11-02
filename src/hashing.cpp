@@ -5,7 +5,7 @@ hashing::hashing()
     logger.log("hashing::hashing");
 }
 
-hashing::hashing(int b, string tableName) 
+hashing::hashing(string tableName, int b,int rowCount, int indexedColumnNumber ) 
 { 
     this->BUCKET = b; 
     this->tableName = tableName;
@@ -53,7 +53,7 @@ void hashing::deleteItem(int key)
           itr->prev->next = NULL;
         }
         else{
-          itr->prev->next = iter->next;
+          itr->prev->next = itr->next;
         }
       }
       itr = itr->next;
@@ -63,9 +63,12 @@ void hashing::deleteItem(int key)
 // function to display hash table 
 void hashing::displayHash() { 
   for (int i = 0; i < BUCKET; i++) { 
-    cout << i; 
-    for (auto x : bucks[i]) 
-      cout << " --> " << x->data; 
-    cout << endl; 
+    bt* itr = bucks[i];
+    while (itr)
+    {
+      cout << itr->data << endl;
+      itr = itr->next;
+    }
+
   } 
 } 
