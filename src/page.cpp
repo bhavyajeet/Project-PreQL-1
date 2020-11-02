@@ -30,7 +30,7 @@ Page::Page(string tableName, int pageIndex)
 {
     logger.log("Page::Pageee");
     this->pageIndex = pageIndex;
-    this->pageName = "../data/temp/" + tableName + "_Page" + to_string(pageIndex);
+    this->pageName = "../data/  temp/" + tableName + "_Page" + to_string(pageIndex);
     logger.log(this->pageName);
     if (tableCatalogue.isTable(tableName)){
         // it is table

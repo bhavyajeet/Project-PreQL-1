@@ -12,6 +12,18 @@ void TableCatalogue::deleteTable(string tableName)
     delete this->tables[tableName];
     this->tables.erase(tableName);
 }
+
+void TableCatalogue::updateTable(Table *anna)
+{
+    logger.log("TableCatalogue::deleteTable"); 
+    for(auto x:this->tables){
+        if(x->tableName == anna->tableName){
+            x = anna;
+            break;
+        }
+    }
+}
+
 Table* TableCatalogue::getTable(string tableName)
 {
     logger.log("TableCatalogue::getTable"); 
