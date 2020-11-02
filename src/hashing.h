@@ -19,11 +19,39 @@
  * </p>
  *
  */
-class hashing
-{
-public:
-    int buckets;
+typedef struct bucket{
+    int data;
+    struct bucket* next;
+    struct bucket* prev;
+}bt;
 
-    hashing();
-    hashing(string tableName, string fanOut, int rowCount, int indexedColumnNumber);
-};
+  
+class hashing 
+{ 
+    
+public: 
+    int BUCKET;    // No. of buckets 
+  
+    BUCKET *= 2;
+    // Pointer to an array containing buckets 
+    vector< vector <bt*> > bucks; 
+    int pointerBucket;
+//     [] *head1 -> -> -> -> -> |
+//     [] *head2 -> -> -> | 
+//     [] *head3 -> -> -> -> -> | ->
+//  -> [] *head4 -> -> -> -> -> |
+//     [] *head5 -> -> 
+
+    // inserts a key into hash table 
+    void insertItem(int x); 
+  
+    // deletes a key from hash table 
+    void deleteItem(int key); 
+  
+    // hash function to map values to key 
+    int hashFunction(int x) { 
+        return (x % BUCKET); 
+    } 
+  
+    void displayHash(); 
+}; 

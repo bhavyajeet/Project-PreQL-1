@@ -1,0 +1,27 @@
+BufferManager::BufferManager
+ParseQuery::clear
+
+Reading New Command: 
+LOAD A
+doCommand
+syntacticParse
+syntacticParseLOAD
+semanticParse
+semanticParseLOAD
+TableCatalogue::isTable
+ParseQuery::clear
+
+Reading New Command: 
+LOAD B
+doCommand
+syntacticParse
+syntacticParseLOAD
+semanticParse
+semanticParseLOAD
+TableCatalogue::isTable
+executeLOAD
+bplusTree::bplusTree
+hashing::hashing
+Table::Table
+Table::load
+../data/B.csv
