@@ -21,6 +21,9 @@
  */
 typedef struct bucket{
     int data;
+    string tableName; // which table it belongs to
+    int pagePtr; // which page it belongs to
+    int rowPtr;  // which row it belongs to within the page
     struct bucket* next;
     struct bucket* prev;
 }bt;
@@ -34,7 +37,8 @@ public:
   
     BUCKET *= 2;
     // Pointer to an array containing buckets 
-    vector< vector <bt*> > bucks; 
+    vector <bt*> bucks; 
+
     int pointerBucket;
 //     [] *head1 -> -> -> -> -> |
 //     [] *head2 -> -> -> | 
