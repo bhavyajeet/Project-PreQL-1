@@ -21,7 +21,7 @@ ANNARA
 a
 OOPOPOP
 ANNARA
- b
+b
 OOPOPOP
 BufferManager::writePage
 Page::Page2
@@ -44,14 +44,7 @@ TableCatalogue::~insertTable
 ParseQuery::clear
 
 Reading New Command: 
-INDEX ON b USING B USING HASH BUCKETS 15
-doCommand
-syntacticParse
-syntacticParseINDEX
-ParseQuery::clear
-
-Reading New Command: 
-INDEX ON b FROM B USING HASH BUCKETS 15
+INDEX ON b FROM B USING HASH BUCKETS 12
 doCommand
 syntacticParse
 syntacticParseINDEX
@@ -62,13 +55,31 @@ TableCatalogue::isColumnFromTable
 TableCatalogue::isTable
 TableCatalogue::getTable
 Table::isColumn
+TableCatalogue::getTable
+executeINDEX
+TableCatalogue::getTable
+Index::creatingIndex
+Cursor::Cursor
+BufferManager::getPage
+searching
+../data/temp/B_Page0
+BufferManager::inPool
+B
+ANNARA
+TERERERE
+BufferManager::insertIntoPool
+Page::Pageee
+../data/temp/B_Page0
+TableCatalogue::isTable
+TableCatalogue::getTable
+Cursor::getNext
+Page::getRow
+Cursor::getNext
+Page::getRow
+Cursor::getNext
+Page::getRow
+Cursor::getNext
+Page::getRow
 ParseQuery::clear
 
 Reading New Command: 
-QUIT
-MatrixCatalogue::~MatrixCatalogue
-TableCatalogue::~TableCatalogue
-Table::~unload
-BufferManager::deleteFile
-BufferManager::deleteFile: Success
-Table::isPermanent

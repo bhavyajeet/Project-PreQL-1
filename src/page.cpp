@@ -30,7 +30,7 @@ Page::Page(string tableName, int pageIndex)
 {
     logger.log("Page::Pageee");
     this->pageIndex = pageIndex;
-    this->pageName = "../data/  temp/" + tableName + "_Page" + to_string(pageIndex);
+    this->pageName = "../data/temp/" + tableName + "_Page" + to_string(pageIndex);
     logger.log(this->pageName);
     if (tableCatalogue.isTable(tableName)){
         // it is table
@@ -99,8 +99,12 @@ vector<int> Page::getRow(int rowIndex)
     logger.log("Page::getRow");
     vector<int> result;
     result.clear();
+    cout << "ANNA ME HERE" << endl;
     if (rowIndex >= this->rowCount)
         return result;
+    cout << rowIndex << endl;
+    cout << "GUGU" << endl;
+    cout << this->rows[rowIndex][0];
     return this->rows[rowIndex];
 }
 

@@ -36,7 +36,8 @@ public:
     int BUCKET;    // No. of buckets 
   
     // Pointer to an array containing buckets 
-    vector <bt*> bucks; 
+    vector < vector <bt*> > bucks; 
+    vector < vector <bt*> > over;
     int pointerBucket;
     string tableName;
 

@@ -30,11 +30,26 @@ bool TableCatalogue::isTable(string tableName)
 bool TableCatalogue::isColumnFromTable(string columnName, string tableName)
 {
     logger.log("TableCatalogue::isColumnFromTable"); 
+    cout << "AAAAAAAAAa";
+    cout << columnName;
+    cout << tableName;
+    cout << endl;
     if (this->isTable(tableName))
     {
+        cout << "RARAR"  << endl;
         Table* table = this->getTable(tableName);
+        for (int i = 0; i < 2; i++)
+        {
+            cout << table->columns[i];
+        }
+        cout << endl;
+        cout << "rararar" << endl;
         if (table->isColumn(columnName))
-            return true;
+            {
+                cout << "LALAL";
+                cout << endl;
+                return true;
+            }
     }
     return false;
 }

@@ -121,6 +121,7 @@ bool Table::blockify()
     {
         if (!getline(s, word, ','))
             return false;
+        word.erase(std::remove_if(word.begin(), word.end(), ::isspace), word.end());
         this->columns[columnCounter] = word;
         logger.log("ANNARA");
         logger.log(word);
@@ -191,10 +192,15 @@ void Table::updateStatistics(vector<int> row)
 bool Table::isColumn(string columnName)
 {
     logger.log("Table::isColumn");
+    cout << columnName;
     for (auto col : this->columns)
     {
+        cout << "PPPPPPPPPPPPPPPPPPPp";
+        cout << col;
+        cout << endl;
         if (col == columnName)
         {
+            cout << "OKOKOKOKOKOKO";
             return true;
         }
     }
@@ -236,12 +242,15 @@ void Table::print()
 
     //print headings
     this->writeRow(this->columns, cout);
-
+    cout << "LAUDA" << endl;
+    cout << PRINT_COUNT;
     Cursor cursor(this->tableName, 0);
     vector<int> row;
     for (int rowCounter = 0; rowCounter < count; rowCounter++)
     {
         row = cursor.getNext();
+        cout << row[0];
+        cout << "ANANDkjesnfijrsngkjn";
         this->writeRow(row, cout);
     }
     printRowCount(this->rowCount);
@@ -382,8 +391,24 @@ int Table::indexTable(string columnName,IndexingStrategy indexingStrategy, strin
             this->Hashing = hashing(this->tableName, stoi(thirdParam), this->rowCount, this->indexedColumnNumber);
             for (int i = 0; i < this->blockCount; i++)
             {
-                cout << "ANNARA" << endl;
+                cout << "ANNARAAAA" << endl;
             }
+            for (int i = 0; i < this->blockCount; i++)
+            {
+                Cursor cursor(this->tableName, i); 
+                for (int j = 0; j < this->rowCount; j++)
+                {
+                    vector <int> rr = cursor.getNext();
+                    cout << "OKOKOKOKOKOKOKOK" << endl;
+                    cout << rr[this->indexedColumnNumber] << endl;
+                    this->Hashing.insertItem(rr[this->indexedColumnNumber],i,j);
+                    cout << "RARARARAR";
+                    cout << endl;
+                    this->Hashing.displayHash();
+                }
+                
+            }
+            
             
         }
     }

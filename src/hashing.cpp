@@ -5,6 +5,14 @@ hashing::hashing()
     logger.log("hashing::hashing");
 }
 
+// [] -> -> -> -> 
+// [] -> -> -> ->
+// [] -> -> -> -> -> ->
+// [] -> -> -> -> 
+// [] -> -> ->
+// [] ->
+
+
 hashing::hashing(string tableName, int b,int rowCount, int indexedColumnNumber ) 
 { 
     this->BUCKET = b; 
@@ -20,27 +28,97 @@ hashing::hashing(string tableName, int b,int rowCount, int indexedColumnNumber )
     this->pointerBucket = 0;
 } 
   
+int sizeOfList(bt * iter){
+  int count = 0;
+  while (iter)
+  {
+    count++;
+    iter = iter->next;
+  }
+  return count;
+}
+
 void hashing::insertItem(int key, int pagePtr, int rowPtr) 
-{ 
-    int index = hashFunction(key);
+{
     bt* item = (bt*) malloc(sizeof(bt));
     item->data = key;
     item->pagePtr = pagePtr;
     item->rowPtr = rowPtr;
-    bt* itr = bucks[index];
-    while (itr)
-    {
-      if(itr->next == NULL){
-        itr->next = item;
-        item->prev = itr;
+    item->next = NULL;
+    // a + a-. b
+    // a + b
+    // a b 
+    // 0 0 0
+    // 0 1 1
+    // 1 0 1
+    // 1 1 1
+    int OVERFLOW_SIZE = 5;
+
+    item->prev = NULL;
+    if(index > this->pointerBucket || sizeOfList(bucks[index]) < OVERFLOW_SIZE){
+      int index = hashFunction(key);
+      if(index < this->pointerBucket){
+        index += BUCKET;
       }
-      itr = itr->next;
+      bt* itr = bucks[index];
+      while (itr)
+      {
+        // cout << itr->data;
+        if(itr->next == NULL){
+          itr->next = item;
+          item->prev = itr;
+          break;
+        }
+        itr = itr->next;
+      }
     }
-    
+    else if(index == this->pointerBucket && sizeOfList(bucks[index]) >= 5){
+       // reHash
+       this->pointerBucket++;
+
+       if(this->pointerBucket == BUCKET*2 - 1){
+        // increase size of BUCKET
+        BUCKET *= 2;
+       }
+        bt* buk = (bt*) malloc(sizeof(bt));
+        buk->next = NULL;
+        buk->prev = NULL;
+        buk->data = -1;
+        int count = 0;
+        bt* iter = bucks[index];
+        index += BUCKET;
+        bucks[index] = buk;
+        while (iter)
+        {
+          count = count + 1;
+          if(count > OVERFLOW_SIZE){
+            // overflow starts
+            bt* save = iter;
+            while (iter)
+            {
+              bt* itr = bucks[index];
+              while (itr)
+              {
+                // cout << itr->data;
+                if(itr->next == NULL){
+                  itr->next = buk;
+                  buk->prev = itr;
+                  break;
+                }
+                itr = itr->next;
+              }      
+              iter = iter->next;
+            }
+            save->next = NULL;
+          }
+          iter = iter->next;
+        }
+       
+    }
 } 
   
 void hashing::deleteItem(int key) 
-{ 
+{
   // get the hash index of key 
   int index = hashFunction(key); 
   int found = 0;
@@ -69,5 +147,6 @@ void hashing::displayHash() {
       cout << itr->data << endl;
       itr = itr->next;
     }
+    cout << endl;
   }
 } 

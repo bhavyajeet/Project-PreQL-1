@@ -26,6 +26,8 @@ vector<int> Cursor::getNext()
             // this is a matrix
             tableCatalogue.getTable(this->tableName)->getNextPage(this);
             if(!this->pagePointer){
+                cout << this->pagePointer << endl;
+                cout << "AAAAAAAAAAAAAAAAAa";
                 result = this->page.getRow(this->pagePointer);
                 this->pagePointer++;
             }
