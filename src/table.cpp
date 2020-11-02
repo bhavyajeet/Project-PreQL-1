@@ -380,6 +380,11 @@ int Table::indexTable(string columnName,IndexingStrategy indexingStrategy, strin
             // construct a hash
             // thirdParam -> number of buckets
             this->Hashing = hashing(this->tableName, stoi(thirdParam), this->rowCount, this->indexedColumnNumber);
+            for (int i = 0; i < this->blockCount; i++)
+            {
+                cout << "ANNARA" << endl;
+            }
+            
         }
     }
 }

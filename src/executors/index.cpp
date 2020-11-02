@@ -41,6 +41,7 @@ bool semanticParseINDEX()
     }
     if (!tableCatalogue.isColumnFromTable(parsedQuery.indexColumnName, parsedQuery.indexRelationName))
     {
+        cout << parsedQuery.indexColumnName;
         cout << "SEMANTIC ERROR: Column doesn't exist in relation" << endl;
         return false;
     }

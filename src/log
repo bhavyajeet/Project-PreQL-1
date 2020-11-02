@@ -44,6 +44,27 @@ TableCatalogue::~insertTable
 ParseQuery::clear
 
 Reading New Command: 
+INDEX ON b USING B USING HASH BUCKETS 15
+doCommand
+syntacticParse
+syntacticParseINDEX
+ParseQuery::clear
+
+Reading New Command: 
+INDEX ON b FROM B USING HASH BUCKETS 15
+doCommand
+syntacticParse
+syntacticParseINDEX
+semanticParse
+semanticParseINDEX
+TableCatalogue::isTable
+TableCatalogue::isColumnFromTable
+TableCatalogue::isTable
+TableCatalogue::getTable
+Table::isColumn
+ParseQuery::clear
+
+Reading New Command: 
 QUIT
 MatrixCatalogue::~MatrixCatalogue
 TableCatalogue::~TableCatalogue
