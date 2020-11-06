@@ -122,7 +122,7 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
        
     }
 } 
-  
+
 void hashing::deleteItem(int key) 
 {
   // get the hash index of key 
@@ -172,7 +172,7 @@ int hashing::searchElement(int key) {
   }
   int barray = [-1,-1];
   return *barray;
-} 
+}
 
 
 // function to display hash table 
