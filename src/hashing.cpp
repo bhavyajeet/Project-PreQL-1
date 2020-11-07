@@ -61,6 +61,7 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
     int OVERFLOW_SIZE = 5;
 
     item->prev = NULL;
+    int index = hashFunction(key);
     if(index > this->pointerBucket || sizeOfList(bucks[index]) < OVERFLOW_SIZE){
       int index = hashFunction(key);
       if(index < this->pointerBucket){
@@ -157,21 +158,23 @@ void hashing::deleteItem(int key)
 } 
   
 // function to display hash table 
-int hashing::searchElement(int key) { 
+void hashing::searchElement(int key) { 
   for (int i = 0; i < BUCKET + this->pointerBucket; i++) { 
     bt* itr = bucks[i];
     while (itr)
     {
-      if(iter->data == key){
-        cout << "BAZINGA !!!"
-        int array = [iter->pagePtr,iter->rowPtr];
-        return *array;
+      if(itr->data == key){
+        cout << "BAZINGA !!!";
+        return;
       }
     }
     cout << endl;
   }
-  int barray = [-1,-1];
-  return *barray;
+  bt* node = (bt*) malloc(sizeof(bt));
+  node->data = -1;
+  node->next = NULL;
+  node->prev = NULL;
+  return;
 }
 
 

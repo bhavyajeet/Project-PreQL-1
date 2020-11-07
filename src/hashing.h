@@ -36,7 +36,7 @@ public:
     int BUCKET;    // No. of buckets 
   
     // Pointer to an array containing buckets 
-    vector < vector <bt*> > bucks; 
+    vector <bt*> bucks; 
     vector < vector <bt*> > over;
     int pointerBucket;
     string tableName;
@@ -45,7 +45,7 @@ public:
     void insertItem(int key, int pagePtr, int rowPtr);
   
     // searches a key into hash table 
-    int searchElement(int key);
+    void searchElement(int key);
 
     // deletes a key from hash table 
     void deleteItem(int key); 
