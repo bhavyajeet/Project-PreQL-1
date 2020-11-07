@@ -50,7 +50,9 @@ public:
     void renameColumn(string fromColumnName, string toColumnName);
     void print();
     int insertRow( vector<int> values);
+    int sortNoIndex( string columnName);
     void makePermanent();
+    void writeRows(vector <vector<int>> rowsArr);
     bool isPermanent();
     void getNextPage(Cursor *cursor);
     Cursor getCursor();

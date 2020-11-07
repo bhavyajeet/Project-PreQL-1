@@ -15,6 +15,7 @@ BufferManager::BufferManager()
  */
 Page BufferManager::getPage(string tableName, int pageIndex)
 {
+    cout << " request for " << "../data/temp/"+tableName + "_Page" + to_string(pageIndex) << endl;
     logger.log("BufferManager::getPage");
     string pageName = "../data/temp/"+tableName + "_Page" + to_string(pageIndex);
     logger.log("searching");
@@ -63,7 +64,15 @@ Page BufferManager::getFromPool(string pageName)
     logger.log("BufferManager::getFromPool");
     for (auto page : this->pages)
         if (pageName == page.pageName)
+        {
+            cout << "Buffer returning : " << page.pageName << endl;
+            vector <int> tester = page.getRow(0);
+            for (auto x : tester){
+                cout << x << " ";
+            } 
+            cout <<  "POOL puss" << endl; 
             return page;
+        }
 }
 
 /**
@@ -82,6 +91,13 @@ Page BufferManager::insertIntoPool(string tableName, int pageIndex)
     if (this->pages.size() >= BLOCK_COUNT)
         pages.pop_front();
     pages.push_back(page);
+    cout << "Buffer returning nopool : " << page.pageName << endl;
+    vector <int> tester = page.getRow(0);
+    for (auto x : tester){
+        cout << x << " ";
+    } 
+    cout <<  "NO POOL puss" << endl; 
+    cout << endl; 
     return page;
 }
 

@@ -32,7 +32,7 @@ bool syntacticParseSORT(){
 bool semanticParseSORT(){
     logger.log("semanticParseSORT");
 
-    cout << "LOL";
+    cout << "semanticParseSORT";
 
     cout << parsedQuery.sortResultRelationName<< endl;
     cout << parsedQuery.sortColumnName<< endl;
@@ -57,7 +57,11 @@ bool semanticParseSORT(){
 
 void executeSORT(){
     logger.log("executeSORT");
-    
+    Table* tableToSort = tableCatalogue.getTable(parsedQuery.sortRelationName);
+
+    tableToSort->sortNoIndex(parsedQuery.sortColumnName);
+
     cout << "sorting aint so easy bruh";
+
     return;
 }
