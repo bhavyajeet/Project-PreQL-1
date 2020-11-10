@@ -39,12 +39,18 @@ Page::writePage
 3
 0
 1
+4
+0
+1
+5
+0
+1
 HO GAYA
 TableCatalogue::~insertTable
 ParseQuery::clear
 
 Reading New Command: 
-INDEX ON b FROM B USING HASH BUCKETS 12
+INDEX ON b FROM B USING BTREE FANOUT 3
 doCommand
 syntacticParse
 syntacticParseINDEX
@@ -59,27 +65,15 @@ TableCatalogue::getTable
 executeINDEX
 TableCatalogue::getTable
 Index::creatingIndex
-Cursor::Cursor
-BufferManager::getPage
-searching
-../data/temp/B_Page0
-BufferManager::inPool
-B
-ANNARA
-TERERERE
-BufferManager::insertIntoPool
-Page::Pageee
-../data/temp/B_Page0
-TableCatalogue::isTable
-TableCatalogue::getTable
-Cursor::getNext
-Page::getRow
-Cursor::getNext
-Page::getRow
-Cursor::getNext
-Page::getRow
-Cursor::getNext
-Page::getRow
+bplusTree::bplusTreeInitialization
+AAA
+AAA
+AAA
+AAA
+AAA
+AAA
+BufferManager::deleteFile
+BufferManager::deleteFile: Success
 ParseQuery::clear
 
 Reading New Command: 
