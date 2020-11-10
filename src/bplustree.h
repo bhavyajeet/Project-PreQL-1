@@ -1,6 +1,6 @@
 namespace std
 {
-/**
+    /**
  * @brief The BufferManager is responsible for reading pages to the main memory.
  * Recall that large files are broken and stored as blocks in the hard disk. The
  * minimum amount of memory that can be read from the disk is a block whose size

@@ -10,7 +10,6 @@ semanticParse
 semanticParseLOAD
 TableCatalogue::isTable
 executeLOAD
-bplusTree::bplusTree
 hashing::hashing
 Table::Table
 Table::load
@@ -50,7 +49,7 @@ TableCatalogue::~insertTable
 ParseQuery::clear
 
 Reading New Command: 
-INDEX ON b FROM B USING BTREE FANOUT 3
+INDEX ON b FROM B USING HASH BUCKETS 5
 doCommand
 syntacticParse
 syntacticParseINDEX
@@ -65,13 +64,31 @@ TableCatalogue::getTable
 executeINDEX
 TableCatalogue::getTable
 Index::creatingIndex
-bplusTree::bplusTreeInitialization
-AAA
-AAA
-AAA
-AAA
-AAA
-AAA
+Cursor::Cursor
+BufferManager::getPage
+searching
+../data/temp/B_Page0
+BufferManager::inPool
+B
+ANNARA
+TERERERE
+BufferManager::insertIntoPool
+Page::Pageee
+../data/temp/B_Page0
+TableCatalogue::isTable
+TableCatalogue::getTable
+Cursor::getNext
+Page::getRow
+Cursor::getNext
+Page::getRow
+Cursor::getNext
+Page::getRow
+Cursor::getNext
+Page::getRow
+Cursor::getNext
+Page::getRow
+Cursor::getNext
+Page::getRow
 BufferManager::deleteFile
 BufferManager::deleteFile: Success
 ParseQuery::clear

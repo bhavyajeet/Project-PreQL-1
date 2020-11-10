@@ -1,8 +1,7 @@
 #include "global.h"
 
-bplusTree::bplusTree()
-{
-    logger.log("bplusTree::bplusTree");
+bplusTree::bplusTree(){
+	
 }
 
 bplusTree::bplusTree(string tableName, string fanOut, int rowCount, int indexedColumnNumber){
@@ -15,127 +14,127 @@ bplusTree::bplusTree(string tableName, string fanOut, int rowCount, int indexedC
 }
 
 void bplusTree::insert(int key, int rowPtr, int pagePtr) {  //in Leaf Node
-    /*
-		1. If the node has an empty space, insert the key/reference pair into the node.
-		2. If the node is already full, split it into two nodes, distributing the keys
-		evenly between the two nodes. If the node is a leaf, take a copy of the minimum
-		value in the second of these two nodes and repeat this insertion algorithm to
-		insert it into the parent node. If the node is a non-leaf, exclude the middle
-		value during the split and repeat this insertion algorithm to insert this excluded
-		value into the parent node.
-	*/
-    Node* cursor = root;
-    Node* parent = NULL;
-    if (root == NULL) {
-        root->isLeaf = true;
-        root->keys.push_back(key);
-        new (&root->ptr2TreeOrData.dataPtr) std::vector<pair<int,int>>;
-        // now, root->ptr2TreeOrData.dataPtr is the active member of the union
-        root->ptr2TreeOrData.dataPtr.push_back({rowPtr,pagePtr});
+    // /*
+	// 	1. If the node has an empty space, insert the key/reference pair into the node.
+	// 	2. If the node is already full, split it into two nodes, distributing the keys
+	// 	evenly between the two nodes. If the node is a leaf, take a copy of the minimum
+	// 	value in the second of these two nodes and repeat this insertion algorithm to
+	// 	insert it into the parent node. If the node is a non-leaf, exclude the middle
+	// 	value during the split and repeat this insertion algorithm to insert this excluded
+	// 	value into the parent node.
+	// */
+    // Node* cursor = root;
+    // Node* parent = NULL;
+    // if (root == NULL) {
+    //     root->isLeaf = true;
+    //     root->keys.push_back(key);
+    //     new (&root->ptr2TreeOrData.dataPtr) std::vector<pair<int,int>>;
+    //     // now, root->ptr2TreeOrData.dataPtr is the active member of the union
+    //     root->ptr2TreeOrData.dataPtr.push_back({rowPtr,pagePtr});
 
-        cout << key << ": I AM ROOT!!" << endl;
-        return;
-    } else {
-        cursor = root;
-        //searching for the possible position for the given key by doing the same procedure we did in search
-        while (cursor->isLeaf == false) {
-            parent = cursor;
-            int idx = std::upper_bound(cursor->keys.begin(), cursor->keys.end(), key) - cursor->keys.begin();
-            cursor = cursor->ptr2TreeOrData.ptr2Tree[idx];
-        }  
-    }
+    //     cout << key << ": I AM ROOT!!" << endl;
+    //     return;
+    // } else {
+    //     cursor = root;
+    //     //searching for the possible position for the given key by doing the same procedure we did in search
+    //     while (cursor->isLeaf == false) {
+    //         parent = cursor;
+    //         int idx = std::upper_bound(cursor->keys.begin(), cursor->keys.end(), key) - cursor->keys.begin();
+    //         cursor = cursor->ptr2TreeOrData.ptr2Tree[idx];
+    //     }  
+    // }
 
-        //now cursor is the leaf node in which we'll insert the new key
-        if (cursor->keys.size() < maxLeafNodeLimit) {
-            /*
-				If current leaf Node is not FULL, find the correct position for the new key and insert!
-			*/
-            int i = std::upper_bound(cursor->keys.begin(), cursor->keys.end(), key) - cursor->keys.begin();
-            cursor->keys.push_back(key);
-            cursor->ptr2TreeOrData.dataPtr.push_back({rowPtr,pagePtr});
+    //     //now cursor is the leaf node in which we'll insert the new key
+    //     if (cursor->keys.size() < maxLeafNodeLimit) {
+    //         /*
+	// 			If current leaf Node is not FULL, find the correct position for the new key and insert!
+	// 		*/
+    //         int i = std::upper_bound(cursor->keys.begin(), cursor->keys.end(), key) - cursor->keys.begin();
+    //         cursor->keys.push_back(key);
+    //         cursor->ptr2TreeOrData.dataPtr.push_back({rowPtr,pagePtr});
 
-            if (i != cursor->keys.size() - 1) {
-                for (int j = cursor->keys.size() - 1; j > i; j--) {  // shifting the position for keys and datapointer
-                    cursor->keys[j] = cursor->keys[j - 1];
-                    cursor->ptr2TreeOrData.dataPtr[j] = cursor->ptr2TreeOrData.dataPtr[j - 1];
-                }
+    //         if (i != cursor->keys.size() - 1) {
+    //             for (int j = cursor->keys.size() - 1; j > i; j--) {  // shifting the position for keys and datapointer
+    //                 cursor->keys[j] = cursor->keys[j - 1];
+    //                 cursor->ptr2TreeOrData.dataPtr[j] = cursor->ptr2TreeOrData.dataPtr[j - 1];
+    //             }
 
-                //since earlier step was just to inc. the size of vectors and making space, now we are simplying inserting
-                cursor->keys[i] = key;
-                cursor->ptr2TreeOrData.dataPtr[i] = {rowPtr,pagePtr};
-            }
-            cout << "Inserted successfully: " << key << endl;
-        }
-        else{
-            /*
-				DAMN!! Node Overflowed :(
-				HAIYYA! Splitting the Node .
-			*/
-            vector<int> virtualNode(cursor->keys);
-            vector< pair<int,int> > virtualDataNode(cursor->ptr2TreeOrData.dataPtr);
+    //             //since earlier step was just to inc. the size of vectors and making space, now we are simplying inserting
+    //             cursor->keys[i] = key;
+    //             cursor->ptr2TreeOrData.dataPtr[i] = {rowPtr,pagePtr};
+    //         }
+    //         cout << "Inserted successfully: " << key << endl;
+    //     }
+    //     else{
+    //         /*
+	// 			DAMN!! Node Overflowed :(
+	// 			HAIYYA! Splitting the Node .
+	// 		*/
+    //         vector<int> virtualNode(cursor->keys);
+    //         vector< pair<int,int> > virtualDataNode(cursor->ptr2TreeOrData.dataPtr);
 
-          //finding the probable place to insert the key
-            int i = std::upper_bound(cursor->keys.begin(), cursor->keys.end(), key) - cursor->keys.begin();
+    //       //finding the probable place to insert the key
+    //         int i = std::upper_bound(cursor->keys.begin(), cursor->keys.end(), key) - cursor->keys.begin();
 
-            virtualNode.push_back(key);          // to create space
-            virtualDataNode.push_back({rowPtr,pagePtr});  // to create space
+    //         virtualNode.push_back(key);          // to create space
+    //         virtualDataNode.push_back({rowPtr,pagePtr});  // to create space
 
-            if (i != virtualNode.size() - 1) {
-                for (int j = virtualNode.size() - 1; j > i; j--) {  // shifting the position for keys and datapointer
-                    virtualNode[j] = virtualNode[j - 1];
-                    virtualDataNode[j] = virtualDataNode[j - 1];
-                }
+    //         if (i != virtualNode.size() - 1) {
+    //             for (int j = virtualNode.size() - 1; j > i; j--) {  // shifting the position for keys and datapointer
+    //                 virtualNode[j] = virtualNode[j - 1];
+    //                 virtualDataNode[j] = virtualDataNode[j - 1];
+    //             }
 
-                //inserting
-                virtualNode[i] = key;
-                virtualDataNode[i] = {rowPtr,pagePtr};
-            }
+    //             //inserting
+    //             virtualNode[i] = key;
+    //             virtualDataNode[i] = {rowPtr,pagePtr};
+    //         }
 
-           /*
-				BAZINGA! I have the power to create new Leaf :)
-			*/
+    //        /*
+	// 			BAZINGA! I have the power to create new Leaf :)
+	// 		*/
 
-            Node* newLeaf = new Node;
-            newLeaf->isLeaf = true;
-            new (&newLeaf->ptr2TreeOrData.dataPtr) std::vector< pair <int,int> >;
-            //// now, newLeaf->ptr2TreeOrData.ptr2Tree is the active member of the union
+    //         Node* newLeaf = new Node;
+    //         newLeaf->isLeaf = true;
+    //         new (&newLeaf->ptr2TreeOrData.dataPtr) std::vector< pair <int,int> >;
+    //         //// now, newLeaf->ptr2TreeOrData.ptr2Tree is the active member of the union
 
-            //swapping the next ptr
-            Node* temp = cursor->ptr2next;
-            cursor->ptr2next = newLeaf;
-            newLeaf->ptr2next = temp;
+    //         //swapping the next ptr
+    //         Node* temp = cursor->ptr2next;
+    //         cursor->ptr2next = newLeaf;
+    //         newLeaf->ptr2next = temp;
 
-            //resizing and copying the keys & dataPtr to OldNode
-            cursor->keys.resize((maxLeafNodeLimit) / 2 +1);//check +1 or not while partitioning
-            cursor->ptr2TreeOrData.dataPtr.reserve((maxLeafNodeLimit) / 2 +1);
-            for (int i = 0; i <= (maxLeafNodeLimit) / 2; i++) {
-                cursor->keys[i] = virtualNode[i];
-                cursor->ptr2TreeOrData.dataPtr[i] = virtualDataNode[i];
-            }
+    //         //resizing and copying the keys & dataPtr to OldNode
+    //         cursor->keys.resize((maxLeafNodeLimit) / 2 +1);//check +1 or not while partitioning
+    //         cursor->ptr2TreeOrData.dataPtr.reserve((maxLeafNodeLimit) / 2 +1);
+    //         for (int i = 0; i <= (maxLeafNodeLimit) / 2; i++) {
+    //             cursor->keys[i] = virtualNode[i];
+    //             cursor->ptr2TreeOrData.dataPtr[i] = virtualDataNode[i];
+    //         }
             
-            //Pushing new keys & dataPtr to NewNode
-            for (int i = (maxLeafNodeLimit) / 2 + 1; i < virtualNode.size(); i++) {
-                newLeaf->keys.push_back(virtualNode[i]);
-                newLeaf->ptr2TreeOrData.dataPtr.push_back(virtualDataNode[i]);
-            }
+    //         //Pushing new keys & dataPtr to NewNode
+    //         for (int i = (maxLeafNodeLimit) / 2 + 1; i < virtualNode.size(); i++) {
+    //             newLeaf->keys.push_back(virtualNode[i]);
+    //             newLeaf->ptr2TreeOrData.dataPtr.push_back(virtualDataNode[i]);
+    //         }
 
-            if (cursor == root) {
-                /*
-					If cursor is root node we create new node
-				*/
+    //         if (cursor == root) {
+    //             /*
+	// 				If cursor is root node we create new node
+	// 			*/
 
-                Node* newRoot = new Node;
-                newRoot->keys.push_back(newLeaf->keys[0]);
-                new (&newRoot->ptr2TreeOrData.ptr2Tree) std::vector<Node*>;
-                newRoot->ptr2TreeOrData.ptr2Tree.push_back(cursor);
-                newRoot->ptr2TreeOrData.ptr2Tree.push_back(newLeaf);
-                root = newRoot;
-                cout << "Created new Root!" << endl;
-            } else {
-                // Insert new key in the parent
-                insertInternal(newLeaf->keys[0], &parent, &newLeaf);
-            }                             
-        }    
+    //             Node* newRoot = new Node;
+    //             newRoot->keys.push_back(newLeaf->keys[0]);
+    //             new (&newRoot->ptr2TreeOrData.ptr2Tree) std::vector<Node*>;
+    //             newRoot->ptr2TreeOrData.ptr2Tree.push_back(cursor);
+    //             newRoot->ptr2TreeOrData.ptr2Tree.push_back(newLeaf);
+    //             root = newRoot;
+    //             cout << "Created new Root!" << endl;
+    //         } else {
+    //             // Insert new key in the parent
+    //             insertInternal(newLeaf->keys[0], &parent, &newLeaf);
+    //         }                             
+    //     }    
 }
 
 
@@ -144,22 +143,22 @@ Node** bplusTree::findParent(Node* cursor, Node* child) {
 		Finds parent using depth first traversal and ignores leaf nodes as they cannot be parents
 		also ignores second last level because we will never find parent of a leaf node during insertion using this function
 	*/
-    Node* parent = NULL;
-    if (cursor->isLeaf || cursor->ptr2TreeOrData.ptr2Tree[0]->isLeaf)
-        return NULL;
+    // Node* parent = NULL;
+    // if (cursor->isLeaf || cursor->ptr2TreeOrData.ptr2Tree[0]->isLeaf)
+    //     return NULL;
 
-    for (int i = 0; i < cursor->ptr2TreeOrData.ptr2Tree.size(); i++) {
-        if (cursor->ptr2TreeOrData.ptr2Tree[i] == child) {
-            parent = cursor;
-        } else {
-            //Commenting To Remove vector out of bound Error: 
-            //new (&cursor->ptr2TreeOrData.ptr2Tree) std::vector<Node*>;
-            Node* tmpCursor = cursor->ptr2TreeOrData.ptr2Tree[i];
-            findParent(tmpCursor, child);
-        }
-    }
+    // for (int i = 0; i < cursor->ptr2TreeOrData.ptr2Tree.size(); i++) {
+    //     if (cursor->ptr2TreeOrData.ptr2Tree[i] == child) {
+    //         parent = cursor;
+    //     } else {
+    //         //Commenting To Remove vector out of bound Error: 
+    //         //new (&cursor->ptr2TreeOrData.ptr2Tree) std::vector<Node*>;
+    //         Node* tmpCursor = cursor->ptr2TreeOrData.ptr2Tree[i];
+    //         findParent(tmpCursor, child);
+    //     }
+    // }
 
-    return &parent;
+    return &root;
 }
 
 
@@ -245,15 +244,15 @@ void bplusTree::insertInternal(int x, Node** cursor, Node** child) {  //in Inter
             /*
 				If cursor is a root we create a new Node
 			*/
-            Node* newRoot = new Node;
-            newRoot->keys.push_back(partitionKey);
-            new (&newRoot->ptr2TreeOrData.ptr2Tree) std::vector<Node*>;
-            newRoot->ptr2TreeOrData.ptr2Tree.push_back(*cursor);
-            //// now, newRoot->ptr2TreeOrData.ptr2Tree is the active member of the union
-            newRoot->ptr2TreeOrData.ptr2Tree.push_back(newInternalNode);
+            // Node* newRoot = new Node;
+            // newRoot->keys.push_back(partitionKey);
+            // new (&newRoot->ptr2TreeOrData.ptr2Tree) std::vector<Node*>;
+            // newRoot->ptr2TreeOrData.ptr2Tree.push_back(*cursor);
+            // //// now, newRoot->ptr2TreeOrData.ptr2Tree is the active member of the union
+            // newRoot->ptr2TreeOrData.ptr2Tree.push_back(newInternalNode);
 
-            root = newRoot;
-            cout << "Created new ROOT!" << endl;
+            // root = newRoot;
+            // cout << "Created new ROOT!" << endl;
         } else {
             /*
 				::Recursion::
@@ -262,4 +261,3 @@ void bplusTree::insertInternal(int x, Node** cursor, Node** child) {  //in Inter
         }
     }
 }
-

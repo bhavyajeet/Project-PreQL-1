@@ -55,6 +55,7 @@ bool Table::load()
     logger.log("Table::load");
     logger.log(this->sourceFileName);
     fstream fin(this->sourceFileName, ios::in);
+    cout << "ARARARRA" << endl;
     string line;
     if (getline(fin, line))
     {
