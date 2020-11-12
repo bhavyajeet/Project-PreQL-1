@@ -49,7 +49,7 @@ TableCatalogue::~insertTable
 ParseQuery::clear
 
 Reading New Command: 
-INDEX ON b FROM B USING HASH BUCKETS 5
+INDEX ON b FROM B USING BTREE FANOUT 5
 doCommand
 syntacticParse
 syntacticParseINDEX

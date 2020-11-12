@@ -385,6 +385,25 @@ int Table::indexTable(string columnName,IndexingStrategy indexingStrategy, strin
             // construct a btree
             // thirdParam -> fanout
             this->BplusTree = bplusTree(this->tableName, thirdParam, this->rowCount, this->indexedColumnNumber);
+            for (int i = 0; i < this->blockCount; i++)
+            {
+                cout << "ANNARAAAA" << endl;
+            }
+            for (int i = 0; i < this->blockCount; i++)
+            {
+                Cursor cursor(this->tableName, i); 
+                for (int j = 0; j < this->rowCount; j++)
+                {
+                    vector <int> rr = cursor.getNext();
+                    cout << "OKOKOKOKOKOKOKOK" << endl;
+                    cout << rr[this->indexedColumnNumber] << endl;
+                    this->BplusTree.insert(rr[this->indexedColumnNumber],i,j);
+                    cout << "RARARARAR";
+                    cout << endl;
+                }
+            }
+            this->BplusTree.display(this->BplusTree.getRoot());            
+
         }
         else{
             // construct a hash
