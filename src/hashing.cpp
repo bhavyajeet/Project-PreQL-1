@@ -71,8 +71,8 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
     if(index < this->pointerBucket){
       // these buckets are split, use the new hash function
       index = hashFunction2(key);
-      siz = bucks[index].size();
       bucks[index].push_back(item);
+      siz = bucks[index].size();
       // cout << "TATATTATTI " << endl;
     }
     else{
@@ -91,15 +91,24 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
       vector <bt*> v;
       v.push_back(buk);
       this->bucks.push_back(v);
+      vector <bt*> a1;
+      vector <bt*> a2;
+      a1.push_back(buk);
+      a2.push_back(buk);
       // iterate from overflow to end and move this to end 
-      for (int i = 0; i < this->bucks[this->pointerBucket].size(); i++)
+      for (int i = 1; i < this->bucks[this->pointerBucket].size(); i++)
       {
-        this->bucks[this->pointerBucket + BUCKET].push_back(this->bucks[this->pointerBucket][i]);
+        if (this->bucks[this->pointerBucket][i]->data % (2*BUCKET)==this->bucks[this->pointerBucket][i]->data % (2*BUCKET)){
+          a1.push_back(this->bucks[this->pointerBucket][i]);
+        }
+        else {
+          a2.push_back(this->bucks[this->pointerBucket][i]);
+        }
       }
+      this->bucks[this->pointerBucket]=a1;
+      this->bucks[this->pointerBucket+BUCKET]=a2;
       cout << this->bucks[this->pointerBucket].size() << endl;
-      if(this->bucks[this->pointerBucket].size() > OVERFLOW_SIZE){
-        this->bucks[this->pointerBucket].resize(OVERFLOW_SIZE);
-      }
+
       this->pointerBucket++;
 
       if(this->pointerBucket == BUCKET ){
