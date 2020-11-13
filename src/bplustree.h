@@ -48,7 +48,7 @@ class bplusTree {
    string tableName;
   bplusTree();
   bplusTree(string tableName, string fanOut, int rowCount, int indexedColumn);
-  void search(int key);
+  pair<int,int>  search(int key);
   void insert(int x, int pagePtr, int rowPtr);
   void display(Node * nd);
   Node *getRoot();

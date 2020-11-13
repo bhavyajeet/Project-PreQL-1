@@ -72,11 +72,8 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
       // these buckets are split, use the new hash function
       index = hashFunction2(key);
       siz = bucks[index].size();
+      bucks[index].push_back(item);
       // cout << "TATATTATTI " << endl;
-      if(index < this->pointerBucket && bucks[index].size() == OVERFLOW_SIZE){
-        // cout << "ANNNAYA AAA" << endl;
-        bucks[index + BUCKET].push_back(item);
-      }
     }
     else{
         bucks[index].push_back(item);
@@ -95,7 +92,7 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
       v.push_back(buk);
       this->bucks.push_back(v);
       // iterate from overflow to end and move this to end 
-      for (int i = OVERFLOW_SIZE; i < this->bucks[this->pointerBucket].size(); i++)
+      for (int i = 0; i < this->bucks[this->pointerBucket].size(); i++)
       {
         this->bucks[this->pointerBucket + BUCKET].push_back(this->bucks[this->pointerBucket][i]);
       }
@@ -107,6 +104,39 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
 
       if(this->pointerBucket == BUCKET ){
         // last bucket has been broken
+        // reHash everything
+        vector < vector< bt* > > temp;
+        for (int i = 0; i < this->bucks.size(); i++)
+        {
+          temp.push_back(this->bucks[i]);
+        }
+        cout << temp.size() << endl;
+        this->bucks.clear();
+        cout << this->bucks.size() << endl;
+        for (int i = 0; i < BUCKET * 2; i++)
+        {
+          bt* buk = (bt*) malloc(sizeof(bt));
+          buk->next = NULL;
+          buk->prev = NULL;
+          buk->data = -1;
+          vector <bt*> v;
+          v.push_back(buk);
+          this->bucks.push_back(v);
+        }
+        cout << this->bucks.size() << endl;        
+        for (int i = 0; i < temp.size(); i++)
+        {
+          for (int j = 1; j < temp[i].size(); j++)
+          { 
+            // aifsn 
+            cout << "POPPO \t||" << temp[i][j]->data << "|| ";
+            int kkey = temp[i][j]->data % (2 * BUCKET);
+            cout << "KEY|" << kkey << "," << temp[i][j]->data << "|";
+            this->bucks[kkey].push_back(temp[i][j]);
+          }
+          cout << endl;
+        }
+        this->pointerBucket = 0;
         BUCKET *= 2;
       }
     }

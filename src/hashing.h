@@ -58,7 +58,7 @@ public:
 
     // hash function to map values to key 
     int hashFunction2(int x) { 
-        return (x % BUCKET); 
+        return (x % 2 * BUCKET); 
     } 
 
 

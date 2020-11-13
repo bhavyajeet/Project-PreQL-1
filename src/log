@@ -44,12 +44,30 @@ Page::writePage
 5
 0
 1
+6
+0
+1
+7
+0
+1
+8
+0
+1
+9
+0
+1
+10
+0
+1
+11
+0
+1
 HO GAYA
 TableCatalogue::~insertTable
 ParseQuery::clear
 
 Reading New Command: 
-INDEX ON b FROM B USING BTREE FANOUT 5
+INDEX ON a FROM B USING HASH BUCKETS 2
 doCommand
 syntacticParse
 syntacticParseINDEX
@@ -89,8 +107,23 @@ Cursor::getNext
 Page::getRow
 Cursor::getNext
 Page::getRow
+Cursor::getNext
+Page::getRow
+Cursor::getNext
+Page::getRow
+Cursor::getNext
+Page::getRow
+Cursor::getNext
+Page::getRow
+Cursor::getNext
+Page::getRow
+Cursor::getNext
+Page::getRow
 BufferManager::deleteFile
 BufferManager::deleteFile: Success
-ParseQuery::clear
-
-Reading New Command: 
+MatrixCatalogue::~MatrixCatalogue
+TableCatalogue::~TableCatalogue
+Table::~unload
+BufferManager::deleteFile
+BufferManager::deleteFile: Err
+Table::isPermanent

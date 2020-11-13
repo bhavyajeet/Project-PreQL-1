@@ -22,7 +22,7 @@ bplusTree::bplusTree(string tableName, string fanOut, int rowCount, int indexedC
 
 
 // Search operation
-void bplusTree::search(int x) {
+ pair<int,int> bplusTree::search(int x) {
   if (root == NULL) {
     cout << "Tree is empty\n";
   } else {
@@ -42,7 +42,7 @@ void bplusTree::search(int x) {
     for (int i = 0; i < cursor->size; i++) {
       if (cursor->key[i] == x) {
         cout << "Found\n";
-        return;
+        return make_pair(cursor->pagePtr[i],cursor->rowPtr[i]);
       }
     }
     cout << "Not found\n";
