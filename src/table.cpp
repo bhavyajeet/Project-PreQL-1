@@ -575,6 +575,7 @@ int Table::sortNoIndex(string columnName)
                     }
                     }
                 }
+                cout << " ==== PAGE NUM CALC are " << tillPage +pageCount[minRowInd]+ minRowInd*chunkSize << endl;
                 cout << "minimum row found at pagechunk " << minRowInd << " with value " << minRow << endl << endl;
                 pagePointer[minRowInd]++;
                 // TODO : write row takes time - directly write to page maybe if possible 
@@ -582,12 +583,17 @@ int Table::sortNoIndex(string columnName)
 
                 //TODO Fix it - like which page to take next (chunkSize+minRowInd-1) not right 
                 // Done 
-                if (pagePointer[minRowInd] >= this->rowsPerBlockCount[tillPage +pageCount[minRowInd]+ minRowInd] ){
+                if (pagePointer[minRowInd] >= this->rowsPerBlockCount[tillPage +pageCount[minRowInd]+ minRowInd*chunkSize] ){
                     pageCount[minRowInd]++;
                     pagePointer[minRowInd]=0;
-                    if (pageCount[minRowInd]<chunkSize){
+                    if (pageCount[minRowInd]<chunkSize ){
+                        if (tillPage + chunkSize*minRowInd+pageCount[minRowInd]<this->blockCount){
                         // pageArr.insert(pageArr.begin()+minRowInd,bufferManager.getPage(readTable,tillPage + chunkSize*minRowInd+pageCount[minRowInd]));
                         pageArr[minRowInd]=bufferManager.getPage(readTable,tillPage + chunkSize*minRowInd+pageCount[minRowInd]);
+                        }
+                        else {
+                            pageCount[minRowInd]=chunkSize;
+                        }
                     }
                 }
 

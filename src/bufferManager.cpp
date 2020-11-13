@@ -20,10 +20,14 @@ Page BufferManager::getPage(string tableName, int pageIndex)
     string pageName = "../data/temp/"+tableName + "_Page" + to_string(pageIndex);
     logger.log("searching");
     logger.log(pageName);
-    if (this->inPool(pageName))
+    if (this->inPool(pageName) && tableName != "X" && tableName != "Y" )
+    {
+        cout << "IN POOOL IN POOOL IN POOL "<< endl;;
         return this->getFromPool(pageName);
+    }
     else
         {
+            cout << "mother board  \n";
             logger.log(tableName);
             logger.log("ANNARA");
             logger.log("TERERERE");
