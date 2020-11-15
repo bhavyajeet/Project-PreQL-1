@@ -142,9 +142,9 @@ void executeGROUP()
 
 // /*
     Table tableOG = *tableCatalogue.getTable(parsedQuery.groupRelationName);
-    tableOG.sortNoIndex(parsedQuery.groupColumnName, "_sort"+tableOG.tableName);
+    tableOG.sortNoIndex(parsedQuery.groupColumnName, "G_sort"+tableOG.tableName);
 
-    Table table = *tableCatalogue.getTable("_sort"+parsedQuery.groupRelationName);
+    Table table = *tableCatalogue.getTable("G_sort"+parsedQuery.groupRelationName);
     int groupColumnIndex = table.getColumnIndex(parsedQuery.groupColumnName);
     int oprColumnIndex = table.getColumnIndex(parsedQuery.groupOperationColumn);
     // int oprColumnIndex1 = tableOG.getColumnIndex(parsedQuery.groupOperationColumn);

@@ -33,6 +33,7 @@ Page::Page(string tableName, int pageIndex)
     this->pageName = "../data/temp/" + tableName + "_Page" + to_string(pageIndex);
     logger.log(this->pageName);
     if (tableCatalogue.isTable(tableName)){
+        cout << "arey  table hai re baba " << endl;
         // it is table
         Table table = *tableCatalogue.getTable(tableName);
         this->tableName = tableName;
@@ -85,6 +86,8 @@ Page::Page(string tableName, int pageIndex)
             }
         }
         fin.close();
+    }else {
+        cout << "here is the mikstake " << endl;
     }
 }
 

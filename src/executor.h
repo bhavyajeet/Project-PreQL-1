@@ -22,6 +22,7 @@ void executeTRANSPOSE();
 void executeINSERT();
 void executeGROUP();
 void executeDELETE();
+void executeALTER();
 
 bool evaluateBinOp(int value1, int value2, BinaryOperator binaryOperator);
 void printRowCount(int rowCount);

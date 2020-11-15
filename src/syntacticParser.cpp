@@ -46,6 +46,8 @@ bool syntacticParse()
         return syntacticParseINSERT();
     else if(possibleQueryType == "DELETE")
         return syntacticParseINSERT();        
+    else if(possibleQueryType == "ALTER")
+        return syntacticParseALTER();
     else
     {
         string resultantRelationName = possibleQueryType;
@@ -133,6 +135,12 @@ void ParsedQuery::clear()
     this->sortResultRelationName = "";
     this->sortColumnName = "";
     this->sortRelationName = "";
+
+
+
+    this->alterRelationName = "";
+    this->alterColumnName = "";
+    this->alterOperation = "";
 
 
 

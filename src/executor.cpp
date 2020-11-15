@@ -23,6 +23,7 @@ void executeCommand(){
         case INSERT: executeINSERT(); break;
         case GROUP: executeGROUP(); break;
         case DELETE: executeDELETE(); break;
+        case ALTER : executeALTER(); break;
         default: cout<<"PARSING ERROR"<<endl;
     }
 
