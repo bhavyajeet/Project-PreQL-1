@@ -147,11 +147,14 @@ void executeGROUP()
     Table table = *tableCatalogue.getTable("_sort"+parsedQuery.groupRelationName);
     int groupColumnIndex = table.getColumnIndex(parsedQuery.groupColumnName);
     int oprColumnIndex = table.getColumnIndex(parsedQuery.groupOperationColumn);
-    int oprColumnIndex1 = tableOG.getColumnIndex(parsedQuery.groupOperationColumn);
+    // int oprColumnIndex1 = tableOG.getColumnIndex(parsedQuery.groupOperationColumn);
     cout << "oprcolumn " << oprColumnIndex << " name :" << parsedQuery.groupOperationColumn << endl;
-    cout << "oprcolumn " << oprColumnIndex1 << " name :" << parsedQuery.groupOperationColumn << endl;
+    // cout << "oprcolumn " << oprColumnIndex1 << " name :" << parsedQuery.groupOperationColumn << endl;
     
-    Table* resultantTable = new Table(parsedQuery.groupResultRelationName, table.columns);
+    vector <string> cols;
+    cols.push_back(parsedQuery.groupColumnName);
+    cols.push_back(parsedQuery.groupOperationName+ parsedQuery.groupOperationColumn);
+    Table* resultantTable = new Table(parsedQuery.groupResultRelationName, cols);
     
     Cursor cursor = table.getCursor();
     vector<int> row = cursor.getNext();
