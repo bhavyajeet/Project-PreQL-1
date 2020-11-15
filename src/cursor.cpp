@@ -43,6 +43,7 @@ vector<int> Cursor::getNext()
     }
     return result;
 }
+
 /**
  * @brief Function that loads Page indicated by pageIndex. Now the cursor starts
  * reading from the new page.

@@ -27,6 +27,7 @@ hashing::hashing(string tableName, int b,int rowCount, int indexedColumnNumber )
       v.push_back(buk);
       this->bucks.push_back(v);
     }
+    OVERFLOW_SIZE = 2;
     this->pointerBucket = 0;
 } 
   
@@ -47,6 +48,7 @@ void hashing::reHash(int key){
     temp.push_back(this->bucks[i]);
   }
   this->bucks.clear();
+  cout << "OKOKOKOKOKOK" << endl;
   for (int i = 0; i < BUCKET * 2; i++)
   {
     bt* buk = (bt*) malloc(sizeof(bt));
@@ -62,7 +64,7 @@ void hashing::reHash(int key){
     for (int j = 1; j < temp[i].size(); j++)
     { 
       // aifsn 
-      int kkey = temp[i][j]->data % (2 * BUCKET);
+      int kkey = (temp[i][j]->data) % (2 * BUCKET);
       this->bucks[kkey].push_back(temp[i][j]);
     }
   }
@@ -77,19 +79,6 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
     item->pagePtr = pagePtr;
     item->rowPtr = rowPtr;
     item->next = NULL;
-//     // a + a-. b
-//     // a + b
-//     // a b 
-//     // 0 0 0
-//     // 0 1 1
-//     // 1 0 1
-//     // 1 1 1
-
-// //  -> [] -> -> -> -> || -> -> -> -> 
-// //     [] -> -> 
-// //     [] -> -> -> -> ||
-// //     [] -> -> -> ->  -> -> ->
-
     int OVERFLOW_SIZE = 2;
     int index = hashFunction(key);
     item->prev = NULL;
@@ -101,13 +90,17 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
     if(index < this->pointerBucket){
       // these buckets are split, use the new hash function
       index = hashFunction2(key);
-      bucks[index].push_back(item);
-      siz = bucks[index].size();
+      if(this->bucks.size() > index){
+        this->bucks[index].push_back(item);
+      }
+      siz = this->bucks[index].size();
       // cout << "TATATTATTI " << endl;
     }
     else{
-        bucks[index].push_back(item);
-        siz = bucks[index].size();
+      if(this->bucks.size() > index){
+        this->bucks[index].push_back(item);
+      }      
+      siz = bucks[index].size();
     }
 
     
@@ -131,16 +124,22 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
       {
         int kkey = hashFunction2(this->bucks[this->pointerBucket][i]->data);
         cout << this->bucks[this->pointerBucket][i]->data <<  "][" << hashFunction2(this->bucks[this->pointerBucket][i]->data) <<  endl;
-        if(kkey == hashFunction(this->bucks[this->pointerBucket][i]->data)){
+        if(kkey == hashFunction(this->bucks[this->pointerBucket][i]->data))
+        {
           a1.push_back(this->bucks[this->pointerBucket][i]);
         }
-        else{
+        else
+        {
           a2.push_back(this->bucks[this->pointerBucket][i]);
         }
       }
-      this->bucks[this->pointerBucket]=a1;
-      this->bucks[this->pointerBucket+BUCKET]=a2;
+      this->bucks[this->pointerBucket] = a1;
+      this->bucks[this->pointerBucket+BUCKET] = a2;
+      cout << "LAUDA+DEFNSJIHSajfbDJHB " << endl;
       cout << this->bucks[this->pointerBucket].size() << endl;
+      cout << this->pointerBucket << endl;
+      cout << BUCKET << endl;
+      cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAALAUDA+DEFNSJIHSajfbDJHB " << endl;
       this->pointerBucket++;
 
       if(this->pointerBucket == BUCKET ){

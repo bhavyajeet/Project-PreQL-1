@@ -109,6 +109,20 @@ vector<int> Page::getRow(int rowIndex)
 }
 
 
+/**
+ * @brief Get row from page indexed by rowIndex
+ * 
+ * @param rowIndex 
+ * @return vector<int> 
+ */
+vector< vector<int> > Page::getRows()
+{
+    logger.log("Page::getRow");
+    return this->rows;
+}
+
+
+
 int Page::getRowCount()
 {
     return this->rowCount;

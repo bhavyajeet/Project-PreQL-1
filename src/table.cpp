@@ -413,11 +413,17 @@ int Table::indexTable(string columnName,IndexingStrategy indexingStrategy, strin
             this->Hashing = hashing(this->tableName, stoi(thirdParam), this->rowCount, this->indexedColumnNumber);
             for (int i = 0; i < this->blockCount; i++)
             {
-                Cursor cursor(this->tableName, i); 
-                for (int j = 0; j < this->rowCount; j++)
+                Page page = bufferManager.getPage(this->tableName,i);
+                vector < vector <int> > rows = page.getRows();
+                cout << rows.size() << endl;
+                int number = page.getRowCount();
+                for (int j = 0; j < number; j++)
                 {
-                    vector <int> rr = cursor.getNext();
-                    this->Hashing.insertItem(rr[this->indexedColumnNumber],i,j);
+                    cout << "PAGE NUMBER" << i << endl;
+                    cout << "ROW NUMBER" << j << endl;
+                    // vector <int> rr = cursor.getNext();
+                    cout << "INSERTING" << rows[j][this->indexedColumnNumber] << endl;
+                    this->Hashing.insertItem(rows[j][this->indexedColumnNumber],i,j);
                     this->Hashing.displayHash();
                 }
                 
