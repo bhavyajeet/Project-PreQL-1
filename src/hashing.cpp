@@ -123,7 +123,8 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
       for (int i = 1; i < this->bucks[this->pointerBucket].size(); i++)
       {
         int kkey = hashFunction2(this->bucks[this->pointerBucket][i]->data);
-        cout << this->bucks[this->pointerBucket][i]->data <<  "][" << hashFunction2(this->bucks[this->pointerBucket][i]->data) <<  endl;
+        int aa = 1;
+        // cout << this->bucks[this->pointerBucket][i]->data <<  "][" << hashFunction2(this->bucks[this->pointerBucket][i]->data) <<  endl;
         if(kkey == hashFunction(this->bucks[this->pointerBucket][i]->data))
         {
           a1.push_back(this->bucks[this->pointerBucket][i]);
@@ -135,11 +136,11 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
       }
       this->bucks[this->pointerBucket] = a1;
       this->bucks[this->pointerBucket+BUCKET] = a2;
-      cout << "LAUDA+DEFNSJIHSajfbDJHB " << endl;
-      cout << this->bucks[this->pointerBucket].size() << endl;
-      cout << this->pointerBucket << endl;
-      cout << BUCKET << endl;
-      cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAALAUDA+DEFNSJIHSajfbDJHB " << endl;
+      // cout << "LAUDA+DEFNSJIHSajfbDJHB " << endl;
+      // cout << this->bucks[this->pointerBucket].size() << endl;
+      // cout << this->pointerBucket << endl;
+      // cout << BUCKET << endl;
+      // cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAALAUDA+DEFNSJIHSajfbDJHB " << endl;
       this->pointerBucket++;
 
       if(this->pointerBucket == BUCKET ){

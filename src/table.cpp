@@ -55,7 +55,7 @@ bool Table::load()
     logger.log("Table::load");
     logger.log(this->sourceFileName);
     fstream fin(this->sourceFileName, ios::in);
-    cout << "ARARARRA" << endl;
+    // cout << "ARARARRA" << endl;
     string line;
     if (getline(fin, line))
     {
@@ -193,15 +193,15 @@ void Table::updateStatistics(vector<int> row)
 bool Table::isColumn(string columnName)
 {
     logger.log("Table::isColumn");
-    cout << columnName;
+    // cout << columnName;
     for (auto col : this->columns)
     {
-        cout << "PPPPPPPPPPPPPPPPPPPp";
-        cout << col;
-        cout << endl;
+        // cout << "PPPPPPPPPPPPPPPPPPPp";
+        // cout << col;
+        // cout << endl;
         if (col == columnName)
         {
-            cout << "OKOKOKOKOKOKO";
+            // cout << "OKOKOKOKOKOKO";
             return true;
         }
     }
@@ -250,8 +250,8 @@ void Table::print()
     for (int rowCounter = 0; rowCounter < count; rowCounter++)
     {
         row = cursor.getNext();
-        cout << row[0];
-        cout << "ANANDkjesnfijrsngkjn";
+        // cout << row[0];
+        // cout << "ANANDkjesnfijrsngkjn";
         this->writeRow(row, cout);
     }
     printRowCount(this->rowCount);
@@ -415,20 +415,19 @@ int Table::indexTable(string columnName,IndexingStrategy indexingStrategy, strin
             {
                 Page page = bufferManager.getPage(this->tableName,i);
                 vector < vector <int> > rows = page.getRows();
-                cout << rows.size() << endl;
+                // cout << rows.size() << endl;
                 int number = page.getRowCount();
                 for (int j = 0; j < number; j++)
                 {
-                    cout << "PAGE NUMBER" << i << endl;
-                    cout << "ROW NUMBER" << j << endl;
+                    // cout << "PAGE NUMBER" << i << endl;
+                    // cout << "ROW NUMBER" << j << endl;
                     // vector <int> rr = cursor.getNext();
-                    cout << "INSERTING" << rows[j][this->indexedColumnNumber] << endl;
+                    // cout << "INSERTING" << rows[j][this->indexedColumnNumber] << endl;
                     this->Hashing.insertItem(rows[j][this->indexedColumnNumber],i,j);
-                    this->Hashing.displayHash();
                 }
                 
             }
-            
+            this->Hashing.displayHash();
             
         }
     }
@@ -450,18 +449,18 @@ int Table::insertRow(vector<int> values){
     // }
     // string FileName = "../data/temp/" + this->tableName + "_Page" + to_string(this->blockCount-1);
     
-    cout << "row count of this table is "<< this->rowCount <<endl;
+    // cout << "row count of this table is "<< this->rowCount <<endl;
     this->rowCount++;
-    for (auto d: this->rowsPerBlockCount){
-        cout << d <<" " ;
-    }
-    cout << endl;
+    // for (auto d: this->rowsPerBlockCount){
+    //     cout << d <<" " ;
+    // }
+    // cout << endl;
     this->rowsPerBlockCount[this->blockCount-1]++;
-    cout << "row count of this table is "<< this->rowCount <<endl;
-    for (auto d: this->rowsPerBlockCount){
-        cout << d <<" " ;
-    }
-    cout << endl;
+    // cout << "row count of this table is "<< this->rowCount <<endl;
+    // for (auto d: this->rowsPerBlockCount){
+    //     cout << d <<" " ;
+    // }
+    // cout << endl;
     Page lastPage =  bufferManager.getPage(this->tableName,this->blockCount-1);
     lastPage.insertPageRow(values);
     bufferManager.updatePage(this->tableName+"_Page"+to_string(this->blockCount-1),lastPage);

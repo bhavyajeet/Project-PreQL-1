@@ -42,8 +42,8 @@ Page::Page(string tableName, int pageIndex)
         this->rows.assign(maxRowCount, row);
 
         ifstream fin(pageName, ios::in);
-        cout << "in page now: ";
-        cout << "page index is "<< pageIndex << "     " << "rows in page is :: "<<  table.rowsPerBlockCount[pageIndex]  <<endl;
+        // cout << "in page now: ";
+        // cout << "page index is "<< pageIndex << "     " << "rows in page is :: "<<  table.rowsPerBlockCount[pageIndex]  <<endl;
         this->rowCount = table.rowsPerBlockCount[pageIndex];
         int number;
         for (uint rowCounter = 0; rowCounter < this->rowCount; rowCounter++)
@@ -99,12 +99,12 @@ vector<int> Page::getRow(int rowIndex)
     logger.log("Page::getRow");
     vector<int> result;
     result.clear();
-    cout << "ANNA ME HERE" << endl;
+    // cout << "ANNA ME HERE" << endl;
     if (rowIndex >= this->rowCount)
         return result;
-    cout << rowIndex << endl;
-    cout << "GUGU" << endl;
-    cout << this->rows[rowIndex][0];
+    // cout << rowIndex << endl;
+    // cout << "GUGU" << endl;
+    // cout << this->rows[rowIndex][0];
     return this->rows[rowIndex];
 }
 
@@ -164,7 +164,7 @@ Page::Page(string tableName, int pageIndex, vector<vector<int>> rows, int rowCou
 void Page::writePage()
 {
     logger.log("Page::writePage");
-    cout << "RAndom cheez"<<endl;
+    // cout << "RAndom cheez"<<endl;
     ofstream fout(this->pageName, ios::trunc);
     for (int rowCounter = 0; rowCounter < this->rowCount; rowCounter++)
     {
@@ -179,7 +179,7 @@ void Page::writePage()
         fout << endl;
     }
     fout.close();
-    cout << "RAndom cheez"<<endl;
+    // cout << "RAndom cheez"<<endl;
     logger.log("HO GAYA");
 }
 
