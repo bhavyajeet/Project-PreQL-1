@@ -21,6 +21,7 @@ void executeCommand(){
         case SOURCE: executeSOURCE(); break;
         case TRANSPOSE: executeTRANSPOSE(); break;
         case INSERT: executeINSERT(); break;
+        case GROUP: executeGROUP(); break;
         default: cout<<"PARSING ERROR"<<endl;
     }
 

@@ -65,6 +65,8 @@ bool syntacticParse()
             return syntacticParseDISTINCT();
         else if (possibleQueryType == "SORT")
             return syntacticParseSORT();
+        else if (possibleQueryType == "GROUP")
+            return syntacticParseGROUP();
         else
         {
             cout << "SYNTAX ERROR" << endl;
@@ -129,6 +131,14 @@ void ParsedQuery::clear()
     this->sortResultRelationName = "";
     this->sortColumnName = "";
     this->sortRelationName = "";
+
+
+
+    this->groupResultRelationName = "";
+    this->groupRelationName = "";
+    this->groupColumnName = "";
+    this->groupOperationName = "";
+    this->groupOperationColumn = "";
 
     this->sourceFileName = "";
 }

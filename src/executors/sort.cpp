@@ -59,7 +59,7 @@ void executeSORT(){
     logger.log("executeSORT");
     Table* tableToSort = tableCatalogue.getTable(parsedQuery.sortRelationName);
 
-    tableToSort->sortNoIndex(parsedQuery.sortColumnName);
+    tableToSort->sortNoIndex(parsedQuery.sortColumnName,parsedQuery.sortResultRelationName);
 
     cout << "sorting aint so easy bruh";
 

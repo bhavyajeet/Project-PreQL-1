@@ -23,6 +23,7 @@ enum QueryType
     SOURCE,
     TRANSPOSE,
     INSERT,
+    GROUP,
     UNDETERMINED
 };
 
@@ -116,6 +117,13 @@ public:
     string insertRelationName = "";
     vector<int> insertValues; 
 
+    string groupResultRelationName = "";
+    string groupRelationName = "";
+    string groupColumnName = "";
+    string groupOperationName = "";
+    string groupOperationColumn = "";
+
+
     ParsedQuery();
     void clear();
 };
@@ -137,6 +145,7 @@ bool syntacticParseSORT();
 bool syntacticParseSOURCE();
 bool syntacticParseTRANSPOSE();
 bool syntacticParseINSERT();
+bool syntacticParseGROUP();
 bool syntacticParseLOADMATRIX();
 bool syntacticParseEXPORTMATRIX();
 

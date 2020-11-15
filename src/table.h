@@ -50,7 +50,8 @@ public:
     void renameColumn(string fromColumnName, string toColumnName);
     void print();
     int insertRow( vector<int> values);
-    int sortNoIndex( string columnName);
+    int sortNoIndex( string columnName,string finName);
+    int sortGroup( string columnName);
     void makePermanent();
     void writeRows(vector <vector<int>> rowsArr);
     bool isPermanent();
@@ -74,7 +75,7 @@ void writeRow(vector<T> row, ostream &fout)
     for (int columnCounter = 0; columnCounter < row.size(); columnCounter++)
     {
         if (columnCounter != 0)
-            fout << ", ";
+            fout << ",";
         fout << row[columnCounter];
     }
     fout << endl;
