@@ -121,12 +121,11 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
       vector <bt*> v;
       v.push_back(buk);
       this->bucks.push_back(v);
-      // iterate from overflow to end and move this to end 
-      vector < bt* > a1 ;
-      vector < bt* > a2 ;
+      vector <bt*> a1;
+      vector <bt*> a2;
       a1.push_back(buk);
       a2.push_back(buk);
-      
+      // iterate from overflow to end and move this to end 
       // k % BUCKET == k % 2*BUCKET;
       for (int i = 1; i < this->bucks[this->pointerBucket].size(); i++)
       {
@@ -139,9 +138,9 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
           a2.push_back(this->bucks[this->pointerBucket][i]);
         }
       }
+      this->bucks[this->pointerBucket]=a1;
+      this->bucks[this->pointerBucket+BUCKET]=a2;
       cout << this->bucks[this->pointerBucket].size() << endl;
-      this->bucks[hashFunction(this->pointerBucket)] = a1;
-      this->bucks[(this->pointerBucket + BUCKET)] = a2;
       this->pointerBucket++;
 
       if(this->pointerBucket == BUCKET ){

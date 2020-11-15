@@ -402,28 +402,7 @@ int Table::indexTable(string columnName,IndexingStrategy indexingStrategy, strin
                 for (int j = 0; j < this->rowCount; j++)
                 {
                     vector <int> rr = cursor.getNext();
-                    // cout << "OKOKOKOKOKOKOKOK" << endl;
-                    // cout << rr[this->indexedColumnNumber] << endl;
-                    // Node * nd -> key, vector [{pagePtr1, rowPtr1} , {pagePtr2, rowPtr2}, {pagePtr3, rowPtr3} ];
-                    // Node *nd = 
                     this->BplusTree.insert(rr[this->indexedColumnNumber],i,j);
-                    // int pagePtr = nd->prev->pagePtr;
-                    // int rowPtr;
-                    // if(nd -> rowPtr < this->maxrowsperblock - 2){
-                    //     while (nd -> pagePtr == pagePtr)
-                    //         {
-                    //             /* code */
-                    //             nd->rowPtr++;
-                    //             nd = nd->next;
-                    //         }
-                    // }
-                    // else{
-                    //     // insert into overflow
-
-                    // }
-                    
-                    // cout << "RARARARAR";
-                    // cout << endl;
                 }
             }
             this->BplusTree.display(this->BplusTree.getRoot());
