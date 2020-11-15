@@ -117,7 +117,7 @@ bool Table::blockify()
     this->distinctValuesPerColumnCount.assign(this->columnCount, 0);
     getline(fin, line);
     stringstream s(line);
-    cout << "in blockify ZERO loop over" << endl;
+    cout << "in blockify ZERO loop over ROWS HERE : " << this->maxRowsPerBlock << endl;
     for (int columnCounter = 0; columnCounter < this->columnCount; columnCounter++)
     {
         if (!getline(s, word, ','))
@@ -141,6 +141,7 @@ bool Table::blockify()
         this->updateStatistics(row);
         if (pageCounter == this->maxRowsPerBlock)
         {
+            cout << "in blockify ZERO ROWS HERE : " << pageCounter << endl;
             bufferManager.writePage(this->tableName, this->blockCount, rowsInPage, pageCounter);
             this->blockCount++;
             this->rowsPerBlockCount.emplace_back(pageCounter);
@@ -260,6 +261,7 @@ void Table::print()
     for (int rowCounter = 0; rowCounter < count; rowCounter++)
     {
         row = cursor.getNext();
+        cout << "PRINTING ROW SIZE " << row.size() << "   " << this->columnCount << endl;
         this->writeRow(row, cout);
     }
     printRowCount(this->rowCount);
@@ -737,8 +739,8 @@ int Table::sortNoIndex(string columnName,string finName)
             vector <Page> pageArr;
             vector <int> pageCount; 
             vector <int> pagePointer; 
-            for (int i=0; i<(m-1) and i < this->blockCount-tillPage ;i++){
-                cout << "getting page " << chunkSize*i <<endl;
+            for (int i=0; i<(m-1) and i*chunkSize < this->blockCount-tillPage ;i++){
+                cout << "getting page " << chunkSize*i <<  " Block count:" << this->blockCount << " tillPage:"<< tillPage << " i:" << i <<  endl;
                 // pageArr.insert(pageArr.begin()+i,bufferManager.getPage(this->tableName,tillPage+chunkSize*i));
                 pageArr.insert(pageArr.begin()+i,bufferManager.getPage(readTable,tillPage+chunkSize*i));
                 pageCount.insert(pageCount.begin()+i,0);
@@ -882,5 +884,223 @@ int Table::sortNoIndex(string columnName,string finName)
 
 
 
+int Table::addCol(string columnName){
+    cout << "begin operation alter"<< endl;
+    cout << columnName << " is to be added "<< endl;
+    for (auto d:this->columns){
+        cout << d << " ";
+    }
+
+    vector <string> newCol = this->columns;
+    newCol.emplace_back(columnName);
+    Table * resultantTable = new Table("A_temp"+this->tableName, newCol); 
+    
+    cout << endl;
+    cout << "DIS VAL PUSH"<< endl;
+    int blkiter=0;
+    bool flag = 0;    
+    cout << "meta data altered"<< endl;
+    for (auto d : this->rowsPerBlockCount)
+    {
+        cout << d << " PRINT D VALUE " << endl;
+
+        flag = 1;
+        Page lastPage = bufferManager.getPage(this->tableName, blkiter);
+        vector<vector<int>> rowset1 = lastPage.getRows();
+        vector<vector<int>> rowset;
+
+        for (int i =0; i < d;i++){
+            rowset.push_back(rowset1[i]);
+            rowset[i].push_back(0);
+            for (auto lol : rowset[i]){
+                cout << lol << " ";
+            }
+            cout << "updates << " << endl;
+        }
+
+        for (auto rt : rowset){
+            for (auto lol : rt){
+                cout << lol << " ";
+            }
+            cout << endl;
+        }
+
+        resultantTable->writeRows(rowset);
+        
+        // lastPage.writeToPage(rowset);
+        // bufferManager.updatePage(this->tableName + "_Page" + to_string(blkiter), lastPage);
+
+        blkiter++;
+    }
+    
+    // resultantTable->tableName=this->tableName;
+    resultantTable->blockify();
+
+    string nameOG = this->tableName;
+    tableCatalogue.deleteTable(this->tableName);
+
+    // resultantTable->tableName= this->tableName ; 
+    // /*
+    blkiter=0;
+    for (auto d : resultantTable->rowsPerBlockCount){
+
+        // Page newPage = bufferManager.getPage(resultantTable->tableName,blkiter);
+        cout << "segway\n";
+        // cout << "PAGE ROWS : "  << newPage.getRowCount()  << endl;
+        cout << "PAGE ROWS : "  << d  << endl;
 
 
+        string ktemp = "../data/temp/"+resultantTable->tableName+"_Page"+to_string(blkiter);
+        char oldname[ktemp.length()+1] ;
+        strcpy(oldname, ktemp.c_str());
+
+        ktemp = "../data/temp/"+nameOG+"_Page"+to_string(blkiter); 
+        char newname[ktemp.length()+1];
+        strcpy(newname, ktemp.c_str());
+
+        rename(oldname,newname);    
+
+        bufferManager.unloadPage("../data/temp/"+nameOG+"_Page"+to_string(blkiter));
+
+        // bufferManager.updatePage("../data/temp/"+this->tableName+"_Page"+to_string(blkiter),newPage);
+
+
+        blkiter++;  
+    }
+
+
+    resultantTable->tableName=nameOG;
+    tableCatalogue.insertTable(resultantTable);
+    // this->columns.emplace_back(columnName);
+    cout << "PUSHED"<< endl;
+    Page lkl = bufferManager.getPage(nameOG,18);
+    vector <vector<int>> polo = lkl.getRows();
+    for (auto lk : polo){
+        for (auto pol : lk){
+            cout << pol << " ";
+        }
+        cout << endl;
+    } 
+    cout << "PRINTED LAST PADE \n";
+    // this->columnCount++;
+    // this->distinctValuesPerColumnCount.push_back(1);
+    // this->maxRowsPerBlock
+    // */
+
+    return 0;
+
+}
+
+
+
+int Table::deleteCol(string columnName){
+    cout << "begin operation alter"<< endl;
+    cout << columnName << " is to be deleted "<< endl;
+    for (auto d:this->columns){
+        cout << d << " ";
+    }
+    int colind = this->getColumnIndex(columnName);
+
+    vector <string> newCol = this->columns;
+    newCol.erase(newCol.begin()+colind);
+    Table * resultantTable = new Table("A_temp"+this->tableName, newCol); 
+    
+    cout << endl;
+    cout << "DIS VAL PUSH"<< endl;
+    int blkiter=0;
+    bool flag = 0;    
+    cout << "meta data altered"<< endl;
+    for (auto d : this->rowsPerBlockCount)
+    {
+        cout << d << " PRINT D VALUE " << endl;
+
+        flag = 1;
+        Page lastPage = bufferManager.getPage(this->tableName, blkiter);
+        vector<vector<int>> rowset1 = lastPage.getRows();
+        vector<vector<int>> rowset;
+
+        for (int i =0; i < d;i++){
+            rowset.push_back(rowset1[i]);
+            // rowset[i].push_back(0);
+            rowset[i].erase(rowset[i].begin()+colind);
+            for (auto lol : rowset[i]){
+                cout << lol << " ";
+            }
+            cout << "updates << " << endl;
+        }
+
+        for (auto rt : rowset){
+            for (auto lol : rt){
+                cout << lol << " ";
+            }
+            cout << endl;
+        }
+
+        resultantTable->writeRows(rowset);
+        
+        // lastPage.writeToPage(rowset);
+        // bufferManager.updatePage(this->tableName + "_Page" + to_string(blkiter), lastPage);
+
+        blkiter++;
+    }
+    
+
+    resultantTable->blockify();
+
+
+    string nameOG = this->tableName;
+    tableCatalogue.deleteTable(this->tableName);
+
+    // resultantTable->tableName= this->tableName ; 
+    // /*
+    blkiter=0;
+    for (auto d : resultantTable->rowsPerBlockCount){
+
+        // Page newPage = bufferManager.getPage(resultantTable->tableName,blkiter);
+
+
+        string ktemp = "../data/temp/"+resultantTable->tableName+"_Page"+to_string(blkiter);
+        char oldname[ktemp.length()+1] ;
+        strcpy(oldname, ktemp.c_str());
+
+        ktemp = "../data/temp/"+nameOG+"_Page"+to_string(blkiter); 
+        char newname[ktemp.length()+1];
+        strcpy(newname, ktemp.c_str());
+
+        rename(oldname,newname);    
+
+        bufferManager.unloadPage("../data/temp/"+nameOG+"_Page"+to_string(blkiter));
+
+        // bufferManager.updatePage("../data/temp/"+this->tableName+"_Page"+to_string(blkiter),newPage);
+
+
+        blkiter++;  
+    }
+
+
+
+    resultantTable->tableName=nameOG;
+    tableCatalogue.insertTable(resultantTable);
+    // this->columns.emplace_back(columnName);
+    cout << "PUSHED"<< endl;
+    Page lkl = bufferManager.getPage(nameOG,18);
+    vector <vector<int>> polo = lkl.getRows();
+    for (auto lk : polo){
+        for (auto pol : lk){
+            cout << pol << " ";
+        }
+        cout << endl;
+    } 
+    cout << "PRINTED LAST PADE \n";
+
+
+    // this->columns.emplace_back(columnName);
+    // this->columns.erase(this->columns.begin()+colind);
+    // cout << "PUSHED"<< endl;
+    // this->columnCount--;
+    // this->distinctValuesPerColumnCount.erase(this->distinctValuesPerColumnCount.begin()+colind);
+    // */
+
+    return 0;
+
+}

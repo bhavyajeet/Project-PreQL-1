@@ -21,3 +21,4 @@ bool semanticParseSOURCE();
 bool semanticParseTRANSPOSE();
 bool semanticParseINSERT();
 bool semanticParseGROUP();
+bool semanticParseALTER();

@@ -23,9 +23,11 @@ vector<int> Cursor::getNext()
     this->pagePointer++;
     if(result.empty()){
         if(tableCatalogue.isTable(this->tableName)){
-            // this is a matrix
+            // this is a table
             tableCatalogue.getTable(this->tableName)->getNextPage(this);
+            cout << "page pointer: " << this->pagePointer << endl;
             if(!this->pagePointer){
+                cout << "got in smh" << endl;
                 result = this->page.getRow(this->pagePointer);
                 this->pagePointer++;
             }

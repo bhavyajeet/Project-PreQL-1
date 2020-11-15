@@ -52,6 +52,8 @@ public:
     int insertRow( vector<int> values);
     int sortNoIndex( string columnName,string finName);
     int sortGroup( string columnName);
+    int addCol( string columnName);
+    int deleteCol( string columnName);
     void makePermanent();
     void writeRows(vector <vector<int>> rowsArr);
     bool isPermanent();

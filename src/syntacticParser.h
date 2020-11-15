@@ -23,6 +23,7 @@ enum QueryType
     SOURCE,
     TRANSPOSE,
     INSERT,
+    ALTER,
     GROUP,
     UNDETERMINED
 };
@@ -123,6 +124,10 @@ public:
     string groupOperationName = "";
     string groupOperationColumn = "";
 
+    string alterRelationName = "";
+    string alterColumnName = "";
+    string alterOperation = "";
+
 
     ParsedQuery();
     void clear();
@@ -146,6 +151,7 @@ bool syntacticParseSOURCE();
 bool syntacticParseTRANSPOSE();
 bool syntacticParseINSERT();
 bool syntacticParseGROUP();
+bool syntacticParseALTER();
 bool syntacticParseLOADMATRIX();
 bool syntacticParseEXPORTMATRIX();
 

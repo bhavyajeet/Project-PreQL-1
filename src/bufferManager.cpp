@@ -20,7 +20,7 @@ Page BufferManager::getPage(string tableName, int pageIndex)
     string pageName = "../data/temp/"+tableName + "_Page" + to_string(pageIndex);
     logger.log("searching");
     logger.log(pageName);
-    if (this->inPool(pageName) && tableName != "X" && tableName != "Y" )
+    if (this->inPool(pageName) && tableName.at(0) != '_' && tableName != "Y" )
     {
         cout << "IN POOOL IN POOOL IN POOL "<< endl;;
         return this->getFromPool(pageName);
@@ -92,10 +92,12 @@ Page BufferManager::insertIntoPool(string tableName, int pageIndex)
 {
     logger.log("BufferManager::insertIntoPool");
     Page page(tableName, pageIndex);
+    cout << page.getRowCount() << "  " << tableName << "  " << pageIndex << endl ;
     if (this->pages.size() >= BLOCK_COUNT)
         pages.pop_front();
     pages.push_back(page);
     cout << "Buffer returning nopool : " << page.pageName << endl;
+    cout << "seg ?" << endl;
     vector <int> tester = page.getRow(0);
     for (auto x : tester){
         cout << x << " ";
@@ -145,6 +147,25 @@ void BufferManager::updatePage(string pageName,Page newPage)
             x++;
         }
 }
+
+void BufferManager::unloadPage(string pageName)
+{
+    cout << "trying to delete page " << pageName << " with rows " << pageName << endl;
+    logger.log("BufferManager::removePage");
+    int x = 0;
+    for (auto page : this->pages)
+        {
+            // cout << "../data/temp/" + pageName<< " == "<< page.pageName << endl;
+            if ( pageName == page.pageName)
+            {
+                cout << "UNLOADED" << endl;
+                this->pages[x].pageName = "dummyPage";                 
+            }
+            x++;
+        }
+}
+
+
 
 /**
  * @brief Deletes file names fileName
