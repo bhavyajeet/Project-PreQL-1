@@ -44,6 +44,8 @@ bool syntacticParse()
         return syntacticParseTRANSPOSE();
     else if(possibleQueryType == "INSERT")
         return syntacticParseINSERT();
+    else if(possibleQueryType == "DELETE")
+        return syntacticParseINSERT();        
     else
     {
         string resultantRelationName = possibleQueryType;
@@ -65,6 +67,8 @@ bool syntacticParse()
             return syntacticParseDISTINCT();
         else if (possibleQueryType == "SORT")
             return syntacticParseSORT();
+        else if (possibleQueryType == "GROUP")
+            return syntacticParseGROUP();
         else
         {
             cout << "SYNTAX ERROR" << endl;
@@ -130,7 +134,21 @@ void ParsedQuery::clear()
     this->sortColumnName = "";
     this->sortRelationName = "";
 
+
+
+    this->groupResultRelationName = "";
+    this->groupRelationName = "";
+    this->groupColumnName = "";
+    this->groupOperationName = "";
+    this->groupOperationColumn = "";
+
     this->sourceFileName = "";
+
+    this->insertRelationName = "";
+
+    this->deleteRelationName = "";
+
+
 }
 
 /**

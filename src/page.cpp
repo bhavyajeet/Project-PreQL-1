@@ -97,6 +97,7 @@ Page::Page(string tableName, int pageIndex)
 vector<int> Page::getRow(int rowIndex)
 {
     logger.log("Page::getRow");
+    cout << "Page " << this->pageName << " Row" << rowIndex << " ";
     vector<int> result;
     result.clear();
     // cout << "ANNA ME HERE" << endl;
@@ -151,6 +152,14 @@ Page::Page(string tableName, int pageIndex, vector<vector<int>> rows, int rowCou
     this->tableName = tableName; // table
     this->pageIndex = pageIndex;
     this->rows = rows;
+    cout << "======= " <<  this->tableName <<endl;
+    for (auto x: this->rows){
+        for (auto re: x){
+            cout << re << " ";
+        }
+        cout << endl;;
+    }
+    cout << "======= " <<endl;
     this->rowCount = rowCount;
     this->columnCount = rows[0].size();
     this->pageName = "../data/temp/"+this->tableName + "_Page" + to_string(pageIndex);

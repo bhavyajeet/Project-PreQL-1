@@ -26,7 +26,7 @@ void doCommand()
 int main(void)
 {
 
-    regex delim("[^\\s,]+");
+    regex delim("[^\\s,(]+");
     string command;
     system("rm -rf ../data/temp");
     system("mkdir ../data/temp");
@@ -36,7 +36,7 @@ int main(void)
         cout << "\n> ";
         tokenizedQuery.clear();
         parsedQuery.clear();
-        logger.log("\nReading New Command: ");
+        // logger.log("\nReading New Command: ");
         getline(cin, command);
         logger.log(command);
 

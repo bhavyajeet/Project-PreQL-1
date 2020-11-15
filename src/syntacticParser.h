@@ -23,7 +23,9 @@ enum QueryType
     SOURCE,
     TRANSPOSE,
     INSERT,
-    UNDETERMINED
+    GROUP,
+    UNDETERMINED,
+    DELETE
 };
 
 enum BinaryOperator
@@ -116,6 +118,16 @@ public:
     string insertRelationName = "";
     vector<int> insertValues; 
 
+    string deleteRelationName = "";
+    vector<int> deleteValues; 
+
+    string groupResultRelationName = "";
+    string groupRelationName = "";
+    string groupColumnName = "";
+    string groupOperationName = "";
+    string groupOperationColumn = "";
+
+
     ParsedQuery();
     void clear();
 };
@@ -137,6 +149,8 @@ bool syntacticParseSORT();
 bool syntacticParseSOURCE();
 bool syntacticParseTRANSPOSE();
 bool syntacticParseINSERT();
+bool syntacticParseGROUP();
+bool syntacticParseDELETE();
 bool syntacticParseLOADMATRIX();
 bool syntacticParseEXPORTMATRIX();
 
