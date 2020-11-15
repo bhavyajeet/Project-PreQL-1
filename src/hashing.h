@@ -49,7 +49,7 @@ public:
     bt* searchElement(int key);
 
     // deletes a key from hash table 
-    bool deleteItem(int key); 
+    bool deleteItem(int key, int pagePtr, int rowPtr); 
   
     // hash function to map values to key 
     int hashFunction(int x) { 
@@ -58,7 +58,7 @@ public:
 
     // hash function to map values to key 
     int hashFunction2(int x) { 
-        return (x % 2 * BUCKET); 
+        return (x % (2 * BUCKET)); 
     } 
 
 
@@ -66,6 +66,7 @@ public:
 
     hashing();
     hashing(string tableName, int b,int rowCount, int indexedColumnNumber );
-  
+    
+
     void displayHash(); 
 }; 

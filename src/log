@@ -67,7 +67,7 @@ TableCatalogue::~insertTable
 ParseQuery::clear
 
 Reading New Command: 
-INDEX ON a FROM B USING HASH BUCKETS 2
+INDEX ON b FROM B USING HASH BUCKETS 2
 doCommand
 syntacticParse
 syntacticParseINDEX
@@ -121,9 +121,6 @@ Cursor::getNext
 Page::getRow
 BufferManager::deleteFile
 BufferManager::deleteFile: Success
-MatrixCatalogue::~MatrixCatalogue
-TableCatalogue::~TableCatalogue
-Table::~unload
-BufferManager::deleteFile
-BufferManager::deleteFile: Err
-Table::isPermanent
+ParseQuery::clear
+
+Reading New Command: 

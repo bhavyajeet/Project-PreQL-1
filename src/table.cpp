@@ -385,25 +385,48 @@ int Table::indexTable(string columnName,IndexingStrategy indexingStrategy, strin
             // construct a btree
             // thirdParam -> fanout
             this->BplusTree = bplusTree(this->tableName, thirdParam, this->rowCount, this->indexedColumnNumber);
-            for (int i = 0; i < this->blockCount; i++)
-            {
-                cout << "ANNARAAAA" << endl;
-            }
+            /*
+            *
+            *
+            *   
+            * this->sort_me();
+            * 
+            */
+            // for (int i = 0; i < this->blockCount; i++)
+            // {
+            //     cout << "ANNARAAAA" << endl;
+            // }
             for (int i = 0; i < this->blockCount; i++)
             {
                 Cursor cursor(this->tableName, i); 
                 for (int j = 0; j < this->rowCount; j++)
                 {
                     vector <int> rr = cursor.getNext();
-                    cout << "OKOKOKOKOKOKOKOK" << endl;
-                    cout << rr[this->indexedColumnNumber] << endl;
+                    // cout << "OKOKOKOKOKOKOKOK" << endl;
+                    // cout << rr[this->indexedColumnNumber] << endl;
+                    // Node * nd -> key, vector [{pagePtr1, rowPtr1} , {pagePtr2, rowPtr2}, {pagePtr3, rowPtr3} ];
+                    // Node *nd = 
                     this->BplusTree.insert(rr[this->indexedColumnNumber],i,j);
-                    cout << "RARARARAR";
-                    cout << endl;
+                    // int pagePtr = nd->prev->pagePtr;
+                    // int rowPtr;
+                    // if(nd -> rowPtr < this->maxrowsperblock - 2){
+                    //     while (nd -> pagePtr == pagePtr)
+                    //         {
+                    //             /* code */
+                    //             nd->rowPtr++;
+                    //             nd = nd->next;
+                    //         }
+                    // }
+                    // else{
+                    //     // insert into overflow
+
+                    // }
+                    
+                    // cout << "RARARARAR";
+                    // cout << endl;
                 }
             }
-            this->BplusTree.display(this->BplusTree.getRoot());            
-
+            this->BplusTree.display(this->BplusTree.getRoot());
         }
         else{
             // construct a hash
@@ -411,19 +434,11 @@ int Table::indexTable(string columnName,IndexingStrategy indexingStrategy, strin
             this->Hashing = hashing(this->tableName, stoi(thirdParam), this->rowCount, this->indexedColumnNumber);
             for (int i = 0; i < this->blockCount; i++)
             {
-                cout << "ANNARAAAA" << endl;
-            }
-            for (int i = 0; i < this->blockCount; i++)
-            {
                 Cursor cursor(this->tableName, i); 
                 for (int j = 0; j < this->rowCount; j++)
                 {
                     vector <int> rr = cursor.getNext();
-                    cout << "OKOKOKOKOKOKOKOK" << endl;
-                    cout << rr[this->indexedColumnNumber] << endl;
                     this->Hashing.insertItem(rr[this->indexedColumnNumber],i,j);
-                    cout << "RARARARAR";
-                    cout << endl;
                     this->Hashing.displayHash();
                 }
                 
