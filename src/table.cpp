@@ -516,6 +516,7 @@ pair<int,int> Table::insertLast(vector<int> values)
 int Table::insertRow(vector<int> values)
 {
     logger.log("Table::insert");
+    cout << "LOLOLOL\t " << this->indexingStrategy << endl;
     if(this->indexed){
         if(this->indexingStrategy == BTREE){
             // do not insert at last, insert in the overflow page instead
@@ -530,6 +531,7 @@ int Table::insertRow(vector<int> values)
             cout << "wherePage:\t" << p.first << endl;
             cout << "whereRow:\t" << p.second << endl;
             this->Hashing.insertItem(values[this->indexedColumnNumber],p.first,p.second);
+            this->Hashing.displayHash();
         }   
     }
     else

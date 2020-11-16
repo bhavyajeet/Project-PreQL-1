@@ -24,6 +24,7 @@ enum QueryType
     TRANSPOSE,
     INSERT,
     ALTER,
+    BULK_INSERT,
     GROUP,
     UNDETERMINED,
     DELETE
@@ -132,6 +133,9 @@ public:
     string alterColumnName = "";
     string alterOperation = "";
 
+    string bulkInsertRelationName = "";
+    string bulkFromRelationName = "";
+
 
     ParsedQuery();
     void clear();
@@ -154,6 +158,7 @@ bool syntacticParseSORT();
 bool syntacticParseSOURCE();
 bool syntacticParseTRANSPOSE();
 bool syntacticParseINSERT();
+bool syntacticParseBULK_INSERT();
 bool syntacticParseGROUP();
 bool syntacticParseDELETE();
 bool syntacticParseALTER();
