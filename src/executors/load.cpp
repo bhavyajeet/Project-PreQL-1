@@ -36,7 +36,7 @@ bool semanticParseLOAD()
 void executeLOAD()
 {
     logger.log("executeLOAD");
-    cout << "ME CALLED" << endl;
+
     Table *table = new Table(parsedQuery.loadRelationName);
     if (table->load())
     {
