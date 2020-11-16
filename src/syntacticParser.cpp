@@ -48,6 +48,8 @@ bool syntacticParse()
         return syntacticParseDELETE();        
     else if(possibleQueryType == "ALTER")
         return syntacticParseALTER();
+    else if(possibleQueryType == "BULK_INSERT")
+        return syntacticParseBULK_INSERT();
     else
     {
         string resultantRelationName = possibleQueryType;
