@@ -9,7 +9,7 @@
  */
 bool syntacticParseSORT(){
     logger.log("syntacticParseSORT");
-    if(tokenizedQuery.size()!= 8 || tokenizedQuery[4] != "BY" || tokenizedQuery[6] != "IN"){
+    if((tokenizedQuery.size()!= 8 && tokenizedQuery.size()!= 10  ) || tokenizedQuery[4] != "BY" || tokenizedQuery[6] != "IN"){
         cout<<"SYNTAX ERROR"<<endl;
         return false;
     }
@@ -18,6 +18,9 @@ bool syntacticParseSORT(){
     parsedQuery.sortColumnName = tokenizedQuery[5];
     parsedQuery.sortRelationName = tokenizedQuery[3];
     string sortingStrategy = tokenizedQuery[7];
+    if (tokenizedQuery.size()!= 10){
+        parsedQuery.sortBufferSize = stoi(tokenizedQuery[9]);
+    }
     if(sortingStrategy == "ASC")
         parsedQuery.sortingStrategy = ASC;
     else if(sortingStrategy == "DESC")
@@ -59,7 +62,14 @@ void executeSORT(){
     logger.log("executeSORT");
     Table* tableToSort = tableCatalogue.getTable(parsedQuery.sortRelationName);
 
-    tableToSort->sortNoIndex(parsedQuery.sortColumnName,parsedQuery.sortResultRelationName);
+    if (parsedQuery.sortingStrategy == ASC)
+    { 
+       tableToSort->sortNoIndex(parsedQuery.sortColumnName,parsedQuery.sortResultRelationName,1,parsedQuery.sortBufferSize);
+    }
+    else 
+    {
+        tableToSort->sortDesc(parsedQuery.sortColumnName,parsedQuery.sortResultRelationName,1,parsedQuery.sortBufferSize);
+    }
 
     cout << "sorting aint so easy bruh";
 

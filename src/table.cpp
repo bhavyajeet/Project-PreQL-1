@@ -593,10 +593,10 @@ bool sortcol(const vector<int> &v1, const vector<int> &v2, int k)
     return v1[k] < v2[k];
 }
 
-int Table::sortGroup(string columnName)
+int Table::sortDesc(string columnName,string finName, bool toInsert , int buffersizeM ) /* toInsert =1  buffersizeM =10*/
 {
     int blkiter = 0;
-    int m = 3;
+    int m = buffersizeM;
     // cout << "value of m is " << m << endl; 
     // cout << "got called \n\n";
     // cout << "row count of this table is " << this->rowCount << endl;
@@ -604,7 +604,7 @@ int Table::sortGroup(string columnName)
 
     int indk = this->getColumnIndex(columnName);
     
-    Table* phase1res = new Table("Y", this->columns);
+    Table* phase1res = new Table("_Y"+this->tableName, this->columns);
 
     for (auto d : this->rowsPerBlockCount)
     {
@@ -626,7 +626,7 @@ int Table::sortGroup(string columnName)
 
             // cout << "got page " << curPage.pageName << endl;
             
-            sort(pageRows.begin(), pageRows.end(), [indk]( const vector<int> &v1, const vector<int> &v2){ return v1[indk] < v2[indk]; } );
+            sort(pageRows.begin(), pageRows.end(), [indk]( const vector<int> &v1, const vector<int> &v2){ return v1[indk] > v2[indk]; } );
             // cout << "The Page rows after sorting are:\n";
             // for (int i = 0; i < m; i++)
             // {
@@ -652,8 +652,8 @@ int Table::sortGroup(string columnName)
 
     int chunkSize = 1;
 
-    string writeTable = "X";
-    string readTable = "Y";
+    string writeTable = "_X"+this->tableName;
+    string readTable = "_Y"+this->tableName;
 
     while (1)
     {
@@ -665,8 +665,8 @@ int Table::sortGroup(string columnName)
             vector <Page> pageArr;
             vector <int> pageCount; 
             vector <int> pagePointer; 
-            for (int i=0; i<(m-1) and i < this->blockCount-tillPage ;i++){
-                // cout << "getting page " << chunkSize*i <<endl;
+            for (int i=0; i<(m-1) and i*chunkSize < this->blockCount-tillPage ;i++){
+                // cout << "getting page " << chunkSize*i <<  " Block count:" << this->blockCount << " tillPage:"<< tillPage << " i:" << i <<  endl;
                 // pageArr.insert(pageArr.begin()+i,bufferManager.getPage(this->tableName,tillPage+chunkSize*i));
                 pageArr.insert(pageArr.begin()+i,bufferManager.getPage(readTable,tillPage+chunkSize*i));
                 pageCount.insert(pageCount.begin()+i,0);
@@ -682,7 +682,7 @@ int Table::sortGroup(string columnName)
 
             // merges the m-1 chunks of given chunksize 
             while (1){
-                int minRow = INT_MAX;
+                int minRow = -1;
                 int minRowInd = -1;
                 vector <int> minResRow;
                 for  (int i=0;i<m-1 and i < this->blockCount-tillPage ;i++){
@@ -699,7 +699,7 @@ int Table::sortGroup(string columnName)
                     //     cout << x << " ";
                     // }
                     // cout << endl;
-                    if (resrows[indk] < minRow ){
+                    if (resrows[indk] > minRow ){
                         minRow = resrows[indk];
                         minRowInd = i;
                         minResRow = resrows;
@@ -719,8 +719,8 @@ int Table::sortGroup(string columnName)
                     pagePointer[minRowInd]=0;
                     if (pageCount[minRowInd]<chunkSize ){
                         if (tillPage + chunkSize*minRowInd+pageCount[minRowInd]<this->blockCount){
-                        // pageArr.insert(pageArr.begin()+minRowInd,bufferManager.getPage(readTable,tillPage + chunkSize*minRowInd+pageCount[minRowInd]));
-                        pageArr[minRowInd]=bufferManager.getPage(readTable,tillPage + chunkSize*minRowInd+pageCount[minRowInd]);
+                            // pageArr.insert(pageArr.begin()+minRowInd,bufferManager.getPage(readTable,tillPage + chunkSize*minRowInd+pageCount[minRowInd]));
+                            pageArr[minRowInd]=bufferManager.getPage(readTable,tillPage + chunkSize*minRowInd+pageCount[minRowInd]);
                         }
                         else {
                             pageCount[minRowInd]=chunkSize;
@@ -745,45 +745,75 @@ int Table::sortGroup(string columnName)
                 break;
         }
 
-        if(resultantTable->blockify())
-        tableCatalogue.insertTable(resultantTable);
+        // if(resultantTable->blockify())
+        // tableCatalogue.insertTable(resultantTable);
 
         chunkSize = chunkSize*(m-1); 
         
-        if (writeTable == "X"){
-            readTable = "X";
+        if (writeTable == "_X"+this->tableName){
+            readTable = "_X"+this->tableName;
             // cout << "seg fault ?\n";
 
             if (chunkSize<this->blockCount || (1)){
-                tableCatalogue.deleteTable("Y");
+                tableCatalogue.deleteTable("_Y"+this->tableName);
             }
 
-            writeTable = "Y";
+            writeTable = "_Y"+this->tableName;
             // cout << "nope\n";
 
         }
         else {
-            readTable = "Y";
+            readTable = "_Y"+this->tableName;
 
             if (chunkSize<this->blockCount || (1)){
-                tableCatalogue.deleteTable("X");
+                tableCatalogue.deleteTable("_X"+this->tableName);
             }
             
-            writeTable = "X";
+            writeTable = "_X"+this->tableName;
         }
 
+
         if (chunkSize>=this->blockCount){
-            cout << "output in " << readTable << endl;
+            // cout << "output in " << readTable << endl;
+            
+            //RENAMING OUTPUT
+            resultantTable->tableName= finName ; 
+
+            string ktemp = "../data/temp/"+readTable+".csv";
+        	char oldname[ktemp.length()+1] ;
+	        strcpy(oldname, ktemp.c_str());
+
+            ktemp = "../data/temp/"+finName+".csv"; 
+            char newname[ktemp.length()+1];
+	        strcpy(newname, ktemp.c_str());
+            
+            // cout << "in blockify ?? " << endl;
+            if(resultantTable->blockify()){
+                // cout << "no blockify ?? " << endl;
+                rename(oldname,newname);
+                resultantTable->sourceFileName = "../data/"+finName+".csv";
+                if (toInsert)
+                    tableCatalogue.insertTable(resultantTable);
+            }
+
             break;
+        }
+
+        else {
+            if(resultantTable->blockify()){
+            if (toInsert)
+                tableCatalogue.insertTable(resultantTable);
+            }
         }
     }
     
 }
 
-int Table::sortNoIndex(string columnName,string finName, bool toInsert ) /* toInsert =1*/
+
+int Table::sortNoIndex(string columnName,string finName, bool toInsert , int buffersizeM ) /* toInsert =1  buffersizeM =10*/
 {
     int blkiter = 0;
-    int m = 3;
+    int m = buffersizeM;
     // cout << "value of m is " << m << endl; 
     // cout << "got called \n\n";
     // cout << "row count of this table is " << this->rowCount << endl;
