@@ -25,15 +25,16 @@ namespace std
 
 // BP node
 class Node {
+  friend class bplusTree;
+
+   public:
   bool IS_LEAF;
   vector < pair<int,int> > dataPtr;
   int *key, size;
   int *rowPtr;
   int *pagePtr;
   Node **ptr;
-  friend class bplusTree;
 
-   public:
   Node();
 };
 
@@ -47,6 +48,9 @@ class bplusTree {
    public:
    string tableName;
   bplusTree();
+
+  void removeKey(int x);
+  void removeInternal(int x, Node* cursor, Node* child);
   bplusTree(string tableName, string fanOut, int rowCount, int indexedColumn);
   pair<int,int>  search(int key);
   void insert(int x, int pagePtr, int rowPtr);

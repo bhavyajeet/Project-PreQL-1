@@ -55,6 +55,7 @@ public:
     int sortGroup( string columnName);
     int addCol( string columnName);
     int deleteCol( string columnName);
+    int deleteRow(vector <int> values);
     void makePermanent();
     void writeRows(vector <vector<int>> rowsArr);
     bool isPermanent();

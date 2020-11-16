@@ -417,14 +417,33 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
             // }
             for (int i = 0; i < this->blockCount; i++)
             {
-                Cursor cursor(this->tableName, i); 
-                for (int j = 0; j < this->rowCount; j++)
+                Page page = bufferManager.getPage(this->tableName,i);
+                vector < vector <int> > rows = page.getRows();
+                // cout << rows.size() << endl;
+                int number = page.getRowCount();
+                for (int j = 0; j < number; j++)
                 {
-                    vector <int> rr = cursor.getNext();
-                    this->BplusTree.insert(rr[this->indexedColumnNumber],i,j);
+                    pair <int,int> p = this->BplusTree.search(rows[j][this->indexedColumnNumber]);
+                    if(p.first == -1){
+                        // only insert if not already there
+                        // cout << "NOT ALREADY HERE" << endl;
+                        this->BplusTree.insert(rows[j][this->indexedColumnNumber],i,j);
+                    }
                 }
+                
             }
+            // for (int i = 0; i < this->blockCount; i++)
+            // {
+            //     Cursor cursor(this->tableName, i); 
+            //     for (int j = 0; j < this->rowCount; j++)
+            //     {
+            //         vector <int> rr = cursor.getNext();
+                    
+            //     }
+            // }
             this->BplusTree.display(this->BplusTree.getRoot());
+            pair<int,int> p = this->BplusTree.search(4);
+            cout << p.first << " " << p.second << endl;;
         }
         else
         {
@@ -1055,6 +1074,50 @@ int Table::addCol(string columnName){
 }
 
 
+int Table::deleteRow(vector <int> values){
+    int found = 0;
+    if(this->indexed){
+        // it is indexed
+        if(this->indexingStrategy == BTREE){
+            // BTREE
+        }
+        else{
+            // HASH
+        }
+    }
+    else{
+        // not indexed
+        // just delete from the page where it belonged to
+        for (int i = 0; i < this->blockCount && !found; i++)
+        {
+            Page page = bufferManager.getPage(this->tableName,i);
+            cout << i << "LALAL" << endl;
+            vector < vector<int> > rows = page.getRows();
+            cout << this->rowsPerBlockCount[i] << endl;
+            for (int j = 0; j < this->rowsPerBlockCount[i] && !found; j++)
+            {
+                /* code */
+                found = 1;
+                for (int k = 0; k < this->columnCount; k++)
+                {
+                    if(rows[j][k] != values[k]){
+                        found = 0;
+                    }
+                }
+                if(found){
+                    this->rowsPerBlockCount[i]--;
+                    rows.erase(rows.begin() + j);
+                    page.writeRows(rows,this->rowsPerBlockCount[i]);
+                    page.writePage();
+                    bufferManager.updatePage(this->tableName + "_Page" + to_string(i),page);
+                    cout << "Deleted from Page:\t" <<  i << endl;
+                    cout << "Deleted from Row:\t" << j << endl;
+                }
+            }
+        }
+    }
+    return found;
+}
 
 int Table::deleteCol(string columnName){
     cout << "begin operation alter"<< endl;

@@ -39,5 +39,10 @@ void executeDELETE()
         cout << val1 << " " << endl;
     }
     cout << endl;
+    Table * table = tableCatalogue.getTable(parsedQuery.deleteRelationName);
+    int ret = table->deleteRow(parsedQuery.deleteValues);
+    if(!ret){
+        cout << "NO SUCH RELATION FOUND" << endl;
+    }
     return;
 }
