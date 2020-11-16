@@ -45,7 +45,7 @@ bool syntacticParse()
     else if(possibleQueryType == "INSERT")
         return syntacticParseINSERT();
     else if(possibleQueryType == "DELETE")
-        return syntacticParseINSERT();        
+        return syntacticParseDELETE();        
     else if(possibleQueryType == "ALTER")
         return syntacticParseALTER();
     else

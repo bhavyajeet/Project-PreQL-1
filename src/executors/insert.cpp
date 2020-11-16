@@ -7,7 +7,7 @@ bool syntacticParseINSERT()
 {
     logger.log("syntacticParseINSERT");
     cout << "INSERT syntactic parser\n";
-    cout << tokenizedQuery.size() << endl; 
+    cout << tokenizedQuery.size() << endl << endl; 
     // if (tokenizedQuery.size() != 5)
     // {
     //     cout << "SYNTAX ERROR" << endl;
