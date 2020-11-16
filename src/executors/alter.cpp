@@ -61,6 +61,20 @@ void executeALTER()
     logger.log("executeALTER");
     cout <<"executeALTER"<< endl;
     Table *table = tableCatalogue.getTable(parsedQuery.alterRelationName);
+
+    // SAVE
+    // string indexedColumnName = "";
+    // string thirdParam = "";;
+    // IndexingStrategy indexingStrategy = NOTHING;
+    // bool indexed = false;
+    // if(table->indexed){
+    //     indexed = true;
+    //     indexedColumnName = table->indexedColumnNumber;
+    //     string thirdParam = table->thirdParam;
+    //     indexingStrategy = table->indexingStrategy;
+    // }
+    //
+
     if (parsedQuery.alterOperation == "ADD")
     {
         cout <<"adding"<< endl;
@@ -71,5 +85,12 @@ void executeALTER()
         table->deleteCol(parsedQuery.alterColumnName);
     }
     cout << "will alter table " << endl;
+    
+    // EXTRA
+    // if(indexed){
+    //     Table *table = tableCatalogue.getTable(parsedQuery.alterRelationName);
+    //     table->indexTable(indexedColumnName,indexingStrategy,thirdParam);
+    // }
+
     return;
 }

@@ -27,6 +27,7 @@ public:
     string tableName = "";
     vector<string> columns;
     vector<uint> distinctValuesPerColumnCount;
+    string thirdParam = "";
     uint columnCount = 0;
     uint indexedColumnNumber = 0;
     long long int rowCount = 0;

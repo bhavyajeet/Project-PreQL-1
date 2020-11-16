@@ -392,6 +392,7 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
     {   
         this->indexed = true;
         this->indexedColumn = columnName;
+        this->thirdParam = thirdParam;
         for (int i = 0; i < this->columnCount; i++)
         {
             if (this->columns[i] == this->indexedColumn)
