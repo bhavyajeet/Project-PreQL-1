@@ -403,6 +403,7 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
         {
             // construct a btree
             // thirdParam -> fanout
+            this->indexingStrategy = BTREE;
             this->BplusTree = bplusTree(this->tableName, thirdParam, this->rowCount, this->indexedColumnNumber);
             /*
             *
@@ -449,6 +450,7 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
         {
             // construct a hash
             // thirdParam -> number of buckets
+            this->indexingStrategy = HASH;
             this->Hashing = hashing(this->tableName, stoi(thirdParam), this->rowCount, this->indexedColumnNumber);
             for (int i = 0; i < this->blockCount; i++)
             {
@@ -537,9 +539,29 @@ int Table::insertRow(vector<int> values)
     logger.log("Table::insert");
     cout << "LOLOLOL\t " << this->indexingStrategy << endl;
     if(this->indexed){
+        cout << "Indexed Table" << endl;
         if(this->indexingStrategy == BTREE){
             // do not insert at last, insert in the overflow page instead
-            pair<int,int> p = this->insertLast(values);
+            cout << "ME INSERT" << endl;
+            pair <int,int> p = this->BplusTree.search(values[this->indexedColumnNumber]);
+            cout << p.first << " " << p.second << endl;
+            // pair<int,int> p = this->insertLast(values);
+            Page page = bufferManager.getPage(this->tableName,-1);
+            cout << page.getRowCount() << "\tROW COUNT" << endl;;
+            if(page.getRowCount() == this->maxRowsPerBlock){
+                // block full re-index
+                
+            }
+            else{
+                vector <vector <int> > rows;
+                if(page.getRowCount() != 0){
+                    rows = page.getRows();
+                }
+                pair <int,int> p = this->BplusTree.search(values[this->indexedColumnNumber]);
+                rows.push_back(values);
+                page.writeRows(rows, page.getRowCount() + 1);
+                page.writePage();
+            }
             return 0;
         }
         else
@@ -880,8 +902,8 @@ int Table::sortNoIndex(string columnName,string finName)
                     pagePointer[minRowInd]=0;
                     if (pageCount[minRowInd]<chunkSize ){
                         if (tillPage + chunkSize*minRowInd+pageCount[minRowInd]<this->blockCount){
-                        // pageArr.insert(pageArr.begin()+minRowInd,bufferManager.getPage(readTable,tillPage + chunkSize*minRowInd+pageCount[minRowInd]));
-                        pageArr[minRowInd]=bufferManager.getPage(readTable,tillPage + chunkSize*minRowInd+pageCount[minRowInd]);
+                            // pageArr.insert(pageArr.begin()+minRowInd,bufferManager.getPage(readTable,tillPage + chunkSize*minRowInd+pageCount[minRowInd]));
+                            pageArr[minRowInd]=bufferManager.getPage(readTable,tillPage + chunkSize*minRowInd+pageCount[minRowInd]);
                         }
                         else {
                             pageCount[minRowInd]=chunkSize;

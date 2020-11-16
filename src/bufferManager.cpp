@@ -49,6 +49,7 @@ bool BufferManager::inPool(string pageName)
     {
         logger.log("OO");
         logger.log(page.pageName);
+        cout << page.pageName << endl;
         if (pageName == page.pageName)
             return true;
     }

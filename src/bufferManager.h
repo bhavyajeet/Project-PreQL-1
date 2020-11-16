@@ -23,7 +23,6 @@
 class BufferManager{
 
     deque<Page> pages; 
-    bool inPool(string pageName);
     Page getFromPool(string pageName);
 
     // Table
@@ -34,6 +33,7 @@ class BufferManager{
     BufferManager();
 
     // Table Methods
+    bool inPool(string pageName);
     Page getPage(string tableName, int pageIndex);
     void unloadPage(string pageName);
     void writePage(string pageName, vector<vector<int>> rows);
@@ -43,5 +43,5 @@ class BufferManager{
 
     // Matrix Methods
     Page insertMatrixIntoPool(string MatrixName, int pageIndex);
-    void updatePage(string pageName,Page newPage);    
+    void updatePage(string pageName,Page newPage);
 };

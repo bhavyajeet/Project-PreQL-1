@@ -132,14 +132,12 @@ int Page::getRowCount()
     return this->rowCount;
 }
 
-
 int Page::writeRows(vector <vector<int>> tows,int rowCount)
 {
     this->rows = tows;
     this->rowCount = rowCount;
     return 1;
 }
-
 
 
 void Page::insertPageRow(vector<int> values ){
