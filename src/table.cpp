@@ -429,24 +429,12 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
                     pair <int,int> p = this->BplusTree.search(rows[j][this->indexedColumnNumber]);
                     if(p.first == -1){
                         // only insert if not already there
-                        // cout << "NOT ALREADY HERE" << endl;
                         this->BplusTree.insert(rows[j][this->indexedColumnNumber],i,j);
                     }
                 }
                 
             }
-            // for (int i = 0; i < this->blockCount; i++)
-            // {
-            //     Cursor cursor(this->tableName, i); 
-            //     for (int j = 0; j < this->rowCount; j++)
-            //     {
-            //         vector <int> rr = cursor.getNext();
-                    
-            //     }
-            // }
             this->BplusTree.display(this->BplusTree.getRoot());
-            pair<int,int> p = this->BplusTree.search(4);
-            cout << p.first << " " << p.second << endl;;
         }
         else
         {
@@ -464,7 +452,6 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
                 {
                     this->Hashing.insertItem(rows[j][this->indexedColumnNumber],i,j);
                 }
-                
             }
             this->Hashing.displayHash();
             
@@ -614,7 +601,7 @@ int Table::sortGroup(string columnName)
             pageRows = vector<vector<int>>(pageRows.begin(), pageRows.end()-pageRows.size()+d);
             int m = pageRows.size();
             int n = pageRows[0].size();
-            cout << "The Page rows before sorting are:\n";
+            // cout << "The Page rows before sorting are:\n";
             for (int i = 0; i < m; i++)
             {
                 for (int j = 0; j < n; j++)
@@ -622,16 +609,16 @@ int Table::sortGroup(string columnName)
                 cout << endl;
             }
 
-            cout << "got page " << curPage.pageName << endl;
+            // cout << "got page " << curPage.pageName << endl;
             
             sort(pageRows.begin(), pageRows.end(), [indk]( const vector<int> &v1, const vector<int> &v2){ return v1[indk] < v2[indk]; } );
-            cout << "The Page rows after sorting are:\n";
-            for (int i = 0; i < m; i++)
-            {
-                for (int j = 0; j < n; j++)
-                    cout << pageRows[i][j] << " ";
-                cout << endl;
-            }
+            // cout << "The Page rows after sorting are:\n";
+            // for (int i = 0; i < m; i++)
+            // {
+            //     for (int j = 0; j < n; j++)
+            //         cout << pageRows[i][j] << " ";
+            //     cout << endl;
+            // }
 
             // TODO : problem is where to write the sorted page ..??
             phase1res->writeRows(pageRows);
@@ -664,14 +651,14 @@ int Table::sortGroup(string columnName)
             vector <int> pageCount; 
             vector <int> pagePointer; 
             for (int i=0; i<(m-1) and i < this->blockCount-tillPage ;i++){
-                cout << "getting page " << chunkSize*i <<endl;
+                // cout << "getting page " << chunkSize*i <<endl;
                 // pageArr.insert(pageArr.begin()+i,bufferManager.getPage(this->tableName,tillPage+chunkSize*i));
                 pageArr.insert(pageArr.begin()+i,bufferManager.getPage(readTable,tillPage+chunkSize*i));
                 pageCount.insert(pageCount.begin()+i,0);
                 pagePointer.insert(pagePointer.begin()+i,0);
                 
             }       
-            cout << "got all pages\n";
+            // cout << "got all pages\n";
             int rowsmerged =0;
             int sumrows = 0;
             for (int i=0; i< chunkSize*(m-1) and i < this->blockCount-tillPage ;i++){
@@ -685,7 +672,7 @@ int Table::sortGroup(string columnName)
                 vector <int> minResRow;
                 for  (int i=0;i<m-1 and i < this->blockCount-tillPage ;i++){
                     if (pageCount[i]>=chunkSize){
-                        cout << " I CONTINUED for " << i << endl;
+                        // cout << " I CONTINUED for " << i << endl;
                         continue;
                     }
                     else {
@@ -851,14 +838,14 @@ int Table::sortNoIndex(string columnName,string finName)
             vector <int> pageCount; 
             vector <int> pagePointer; 
             for (int i=0; i<(m-1) and i*chunkSize < this->blockCount-tillPage ;i++){
-                cout << "getting page " << chunkSize*i <<  " Block count:" << this->blockCount << " tillPage:"<< tillPage << " i:" << i <<  endl;
+                // cout << "getting page " << chunkSize*i <<  " Block count:" << this->blockCount << " tillPage:"<< tillPage << " i:" << i <<  endl;
                 // pageArr.insert(pageArr.begin()+i,bufferManager.getPage(this->tableName,tillPage+chunkSize*i));
                 pageArr.insert(pageArr.begin()+i,bufferManager.getPage(readTable,tillPage+chunkSize*i));
                 pageCount.insert(pageCount.begin()+i,0);
                 pagePointer.insert(pagePointer.begin()+i,0);
                 
             }       
-            cout << "got all pages\n";
+            // cout << "got all pages\n";
             int rowsmerged =0;
             int sumrows = 0;
             for (int i=0; i< chunkSize*(m-1) and i < this->blockCount-tillPage ;i++){
@@ -872,18 +859,18 @@ int Table::sortNoIndex(string columnName,string finName)
                 vector <int> minResRow;
                 for  (int i=0;i<m-1 and i < this->blockCount-tillPage ;i++){
                     if (pageCount[i]>=chunkSize){
-                        cout << " I CONTINUED for " << i << endl;
+                        // cout << " I CONTINUED for " << i << endl;
                         continue;
                     }
                     else {
                     // cout << pageArr[i].pageName << " yaar "  <<endl; 
                     // cout << pageArr[i].pageName << " yaar " << pageArr[i].getRowCount() <<endl; 
                     vector <int> resrows = pageArr[i].getRow(pagePointer[i]) ;
-                    cout << "THIS IS ROW " << pagePointer[i] << ": " ;
-                    for (auto x : resrows ){
-                        cout << x << " ";
-                    }
-                    cout << endl;
+                    // cout << "THIS IS ROW " << pagePointer[i] << ": " ;
+                    // for (auto x : resrows ){
+                    //     cout << x << " ";
+                    // }
+                    // cout << endl;
                     if (resrows[indk] < minRow ){
                         minRow = resrows[indk];
                         minRowInd = i;
@@ -891,8 +878,8 @@ int Table::sortNoIndex(string columnName,string finName)
                     }
                     }
                 }
-                cout << " ==== PAGE NUM CALC are " << tillPage +pageCount[minRowInd]+ minRowInd*chunkSize << endl;
-                cout << "minimum row found at pagechunk " << minRowInd << " with value " << minRow << endl << endl;
+                // cout << " ==== PAGE NUM CALC are " << tillPage +pageCount[minRowInd]+ minRowInd*chunkSize << endl;
+                // cout << "minimum row found at pagechunk " << minRowInd << " with value " << minRow << endl << endl;
                 pagePointer[minRowInd]++;
                 // TODO : write row takes time - directly write to page maybe if possible 
                 resultantTable->writeRow(minResRow);
@@ -937,14 +924,14 @@ int Table::sortNoIndex(string columnName,string finName)
         
         if (writeTable == "_X"+this->tableName){
             readTable = "_X"+this->tableName;
-            cout << "seg fault ?\n";
+            // cout << "seg fault ?\n";
 
             if (chunkSize<this->blockCount || (1)){
                 tableCatalogue.deleteTable("_Y"+this->tableName);
             }
 
             writeTable = "_Y"+this->tableName;
-            cout << "nope\n";
+            // cout << "nope\n";
 
         }
         else {
@@ -972,9 +959,9 @@ int Table::sortNoIndex(string columnName,string finName)
             char newname[ktemp.length()+1];
 	        strcpy(newname, ktemp.c_str());
             
-            cout << "in blockify ?? " << endl;
+            // cout << "in blockify ?? " << endl;
             if(resultantTable->blockify()){
-                cout << "no blockify ?? " << endl;
+                // cout << "no blockify ?? " << endl;
                 rename(oldname,newname);
                 resultantTable->sourceFileName = "../data/"+finName+".csv";
                 tableCatalogue.insertTable(resultantTable);
@@ -1109,7 +1096,36 @@ int Table::deleteRow(vector <int> values){
         }
         else{
             // HASH
-
+            vector< pair<int,int> > p = this->Hashing.searchElement(values[this->indexedColumnNumber]);
+            int found = 0;
+            for (int i = 0; !found && i < p.size(); i++)
+            {
+                found = 1;
+                int pageNum = p[i].first;
+                int rowNum = p[i].second;
+                cout << "PageNum:\t" << pageNum << endl;
+                cout << "RowNum:\t" << rowNum << endl;
+                Page page = bufferManager.getPage(this->tableName,pageNum);
+                vector < vector<int> > rows = page.getRows();
+                
+                for (int i = 0; !found && i < this->columnCount; i++)
+                {
+                    if(rows[rowNum][i] != values[i]){
+                        // this is the row to be deleted
+                        found = 0;
+                    }
+                }
+                if(found){
+                    // delete this
+                    cout << "DELETING" << endl;
+                    Page page = bufferManager.getPage(this->tableName,pageNum);
+                    vector < vector<int> > rows = page.getRows();
+                    rows.erase(rows.begin() + rowNum);
+                    page.writeRows(rows,page.getRowCount() - 1);
+                    page.writePage();
+                    bufferManager.updatePage(this->tableName + "_Page" + to_string(pageNum),page);
+                }
+            }
         }
     }
     else{

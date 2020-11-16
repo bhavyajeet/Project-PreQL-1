@@ -1,8 +1,5 @@
 
-> in blockify ZERO loop over ROWS HERE : 125
-in blockify second loop over
-======= B
-1 4 
+> ======= B
 2 3 
 3 2 
 4 1 
@@ -127,8 +124,9 @@ in blockify second loop over
 0 0 
 0 0 
 0 0 
+0 0 
 ======= 
-Loaded Table. Column Count: 2 Row Count: 14
+Loaded Table. Column Count: 2 Row Count: 13
 
 > AAAAAAAAAabB
 RARAR
@@ -138,80 +136,47 @@ LALAL
  request for ../data/temp/B_Page0
 mother board  
 arey  table hai re baba 
-14  B  0
+13  B  0
 Buffer returning nopool : ../data/temp/B_Page0
 seg ?
-Page ../data/temp/B_Page0 Row0 1 4 NO POOL puss
+Page ../data/temp/B_Page0 Row0 2 3 NO POOL puss
 
-Tree is empty
-WHAT IS YOUR NAME?	4
-RERERERERERE
-WINDIRANDIRARARARAR
-Not found
-WHAT IS YOUR NAME?	3
-Not found
-WHAT IS YOUR NAME?	2
-Not found
-WHAT IS YOUR NAME?	1
-LAUWA ADAADFAF	1
-AUR KAISA HAI BEY
-Not found
-WHAT IS YOUR NAME?	5
-Not found
-WHAT IS YOUR NAME?	6
-LAUWA ADAADFAF	6
-AUR KAISA HAI BEY
-Found
-Found
-Found
-Found
-Found
-Found
-Not found
-WHAT IS YOUR NAME?	8
-Found
-ANNA
-3 {{0}}((1))
-5 {{0}}((4))
+OKOKOKOKOKOK
+|-1|
+|-1||1||1|
+|-1||2||2|
+|-1||3||3|
+|-1||4|
+>>|-1||5||5|
+|-1||6||6|
+|-1|
+|-1||8||8|
+|-1|
+|-1|
 
-I AM NOT A LEAF
-ANNA
-1 {{0}}((3))
-2 {{0}}((2))
+> MAI DELETE KARNE VALA HUN
+3 
+2 
 
-I AM LEAF
-ANNA
-3 {{0}}((1))
-4 {{0}}((0))
-
-I AM LEAF
-ANNA
-5 {{0}}((4))
-6 {{0}}((5))
-8 {{0}}((12))
-
-I AM LEAF
-Found
-0 0
-
-> INSERT syntactic parser
-6
-
-INSERT semantic parserLOLOLOL	 0
-Indexed Table
-ME INSERT
-Found
-0 2
- request for ../data/temp/B_Page-1
-mother board  
-arey  table hai re baba 
-0  B  -1
-Buffer returning nopool : ../data/temp/B_Page-1
-seg ?
-Page ../data/temp/B_Page-1 Row0 NO POOL puss
-
-0	ROW COUNT
-
-OKOKOKOKO	0
-I Will Execute Insert One Day
-That day is here
+||2||
+FOUND
+1
+||2||
+FOUND
+7
+PageNum:	0
+RowNum:	1
+ request for ../data/temp/B_Page0
+../data/temp/B_Page0
+IN POOOL IN POOOL IN POOL 
+Buffer returning : ../data/temp/B_Page0
+Page ../data/temp/B_Page0 Row0 2 3 POOL puss
+ request for ../data/temp/B_Page0
+../data/temp/B_Page0
+IN POOOL IN POOOL IN POOL 
+Buffer returning : ../data/temp/B_Page0
+Page ../data/temp/B_Page0 Row0 2 3 POOL puss
+trying to update page ../data/temp/B_Page0 with rows 12
+|../data/temp/B_Page0|
+ALLU ARJUN ANNAYA
+NO SUCH RELATION FOUND
