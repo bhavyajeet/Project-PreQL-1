@@ -18,7 +18,7 @@ bool syntacticParseSORT(){
     parsedQuery.sortColumnName = tokenizedQuery[5];
     parsedQuery.sortRelationName = tokenizedQuery[3];
     string sortingStrategy = tokenizedQuery[7];
-    if (tokenizedQuery.size()!= 10){
+    if (tokenizedQuery.size()== 10){
         parsedQuery.sortBufferSize = stoi(tokenizedQuery[9]);
     }
     if(sortingStrategy == "ASC")

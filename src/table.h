@@ -25,6 +25,7 @@ class Table
 public:
     string sourceFileName = "";
     string tableName = "";
+    string thirdParam = "";
     vector<string> columns;
     vector<uint> distinctValuesPerColumnCount;
     uint columnCount = 0;
