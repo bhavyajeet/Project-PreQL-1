@@ -1087,10 +1087,11 @@ int Table::addCol(string columnName){
 
 }
 
-pair<int,int> checkSame(vector< vector<int>> rows, rowsCount, vector<int> values){
+pair<int,int> Table::checkSame(vector< vector<int>> rows, int rowsCount, vector<int> values){
     int found = 0;
     int where = -1;
-    for (int i = 0;!found &&s i < rowsCount; i++)
+    int gggg = 1;
+    for (int i = 0;!found && i < rowsCount; i++)
     {
         found = 1;
         for (int j = 0; j < this->columnCount; j++)
@@ -1152,7 +1153,7 @@ int Table::deleteRow(vector <int> values){
                     found = 1;
                     Page page = bufferManager.getPage(this->tableName,ind);
                     vector < vector <int >> rows = page.getRows();
-                    pair<int,int> p = checkSame(rows,this->rowsPerBlockCount[ind];values);   
+                    pair<int,int> p = checkSame(rows,this->rowsPerBlockCount[ind],values);   
                     if(p.first = 1){
                         // found here
                         found = 1;
@@ -1165,7 +1166,7 @@ int Table::deleteRow(vector <int> values){
                         // now update all trailing elements
                         for (int i = where; i < rowsPerBlockCount[ind]; i++)
                         {
-                            this->BplusTree.searchAndUpdate(rows[i][this->indexedColumNumber],ind,i);
+                            this->BplusTree.searchAndUpdate(rows[i][this->indexedColumnNumber],ind,i);
                         }
                     }
                     else{
@@ -1218,7 +1219,7 @@ int Table::deleteRow(vector <int> values){
         for (int i = 0; i < this->blockCount && !found; i++)
         {
             Page page = bufferManager.getPage(this->tableName,i);
-            cout << i << "LALAL" << endl;
+            // cout << i << "`LALAL" << endl;
             vector < vector<int> > rows = page.getRows();
             cout << this->rowsPerBlockCount[i] << endl;
             for (int j = 0; j < this->rowsPerBlockCount[i] && !found; j++)
@@ -1282,12 +1283,12 @@ int Table::deleteCol(string columnName){
             // cout << "updates << " << endl;
         }
 
-        for (auto rt : rowset){
-            for (auto lol : rt){
-                cout << lol << " ";
-            }
-            cout << endl;
-        }
+        // for (auto rt : rowset){
+        //     for (auto lol : rt){
+        //         cout << lol << " ";
+        //     }
+        //     cout << endl;
+        // }
 
         resultantTable->writeRows(rowset);
         

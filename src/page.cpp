@@ -33,7 +33,7 @@ Page::Page(string tableName, int pageIndex)
     this->pageName = "../data/temp/" + tableName + "_Page" + to_string(pageIndex);
     logger.log(this->pageName);
     if (tableCatalogue.isTable(tableName)){
-        cout << "arey  table hai re baba " << endl;
+        // cout << "arey  table hai re baba " << endl;
         // it is table
         Table table = *tableCatalogue.getTable(tableName);
         this->tableName = tableName;
@@ -87,7 +87,7 @@ Page::Page(string tableName, int pageIndex)
         }
         fin.close();
     }else {
-        cout << "here is the mikstake " << endl;
+        // cout << "here is the mikstake " << endl;
     }
 }
 
@@ -100,7 +100,7 @@ Page::Page(string tableName, int pageIndex)
 vector<int> Page::getRow(int rowIndex)
 {
     logger.log("Page::getRow");
-    cout << "Page " << this->pageName << " Row" << rowIndex << " ";
+    // cout << "Page " << this->pageName << " Row" << rowIndex << " ";
     vector<int> result;
     result.clear();
     // cout << "ANNA ME HERE" << endl;
@@ -141,10 +141,10 @@ int Page::writeRows(vector <vector<int>> tows,int rowCount)
 
 
 void Page::insertPageRow(vector<int> values ){
-    cout << "Page insert";
-    for (auto x: values){
-        cout << x;
-    }
+    // cout << "Page insert";
+    // for (auto x: values){
+    //     cout << x;
+    // }
     for (int i=0;i<values.size();i++)
     {
         this->rows[this->rowCount][i]= values[i];

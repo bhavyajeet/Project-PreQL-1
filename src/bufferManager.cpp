@@ -15,19 +15,19 @@ BufferManager::BufferManager()
  */
 Page BufferManager::getPage(string tableName, int pageIndex)
 {
-    cout << " request for " << "../data/temp/"+tableName + "_Page" + to_string(pageIndex) << endl;
+    // cout << " request for " << "../data/temp/"+tableName + "_Page" + to_string(pageIndex) << endl;
     logger.log("BufferManager::getPage");
     string pageName = "../data/temp/"+tableName + "_Page" + to_string(pageIndex);
     logger.log("searching");
     logger.log(pageName);
     if (this->inPool(pageName) && tableName.at(0) != '_' && tableName != "Y" )
     {
-        cout << "IN POOOL IN POOOL IN POOL "<< endl;;
+        // cout << "IN POOOL IN POOOL IN POOL "<< endl;;
         return this->getFromPool(pageName);
     }
     else
         {
-            cout << "mother board  \n";
+            // cout << "mother board  \n";
             logger.log(tableName);
             logger.log("ANNARA");
             logger.log("TERERERE");
@@ -49,7 +49,7 @@ bool BufferManager::inPool(string pageName)
     {
         logger.log("OO");
         logger.log(page.pageName);
-        cout << page.pageName << endl;
+        // cout << page.pageName << endl;
         if (pageName == page.pageName)
             return true;
     }
@@ -70,12 +70,12 @@ Page BufferManager::getFromPool(string pageName)
     for (auto page : this->pages)
         if (pageName == page.pageName)
         {
-            cout << "Buffer returning : " << page.pageName << endl;
+            // cout << "Buffer returning : " << page.pageName << endl;
             vector <int> tester = page.getRow(0);
-            for (auto x : tester){
-                cout << x << " ";
-            } 
-            cout <<  "POOL puss" << endl; 
+            // for (auto x : tester){
+            //     cout << x << " ";
+            // } 
+            // cout <<  "POOL puss" << endl; 
             return page;
         }
 }
@@ -97,14 +97,14 @@ Page BufferManager::insertIntoPool(string tableName, int pageIndex)
     if (this->pages.size() >= BLOCK_COUNT)
         pages.pop_front();
     pages.push_back(page);
-    cout << "Buffer returning nopool : " << page.pageName << endl;
-    cout << "seg ?" << endl;
+    // cout << "Buffer returning nopool : " << page.pageName << endl;
+    // cout << "seg ?" << endl;
     vector <int> tester = page.getRow(0);
-    for (auto x : tester){
-        cout << x << " ";
-    } 
-    cout <<  "NO POOL puss" << endl; 
-    cout << endl; 
+    // for (auto x : tester){
+    //     cout << x << " ";
+    // } 
+    // cout <<  "NO POOL puss" << endl; 
+    // cout << endl; 
     return page;
 }
 

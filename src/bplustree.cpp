@@ -54,7 +54,7 @@ bplusTree::bplusTree(string tableName, string fanOut, int rowCount, int indexedC
 void bplusTree::searchAndUpdate(int x, int pagePtr, int rowPtr) {
   if (root == NULL) {
     cout << "Tree is empty\n";
-	return {-1,-1};
+	return;
   } else {
     Node *cursor = root;
     while (cursor->IS_LEAF == false) {
@@ -76,11 +76,11 @@ void bplusTree::searchAndUpdate(int x, int pagePtr, int rowPtr) {
 			// this one has moved backward in the page
 			cursor->rowPtr[i]--;
 		}
-        return make_pair(cursor->pagePtr[i],cursor->rowPtr[i]);
+        return;
       }
     }
     cout << "Not found\n";
-	return {-1,-1};
+	return;
   }	
 }
 
