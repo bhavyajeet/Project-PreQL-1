@@ -583,6 +583,7 @@ int Table::insertRow(vector<int> values)
                 rows.push_back(values);
                 page.writeRows(rows, page.getRowCount() + 1);
                 page.writePage();
+                bufferManager.updatePage(this->tableName + "_Page" + to_string(-1),page);
             }
             return 0;
         }
