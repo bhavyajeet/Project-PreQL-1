@@ -1,182 +1,342 @@
 
-> ======= B
-2 3 
-3 2 
-4 1 
-4 5 
-4 6 
-1 4 
-2 3 
-3 2 
-4 1 
-4 5 
-4 6 
-7 8 
-8 8 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-0 0 
-======= 
-Loaded Table. Column Count: 2 Row Count: 13
+> Loaded Table. Column Count: 10 Row Count: 100
 
-> AAAAAAAAAabB
+> AAAAAAAAAaA1_aR
 RARAR
-ab
+A1_aA1_b
 rararar
 LALAL
- request for ../data/temp/B_Page0
+ request for ../data/temp/R_Page0
 mother board  
 arey  table hai re baba 
-13  B  0
-Buffer returning nopool : ../data/temp/B_Page0
+25  R  0
+Buffer returning nopool : ../data/temp/R_Page0
 seg ?
-Page ../data/temp/B_Page0 Row0 2 3 NO POOL puss
+Page ../data/temp/R_Page0 Row0 8 18 28 38 48 6 16 26 36 46 NO POOL puss
 
-OKOKOKOKOKOK
-|-1|
-|-1||1||1|
-|-1||2||2|
-|-1||3||3|
-|-1||4|
->>|-1||5||5|
-|-1||6||6|
-|-1|
-|-1||8||8|
-|-1|
-|-1|
+ request for ../data/temp/R_Page1
+../data/temp/R_Page0
+mother board  
+arey  table hai re baba 
+25  R  1
+Buffer returning nopool : ../data/temp/R_Page1
+seg ?
+Page ../data/temp/R_Page1 Row0 10 20 30 40 50 6 16 26 36 46 NO POOL puss
 
-> MAI DELETE KARNE VALA HUN
-3 
-2 
+ request for ../data/temp/R_Page2
+../data/temp/R_Page0
+../data/temp/R_Page1
+mother board  
+arey  table hai re baba 
+25  R  2
+Buffer returning nopool : ../data/temp/R_Page2
+seg ?
+Page ../data/temp/R_Page2 Row0 3 13 23 33 43 8 18 28 38 48 NO POOL puss
 
-||2||
-FOUND
-1
-||2||
-FOUND
-7
-PageNum:	0
-RowNum:	1
- request for ../data/temp/B_Page0
-../data/temp/B_Page0
+ request for ../data/temp/R_Page3
+../data/temp/R_Page0
+../data/temp/R_Page1
+../data/temp/R_Page2
+mother board  
+arey  table hai re baba 
+25  R  3
+Buffer returning nopool : ../data/temp/R_Page3
+seg ?
+Page ../data/temp/R_Page3 Row0 7 17 27 37 47 2 12 22 32 42 NO POOL puss
+
+ request for ../data/temp/_YR_Page0
+../data/temp/R_Page0
+../data/temp/R_Page1
+../data/temp/R_Page2
+../data/temp/R_Page3
+mother board  
+arey  table hai re baba 
+25  _YR  0
+Buffer returning nopool : ../data/temp/_YR_Page0
+seg ?
+Page ../data/temp/_YR_Page0 Row0 1 11 21 31 41 5 15 25 35 45 NO POOL puss
+
+ request for ../data/temp/_YR_Page1
+../data/temp/R_Page0
+../data/temp/R_Page1
+../data/temp/R_Page2
+../data/temp/R_Page3
+../data/temp/_YR_Page0
+mother board  
+arey  table hai re baba 
+25  _YR  1
+Buffer returning nopool : ../data/temp/_YR_Page1
+seg ?
+Page ../data/temp/_YR_Page1 Row0 1 11 21 31 41 4 14 24 34 44 NO POOL puss
+
+Page ../data/temp/_YR_Page0 Row0 Page ../data/temp/_YR_Page1 Row0 Page ../data/temp/_YR_Page0 Row1 Page ../data/temp/_YR_Page1 Row0 Page ../data/temp/_YR_Page0 Row2 Page ../data/temp/_YR_Page1 Row0 Page ../data/temp/_YR_Page0 Row3 Page ../data/temp/_YR_Page1 Row0 Page ../data/temp/_YR_Page0 Row4 Page ../data/temp/_YR_Page1 Row0 Page ../data/temp/_YR_Page0 Row4 Page ../data/temp/_YR_Page1 Row1 Page ../data/temp/_YR_Page0 Row5 Page ../data/temp/_YR_Page1 Row1 Page ../data/temp/_YR_Page0 Row6 Page ../data/temp/_YR_Page1 Row1 Page ../data/temp/_YR_Page0 Row7 Page ../data/temp/_YR_Page1 Row1 Page ../data/temp/_YR_Page0 Row8 Page ../data/temp/_YR_Page1 Row1 Page ../data/temp/_YR_Page0 Row8 Page ../data/temp/_YR_Page1 Row2 Page ../data/temp/_YR_Page0 Row8 Page ../data/temp/_YR_Page1 Row3 Page ../data/temp/_YR_Page0 Row9 Page ../data/temp/_YR_Page1 Row3 Page ../data/temp/_YR_Page0 Row10 Page ../data/temp/_YR_Page1 Row3 Page ../data/temp/_YR_Page0 Row10 Page ../data/temp/_YR_Page1 Row4 Page ../data/temp/_YR_Page0 Row11 Page ../data/temp/_YR_Page1 Row4 Page ../data/temp/_YR_Page0 Row11 Page ../data/temp/_YR_Page1 Row5 Page ../data/temp/_YR_Page0 Row11 Page ../data/temp/_YR_Page1 Row6 Page ../data/temp/_YR_Page0 Row11 Page ../data/temp/_YR_Page1 Row7 Page ../data/temp/_YR_Page0 Row11 Page ../data/temp/_YR_Page1 Row8 Page ../data/temp/_YR_Page0 Row12 Page ../data/temp/_YR_Page1 Row8 Page ../data/temp/_YR_Page0 Row13 Page ../data/temp/_YR_Page1 Row8 Page ../data/temp/_YR_Page0 Row13 Page ../data/temp/_YR_Page1 Row9 Page ../data/temp/_YR_Page0 Row13 Page ../data/temp/_YR_Page1 Row10 Page ../data/temp/_YR_Page0 Row13 Page ../data/temp/_YR_Page1 Row11 Page ../data/temp/_YR_Page0 Row13 Page ../data/temp/_YR_Page1 Row12 Page ../data/temp/_YR_Page0 Row13 Page ../data/temp/_YR_Page1 Row13 Page ../data/temp/_YR_Page0 Row14 Page ../data/temp/_YR_Page1 Row13 Page ../data/temp/_YR_Page0 Row15 Page ../data/temp/_YR_Page1 Row13 Page ../data/temp/_YR_Page0 Row15 Page ../data/temp/_YR_Page1 Row14 Page ../data/temp/_YR_Page0 Row15 Page ../data/temp/_YR_Page1 Row15 Page ../data/temp/_YR_Page0 Row15 Page ../data/temp/_YR_Page1 Row16 Page ../data/temp/_YR_Page0 Row16 Page ../data/temp/_YR_Page1 Row16 Page ../data/temp/_YR_Page0 Row17 Page ../data/temp/_YR_Page1 Row16 Page ../data/temp/_YR_Page0 Row18 Page ../data/temp/_YR_Page1 Row16 Page ../data/temp/_YR_Page0 Row19 Page ../data/temp/_YR_Page1 Row16 Page ../data/temp/_YR_Page0 Row20 Page ../data/temp/_YR_Page1 Row16 Page ../data/temp/_YR_Page0 Row20 Page ../data/temp/_YR_Page1 Row17 Page ../data/temp/_YR_Page0 Row20 Page ../data/temp/_YR_Page1 Row18 Page ../data/temp/_YR_Page0 Row20 Page ../data/temp/_YR_Page1 Row19 Page ../data/temp/_YR_Page0 Row21 Page ../data/temp/_YR_Page1 Row19 Page ../data/temp/_YR_Page0 Row22 Page ../data/temp/_YR_Page1 Row19 Page ../data/temp/_YR_Page0 Row23 Page ../data/temp/_YR_Page1 Row19 Page ../data/temp/_YR_Page0 Row23 Page ../data/temp/_YR_Page1 Row20 Page ../data/temp/_YR_Page0 Row23 Page ../data/temp/_YR_Page1 Row21 Page ../data/temp/_YR_Page0 Row24 Page ../data/temp/_YR_Page1 Row21 Page ../data/temp/_YR_Page1 Row21 Page ../data/temp/_YR_Page1 Row22 Page ../data/temp/_YR_Page1 Row23 Page ../data/temp/_YR_Page1 Row24  request for ../data/temp/_YR_Page2
+../data/temp/R_Page0
+../data/temp/R_Page1
+../data/temp/R_Page2
+../data/temp/R_Page3
+../data/temp/_YR_Page0
+../data/temp/_YR_Page1
+mother board  
+arey  table hai re baba 
+25  _YR  2
+Buffer returning nopool : ../data/temp/_YR_Page2
+seg ?
+Page ../data/temp/_YR_Page2 Row0 1 11 21 31 41 6 16 26 36 46 NO POOL puss
+
+ request for ../data/temp/_YR_Page3
+../data/temp/R_Page0
+../data/temp/R_Page1
+../data/temp/R_Page2
+../data/temp/R_Page3
+../data/temp/_YR_Page0
+../data/temp/_YR_Page1
+../data/temp/_YR_Page2
+mother board  
+arey  table hai re baba 
+25  _YR  3
+Buffer returning nopool : ../data/temp/_YR_Page3
+seg ?
+Page ../data/temp/_YR_Page3 Row0 1 11 21 31 41 8 18 28 38 48 NO POOL puss
+
+Page ../data/temp/_YR_Page2 Row0 Page ../data/temp/_YR_Page3 Row0 Page ../data/temp/_YR_Page2 Row1 Page ../data/temp/_YR_Page3 Row0 Page ../data/temp/_YR_Page2 Row1 Page ../data/temp/_YR_Page3 Row1 Page ../data/temp/_YR_Page2 Row1 Page ../data/temp/_YR_Page3 Row2 Page ../data/temp/_YR_Page2 Row1 Page ../data/temp/_YR_Page3 Row3 Page ../data/temp/_YR_Page2 Row1 Page ../data/temp/_YR_Page3 Row4 Page ../data/temp/_YR_Page2 Row2 Page ../data/temp/_YR_Page3 Row4 Page ../data/temp/_YR_Page2 Row3 Page ../data/temp/_YR_Page3 Row4 Page ../data/temp/_YR_Page2 Row3 Page ../data/temp/_YR_Page3 Row5 Page ../data/temp/_YR_Page2 Row3 Page ../data/temp/_YR_Page3 Row6 Page ../data/temp/_YR_Page2 Row4 Page ../data/temp/_YR_Page3 Row6 Page ../data/temp/_YR_Page2 Row5 Page ../data/temp/_YR_Page3 Row6 Page ../data/temp/_YR_Page2 Row6 Page ../data/temp/_YR_Page3 Row6 Page ../data/temp/_YR_Page2 Row7 Page ../data/temp/_YR_Page3 Row6 Page ../data/temp/_YR_Page2 Row7 Page ../data/temp/_YR_Page3 Row7 Page ../data/temp/_YR_Page2 Row7 Page ../data/temp/_YR_Page3 Row8 Page ../data/temp/_YR_Page2 Row7 Page ../data/temp/_YR_Page3 Row9 Page ../data/temp/_YR_Page2 Row8 Page ../data/temp/_YR_Page3 Row9 Page ../data/temp/_YR_Page2 Row9 Page ../data/temp/_YR_Page3 Row9 Page ../data/temp/_YR_Page2 Row10 Page ../data/temp/_YR_Page3 Row9 Page ../data/temp/_YR_Page2 Row11 Page ../data/temp/_YR_Page3 Row9 Page ../data/temp/_YR_Page2 Row12 Page ../data/temp/_YR_Page3 Row9 Page ../data/temp/_YR_Page2 Row13 Page ../data/temp/_YR_Page3 Row9 Page ../data/temp/_YR_Page2 Row14 Page ../data/temp/_YR_Page3 Row9 Page ../data/temp/_YR_Page2 Row14 Page ../data/temp/_YR_Page3 Row10 Page ../data/temp/_YR_Page2 Row14 Page ../data/temp/_YR_Page3 Row11 Page ../data/temp/_YR_Page2 Row14 Page ../data/temp/_YR_Page3 Row12 Page ../data/temp/_YR_Page2 Row14 Page ../data/temp/_YR_Page3 Row13 Page ../data/temp/_YR_Page2 Row14 Page ../data/temp/_YR_Page3 Row14 Page ../data/temp/_YR_Page2 Row15 Page ../data/temp/_YR_Page3 Row14 Page ../data/temp/_YR_Page2 Row16 Page ../data/temp/_YR_Page3 Row14 Page ../data/temp/_YR_Page2 Row17 Page ../data/temp/_YR_Page3 Row14 Page ../data/temp/_YR_Page2 Row18 Page ../data/temp/_YR_Page3 Row14 Page ../data/temp/_YR_Page2 Row19 Page ../data/temp/_YR_Page3 Row14 Page ../data/temp/_YR_Page2 Row19 Page ../data/temp/_YR_Page3 Row15 Page ../data/temp/_YR_Page2 Row20 Page ../data/temp/_YR_Page3 Row15 Page ../data/temp/_YR_Page2 Row21 Page ../data/temp/_YR_Page3 Row15 Page ../data/temp/_YR_Page2 Row21 Page ../data/temp/_YR_Page3 Row16 Page ../data/temp/_YR_Page2 Row21 Page ../data/temp/_YR_Page3 Row17 Page ../data/temp/_YR_Page2 Row21 Page ../data/temp/_YR_Page3 Row18 Page ../data/temp/_YR_Page2 Row21 Page ../data/temp/_YR_Page3 Row19 Page ../data/temp/_YR_Page2 Row21 Page ../data/temp/_YR_Page3 Row20 Page ../data/temp/_YR_Page2 Row22 Page ../data/temp/_YR_Page3 Row20 Page ../data/temp/_YR_Page2 Row23 Page ../data/temp/_YR_Page3 Row20 Page ../data/temp/_YR_Page2 Row24 Page ../data/temp/_YR_Page3 Row20 Page ../data/temp/_YR_Page2 Row24 Page ../data/temp/_YR_Page3 Row21 Page ../data/temp/_YR_Page2 Row24 Page ../data/temp/_YR_Page3 Row22 Page ../data/temp/_YR_Page3 Row22 Page ../data/temp/_YR_Page3 Row23 Page ../data/temp/_YR_Page3 Row24  request for ../data/temp/_XR_Page0
+../data/temp/R_Page0
+../data/temp/R_Page1
+../data/temp/R_Page2
+../data/temp/R_Page3
+../data/temp/_YR_Page0
+../data/temp/_YR_Page1
+../data/temp/_YR_Page2
+../data/temp/_YR_Page3
+mother board  
+arey  table hai re baba 
+25  _XR  0
+Buffer returning nopool : ../data/temp/_XR_Page0
+seg ?
+Page ../data/temp/_XR_Page0 Row0 1 11 21 31 41 5 15 25 35 45 NO POOL puss
+
+ request for ../data/temp/_XR_Page2
+../data/temp/R_Page0
+../data/temp/R_Page1
+../data/temp/R_Page2
+../data/temp/R_Page3
+../data/temp/_YR_Page0
+../data/temp/_YR_Page1
+../data/temp/_YR_Page2
+../data/temp/_YR_Page3
+../data/temp/_XR_Page0
+mother board  
+arey  table hai re baba 
+25  _XR  2
+Buffer returning nopool : ../data/temp/_XR_Page2
+seg ?
+Page ../data/temp/_XR_Page2 Row0 1 11 21 31 41 6 16 26 36 46 NO POOL puss
+
+Page ../data/temp/_XR_Page0 Row0 Page ../data/temp/_XR_Page2 Row0 Page ../data/temp/_XR_Page0 Row1 Page ../data/temp/_XR_Page2 Row0 Page ../data/temp/_XR_Page0 Row2 Page ../data/temp/_XR_Page2 Row0 Page ../data/temp/_XR_Page0 Row3 Page ../data/temp/_XR_Page2 Row0 Page ../data/temp/_XR_Page0 Row4 Page ../data/temp/_XR_Page2 Row0 Page ../data/temp/_XR_Page0 Row5 Page ../data/temp/_XR_Page2 Row0 Page ../data/temp/_XR_Page0 Row5 Page ../data/temp/_XR_Page2 Row1 Page ../data/temp/_XR_Page0 Row5 Page ../data/temp/_XR_Page2 Row2 Page ../data/temp/_XR_Page0 Row5 Page ../data/temp/_XR_Page2 Row3 Page ../data/temp/_XR_Page0 Row5 Page ../data/temp/_XR_Page2 Row4 Page ../data/temp/_XR_Page0 Row5 Page ../data/temp/_XR_Page2 Row5 Page ../data/temp/_XR_Page0 Row6 Page ../data/temp/_XR_Page2 Row5 Page ../data/temp/_XR_Page0 Row7 Page ../data/temp/_XR_Page2 Row5 Page ../data/temp/_XR_Page0 Row8 Page ../data/temp/_XR_Page2 Row5 Page ../data/temp/_XR_Page0 Row9 Page ../data/temp/_XR_Page2 Row5 Page ../data/temp/_XR_Page0 Row10 Page ../data/temp/_XR_Page2 Row5 Page ../data/temp/_XR_Page0 Row11 Page ../data/temp/_XR_Page2 Row5 Page ../data/temp/_XR_Page0 Row11 Page ../data/temp/_XR_Page2 Row6 Page ../data/temp/_XR_Page0 Row11 Page ../data/temp/_XR_Page2 Row7 Page ../data/temp/_XR_Page0 Row11 Page ../data/temp/_XR_Page2 Row8 Page ../data/temp/_XR_Page0 Row11 Page ../data/temp/_XR_Page2 Row9 Page ../data/temp/_XR_Page0 Row12 Page ../data/temp/_XR_Page2 Row9 Page ../data/temp/_XR_Page0 Row13 Page ../data/temp/_XR_Page2 Row9 Page ../data/temp/_XR_Page0 Row14 Page ../data/temp/_XR_Page2 Row9 Page ../data/temp/_XR_Page0 Row14 Page ../data/temp/_XR_Page2 Row10 Page ../data/temp/_XR_Page0 Row14 Page ../data/temp/_XR_Page2 Row11 Page ../data/temp/_XR_Page0 Row14 Page ../data/temp/_XR_Page2 Row12 Page ../data/temp/_XR_Page0 Row14 Page ../data/temp/_XR_Page2 Row13 Page ../data/temp/_XR_Page0 Row14 Page ../data/temp/_XR_Page2 Row14 Page ../data/temp/_XR_Page0 Row14 Page ../data/temp/_XR_Page2 Row15 Page ../data/temp/_XR_Page0 Row14 Page ../data/temp/_XR_Page2 Row16 Page ../data/temp/_XR_Page0 Row15 Page ../data/temp/_XR_Page2 Row16 Page ../data/temp/_XR_Page0 Row16 Page ../data/temp/_XR_Page2 Row16 Page ../data/temp/_XR_Page0 Row17 Page ../data/temp/_XR_Page2 Row16 Page ../data/temp/_XR_Page0 Row18 Page ../data/temp/_XR_Page2 Row16 Page ../data/temp/_XR_Page0 Row19 Page ../data/temp/_XR_Page2 Row16 Page ../data/temp/_XR_Page0 Row19 Page ../data/temp/_XR_Page2 Row17 Page ../data/temp/_XR_Page0 Row19 Page ../data/temp/_XR_Page2 Row18 Page ../data/temp/_XR_Page0 Row19 Page ../data/temp/_XR_Page2 Row19 Page ../data/temp/_XR_Page0 Row19 Page ../data/temp/_XR_Page2 Row20 Page ../data/temp/_XR_Page0 Row19 Page ../data/temp/_XR_Page2 Row21 Page ../data/temp/_XR_Page0 Row20 Page ../data/temp/_XR_Page2 Row21 Page ../data/temp/_XR_Page0 Row21 Page ../data/temp/_XR_Page2 Row21 Page ../data/temp/_XR_Page0 Row22 Page ../data/temp/_XR_Page2 Row21 Page ../data/temp/_XR_Page0 Row22 Page ../data/temp/_XR_Page2 Row22 Page ../data/temp/_XR_Page0 Row22 Page ../data/temp/_XR_Page2 Row23 Page ../data/temp/_XR_Page0 Row22 Page ../data/temp/_XR_Page2 Row24  request for ../data/temp/_XR_Page3
+../data/temp/R_Page0
+../data/temp/R_Page1
+../data/temp/R_Page2
+../data/temp/R_Page3
+../data/temp/_YR_Page0
+../data/temp/_YR_Page1
+../data/temp/_YR_Page2
+../data/temp/_YR_Page3
+../data/temp/_XR_Page0
+../data/temp/_XR_Page2
+mother board  
+arey  table hai re baba 
+25  _XR  3
+Buffer returning nopool : ../data/temp/_XR_Page3
+seg ?
+Page ../data/temp/_XR_Page3 Row0 5 15 25 35 45 3 13 23 33 43 NO POOL puss
+
+Page ../data/temp/_XR_Page0 Row22 Page ../data/temp/_XR_Page3 Row0 Page ../data/temp/_XR_Page0 Row22 Page ../data/temp/_XR_Page3 Row1 Page ../data/temp/_XR_Page0 Row22 Page ../data/temp/_XR_Page3 Row2 Page ../data/temp/_XR_Page0 Row22 Page ../data/temp/_XR_Page3 Row3 Page ../data/temp/_XR_Page0 Row23 Page ../data/temp/_XR_Page3 Row3 Page ../data/temp/_XR_Page0 Row24 Page ../data/temp/_XR_Page3 Row3  request for ../data/temp/_XR_Page1
+../data/temp/R_Page0
+../data/temp/R_Page1
+../data/temp/R_Page2
+../data/temp/R_Page3
+../data/temp/_YR_Page0
+../data/temp/_YR_Page1
+../data/temp/_YR_Page2
+../data/temp/_YR_Page3
+../data/temp/_XR_Page0
+../data/temp/_XR_Page2
+../data/temp/_XR_Page3
+mother board  
+arey  table hai re baba 
+25  _XR  1
+Buffer returning nopool : ../data/temp/_XR_Page1
+seg ?
+Page ../data/temp/_XR_Page1 Row0 6 16 26 36 46 9 19 29 39 49 NO POOL puss
+
+Page ../data/temp/_XR_Page1 Row0 Page ../data/temp/_XR_Page3 Row3 Page ../data/temp/_XR_Page1 Row1 Page ../data/temp/_XR_Page3 Row3 Page ../data/temp/_XR_Page1 Row1 Page ../data/temp/_XR_Page3 Row4 Page ../data/temp/_XR_Page1 Row1 Page ../data/temp/_XR_Page3 Row5 Page ../data/temp/_XR_Page1 Row1 Page ../data/temp/_XR_Page3 Row6 Page ../data/temp/_XR_Page1 Row1 Page ../data/temp/_XR_Page3 Row7 Page ../data/temp/_XR_Page1 Row1 Page ../data/temp/_XR_Page3 Row8 Page ../data/temp/_XR_Page1 Row1 Page ../data/temp/_XR_Page3 Row9 Page ../data/temp/_XR_Page1 Row2 Page ../data/temp/_XR_Page3 Row9 Page ../data/temp/_XR_Page1 Row3 Page ../data/temp/_XR_Page3 Row9 Page ../data/temp/_XR_Page1 Row4 Page ../data/temp/_XR_Page3 Row9 Page ../data/temp/_XR_Page1 Row5 Page ../data/temp/_XR_Page3 Row9 Page ../data/temp/_XR_Page1 Row6 Page ../data/temp/_XR_Page3 Row9 Page ../data/temp/_XR_Page1 Row6 Page ../data/temp/_XR_Page3 Row10 Page ../data/temp/_XR_Page1 Row6 Page ../data/temp/_XR_Page3 Row11 Page ../data/temp/_XR_Page1 Row6 Page ../data/temp/_XR_Page3 Row12 Page ../data/temp/_XR_Page1 Row6 Page ../data/temp/_XR_Page3 Row13 Page ../data/temp/_XR_Page1 Row6 Page ../data/temp/_XR_Page3 Row14 Page ../data/temp/_XR_Page1 Row7 Page ../data/temp/_XR_Page3 Row14 Page ../data/temp/_XR_Page1 Row8 Page ../data/temp/_XR_Page3 Row14 Page ../data/temp/_XR_Page1 Row9 Page ../data/temp/_XR_Page3 Row14 Page ../data/temp/_XR_Page1 Row10 Page ../data/temp/_XR_Page3 Row14 Page ../data/temp/_XR_Page1 Row11 Page ../data/temp/_XR_Page3 Row14 Page ../data/temp/_XR_Page1 Row12 Page ../data/temp/_XR_Page3 Row14 Page ../data/temp/_XR_Page1 Row13 Page ../data/temp/_XR_Page3 Row14 Page ../data/temp/_XR_Page1 Row14 Page ../data/temp/_XR_Page3 Row14 Page ../data/temp/_XR_Page1 Row14 Page ../data/temp/_XR_Page3 Row15 Page ../data/temp/_XR_Page1 Row14 Page ../data/temp/_XR_Page3 Row16 Page ../data/temp/_XR_Page1 Row15 Page ../data/temp/_XR_Page3 Row16 Page ../data/temp/_XR_Page1 Row16 Page ../data/temp/_XR_Page3 Row16 Page ../data/temp/_XR_Page1 Row17 Page ../data/temp/_XR_Page3 Row16 Page ../data/temp/_XR_Page1 Row18 Page ../data/temp/_XR_Page3 Row16 Page ../data/temp/_XR_Page1 Row19 Page ../data/temp/_XR_Page3 Row16 Page ../data/temp/_XR_Page1 Row19 Page ../data/temp/_XR_Page3 Row17 Page ../data/temp/_XR_Page1 Row19 Page ../data/temp/_XR_Page3 Row18 Page ../data/temp/_XR_Page1 Row19 Page ../data/temp/_XR_Page3 Row19 Page ../data/temp/_XR_Page1 Row19 Page ../data/temp/_XR_Page3 Row20 Page ../data/temp/_XR_Page1 Row19 Page ../data/temp/_XR_Page3 Row21 Page ../data/temp/_XR_Page1 Row20 Page ../data/temp/_XR_Page3 Row21 Page ../data/temp/_XR_Page1 Row21 Page ../data/temp/_XR_Page3 Row21 Page ../data/temp/_XR_Page1 Row22 Page ../data/temp/_XR_Page3 Row21 Page ../data/temp/_XR_Page1 Row23 Page ../data/temp/_XR_Page3 Row21 Page ../data/temp/_XR_Page1 Row24 Page ../data/temp/_XR_Page3 Row21 Page ../data/temp/_XR_Page3 Row21 Page ../data/temp/_XR_Page3 Row22 Page ../data/temp/_XR_Page3 Row23 Page ../data/temp/_XR_Page3 Row24  request for ../data/temp/R_Page0
+../data/temp/R_Page0
 IN POOOL IN POOOL IN POOL 
-Buffer returning : ../data/temp/B_Page0
-Page ../data/temp/B_Page0 Row0 2 3 POOL puss
- request for ../data/temp/B_Page0
-../data/temp/B_Page0
+Buffer returning : ../data/temp/R_Page0
+Page ../data/temp/R_Page0 Row0 8 18 28 38 48 6 16 26 36 46 POOL puss
+Tree is empty
+WHAT IS YOUR NAME?	8
+RERERERERERE
+WINDIRANDIRARARARAR
+Not found
+WHAT IS YOUR NAME?	1
+Found
+Not found
+WHAT IS YOUR NAME?	9
+Found
+Not found
+WHAT IS YOUR NAME?	5
+LAUWA ADAADFAF	5
+AUR KAISA HAI BEY
+Not found
+WHAT IS YOUR NAME?	2
+Found
+Found
+Not found
+WHAT IS YOUR NAME?	4
+LAUWA ADAADFAF	4
+AUR KAISA HAI BEY
+Found
+Not found
+WHAT IS YOUR NAME?	7
+Not found
+WHAT IS YOUR NAME?	3
+Found
+Found
+Not found
+WHAT IS YOUR NAME?	10
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+ request for ../data/temp/R_Page1
+../data/temp/R_Page0
+../data/temp/R_Page1
 IN POOOL IN POOOL IN POOL 
-Buffer returning : ../data/temp/B_Page0
-Page ../data/temp/B_Page0 Row0 2 3 POOL puss
-trying to update page ../data/temp/B_Page0 with rows 12
-|../data/temp/B_Page0|
-ALLU ARJUN ANNAYA
-NO SUCH RELATION FOUND
+Buffer returning : ../data/temp/R_Page1
+Page ../data/temp/R_Page1 Row0 10 20 30 40 50 6 16 26 36 46 POOL puss
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Not found
+WHAT IS YOUR NAME?	6
+LAUWA ADAADFAF	6
+AUR KAISA HAI BEY
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+ request for ../data/temp/R_Page2
+../data/temp/R_Page0
+../data/temp/R_Page1
+../data/temp/R_Page2
+IN POOOL IN POOOL IN POOL 
+Buffer returning : ../data/temp/R_Page2
+Page ../data/temp/R_Page2 Row0 3 13 23 33 43 8 18 28 38 48 POOL puss
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+ request for ../data/temp/R_Page3
+../data/temp/R_Page0
+../data/temp/R_Page1
+../data/temp/R_Page2
+../data/temp/R_Page3
+IN POOOL IN POOOL IN POOL 
+Buffer returning : ../data/temp/R_Page3
+Page ../data/temp/R_Page3 Row0 7 17 27 37 47 2 12 22 32 42 POOL puss
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+Found
+ANNA
+4 {{0}}((9))
+6 {{1}}((12))
+8 {{0}}((0))
+
+I AM NOT A LEAF
+ANNA
+1 {{0}}((1))
+2 {{0}}((6))
+3 {{0}}((12))
+
+I AM LEAF
+ANNA
+4 {{0}}((9))
+5 {{0}}((5))
+
+I AM LEAF
+ANNA
+6 {{1}}((12))
+7 {{0}}((11))
+
+I AM LEAF
+ANNA
+8 {{0}}((0))
+9 {{0}}((3))
+10 {{0}}((15))
+
+I AM LEAF

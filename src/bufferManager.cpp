@@ -140,10 +140,10 @@ void BufferManager::updatePage(string pageName,Page newPage)
     int x = 0;
     for (auto page : this->pages)
         {
-            cout << "|" << page.pageName << "|" << endl;
+            // cout << "|" << page.pageName << "|" << endl;
             if ("../data/temp/" + pageName == page.pageName)
             {
-                    cout << "ALLU ARJUN ANNAYA" << endl;;
+                    // cout << "ALLU ARJUN ANNAYA" << endl;;
                     this->pages[x] = newPage;
                     page = newPage;
             }

@@ -389,7 +389,7 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
         this->indexedColumn = "";
     }
     else
-    {
+    {   
         this->indexed = true;
         this->indexedColumn = columnName;
         for (int i = 0; i < this->columnCount; i++)
@@ -434,6 +434,7 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
                 }
                 
             }
+            // this->BplusTree.removeKey(6);
             this->BplusTree.display(this->BplusTree.getRoot());
         }
         else
@@ -582,10 +583,10 @@ int Table::sortGroup(string columnName)
 {
     int blkiter = 0;
     int m = 3;
-    cout << "value of m is " << m << endl; 
-    cout << "got called \n\n";
-    cout << "row count of this table is " << this->rowCount << endl;
-    cout << this->rowsPerBlockCount[0] << endl;
+    // cout << "value of m is " << m << endl; 
+    // cout << "got called \n\n";
+    // cout << "row count of this table is " << this->rowCount << endl;
+    // cout << this->rowsPerBlockCount[0] << endl;
 
     int indk = this->getColumnIndex(columnName);
     
@@ -593,7 +594,7 @@ int Table::sortGroup(string columnName)
 
     for (auto d : this->rowsPerBlockCount)
     {
-        cout << "page" << d << "\n";
+        // cout << "page" << d << "\n";
         if (d > 0)
         {
             Page curPage = bufferManager.getPage(this->tableName, blkiter);
@@ -602,12 +603,12 @@ int Table::sortGroup(string columnName)
             int m = pageRows.size();
             int n = pageRows[0].size();
             // cout << "The Page rows before sorting are:\n";
-            for (int i = 0; i < m; i++)
-            {
-                for (int j = 0; j < n; j++)
-                    cout << pageRows[i][j] << " ";
-                cout << endl;
-            }
+            // for (int i = 0; i < m; i++)
+            // {
+            //     for (int j = 0; j < n; j++)
+            //         cout << pageRows[i][j] << " ";
+            //     cout << endl;
+            // }
 
             // cout << "got page " << curPage.pageName << endl;
             
@@ -679,11 +680,11 @@ int Table::sortGroup(string columnName)
                     // cout << pageArr[i].pageName << " yaar "  <<endl; 
                     // cout << pageArr[i].pageName << " yaar " << pageArr[i].getRowCount() <<endl; 
                     vector <int> resrows = pageArr[i].getRow(pagePointer[i]) ;
-                    cout << "THIS IS ROW " << pagePointer[i] << ": " ;
-                    for (auto x : resrows ){
-                        cout << x << " ";
-                    }
-                    cout << endl;
+                    // cout << "THIS IS ROW " << pagePointer[i] << ": " ;
+                    // for (auto x : resrows ){
+                    //     cout << x << " ";
+                    // }
+                    // cout << endl;
                     if (resrows[indk] < minRow ){
                         minRow = resrows[indk];
                         minRowInd = i;
@@ -691,8 +692,8 @@ int Table::sortGroup(string columnName)
                     }
                     }
                 }
-                cout << " ==== PAGE NUM CALC are " << tillPage +pageCount[minRowInd]+ minRowInd*chunkSize << endl;
-                cout << "minimum row found at pagechunk " << minRowInd << " with value " << minRow << endl << endl;
+                // cout << " ==== PAGE NUM CALC are " << tillPage +pageCount[minRowInd]+ minRowInd*chunkSize << endl;
+                // cout << "minimum row found at pagechunk " << minRowInd << " with value " << minRow << endl << endl;
                 pagePointer[minRowInd]++;
                 // TODO : write row takes time - directly write to page maybe if possible 
                 resultantTable->writeRow(minResRow);
@@ -737,14 +738,14 @@ int Table::sortGroup(string columnName)
         
         if (writeTable == "X"){
             readTable = "X";
-            cout << "seg fault ?\n";
+            // cout << "seg fault ?\n";
 
             if (chunkSize<this->blockCount || (1)){
                 tableCatalogue.deleteTable("Y");
             }
 
             writeTable = "Y";
-            cout << "nope\n";
+            // cout << "nope\n";
 
         }
         else {
@@ -769,10 +770,10 @@ int Table::sortNoIndex(string columnName,string finName)
 {
     int blkiter = 0;
     int m = 3;
-    cout << "value of m is " << m << endl; 
-    cout << "got called \n\n";
-    cout << "row count of this table is " << this->rowCount << endl;
-    cout << this->rowsPerBlockCount[0] << endl;
+    // cout << "value of m is " << m << endl; 
+    // cout << "got called \n\n";
+    // cout << "row count of this table is " << this->rowCount << endl;
+    // cout << this->rowsPerBlockCount[0] << endl;
 
     int indk = this->getColumnIndex(columnName);
     
@@ -780,7 +781,7 @@ int Table::sortNoIndex(string columnName,string finName)
 
     for (auto d : this->rowsPerBlockCount)
     {
-        cout << "page" << d << "\n";
+        // cout << "page" << d << "\n";
         if (d > 0)
         {
             Page curPage = bufferManager.getPage(this->tableName, blkiter);
@@ -788,24 +789,24 @@ int Table::sortNoIndex(string columnName,string finName)
             pageRows = vector<vector<int>>(pageRows.begin(), pageRows.end()-pageRows.size()+d);
             int m = pageRows.size();
             int n = pageRows[0].size();
-            cout << "The Page rows before sorting are:\n";
-            for (int i = 0; i < m; i++)
-            {
-                for (int j = 0; j < n; j++)
-                    cout << pageRows[i][j] << " ";
-                cout << endl;
-            }
+            // cout << "The Page rows before sorting are:\n";
+            // for (int i = 0; i < m; i++)
+            // {
+            //     for (int j = 0; j < n; j++)
+            //         cout << pageRows[i][j] << " ";
+            //     cout << endl;
+            // }
 
-            cout << "got page " << curPage.pageName << endl;
+            // cout << "got page " << curPage.pageName << endl;
             
             sort(pageRows.begin(), pageRows.end(), [indk]( const vector<int> &v1, const vector<int> &v2){ return v1[indk] < v2[indk]; } );
-            cout << "The Page rows after sorting are:\n";
-            for (int i = 0; i < m; i++)
-            {
-                for (int j = 0; j < n; j++)
-                    cout << pageRows[i][j] << " ";
-                cout << endl;
-            }
+            // cout << "The Page rows after sorting are:\n";
+            // for (int i = 0; i < m; i++)
+            // {
+            //     for (int j = 0; j < n; j++)
+            //         cout << pageRows[i][j] << " ";
+            //     cout << endl;
+            // }
 
             // TODO : problem is where to write the sorted page ..??
             phase1res->writeRows(pageRows);
@@ -946,7 +947,7 @@ int Table::sortNoIndex(string columnName,string finName)
 
 
         if (chunkSize>=this->blockCount){
-            cout << "output in " << readTable << endl;
+            // cout << "output in " << readTable << endl;
             
             //RENAMING OUTPUT
             resultantTable->tableName= finName ; 
@@ -982,22 +983,22 @@ int Table::sortNoIndex(string columnName,string finName)
 int Table::addCol(string columnName){
     cout << "begin operation alter"<< endl;
     cout << columnName << " is to be added "<< endl;
-    for (auto d:this->columns){
-        cout << d << " ";
-    }
+    // for (auto d:this->columns){
+    //     cout << d << " ";
+    // }
 
     vector <string> newCol = this->columns;
     newCol.emplace_back(columnName);
     Table * resultantTable = new Table("A_temp"+this->tableName, newCol); 
     
-    cout << endl;
-    cout << "DIS VAL PUSH"<< endl;
+    // cout << endl;
+    // cout << "DIS VAL PUSH"<< endl;
     int blkiter=0;
     bool flag = 0;    
-    cout << "meta data altered"<< endl;
+    // cout << "meta data altered"<< endl;
     for (auto d : this->rowsPerBlockCount)
     {
-        cout << d << " PRINT D VALUE " << endl;
+        // cout << d << " PRINT D VALUE " << endl;
 
         flag = 1;
         Page lastPage = bufferManager.getPage(this->tableName, blkiter);
@@ -1007,18 +1008,18 @@ int Table::addCol(string columnName){
         for (int i =0; i < d;i++){
             rowset.push_back(rowset1[i]);
             rowset[i].push_back(0);
-            for (auto lol : rowset[i]){
-                cout << lol << " ";
-            }
-            cout << "updates << " << endl;
+            // for (auto lol : rowset[i]){
+            //     cout << lol << " ";
+            // }
+            // cout << "updates << " << endl;
         }
 
-        for (auto rt : rowset){
-            for (auto lol : rt){
-                cout << lol << " ";
-            }
-            cout << endl;
-        }
+        // for (auto rt : rowset){
+        //     for (auto lol : rt){
+        //         cout << lol << " ";
+        //     }
+        //     cout << endl;
+        // }
 
         resultantTable->writeRows(rowset);
         
@@ -1040,9 +1041,9 @@ int Table::addCol(string columnName){
     for (auto d : resultantTable->rowsPerBlockCount){
 
         // Page newPage = bufferManager.getPage(resultantTable->tableName,blkiter);
-        cout << "segway\n";
+        // cout << "segway\n";
         // cout << "PAGE ROWS : "  << newPage.getRowCount()  << endl;
-        cout << "PAGE ROWS : "  << d  << endl;
+        // cout << "PAGE ROWS : "  << d  << endl;
 
 
         string ktemp = "../data/temp/"+resultantTable->tableName+"_Page"+to_string(blkiter);
@@ -1067,7 +1068,7 @@ int Table::addCol(string columnName){
     resultantTable->tableName=nameOG;
     tableCatalogue.insertTable(resultantTable);
     // this->columns.emplace_back(columnName);
-    cout << "PUSHED"<< endl;
+    // cout << "PUSHED"<< endl;
     Page lkl = bufferManager.getPage(nameOG,18);
     vector <vector<int>> polo = lkl.getRows();
     for (auto lk : polo){
@@ -1086,6 +1087,25 @@ int Table::addCol(string columnName){
 
 }
 
+pair<int,int> checkSame(vector< vector<int>> rows, rowsCount, vector<int> values){
+    int found = 0;
+    int where = -1;
+    for (int i = 0;!found &&s i < rowsCount; i++)
+    {
+        found = 1;
+        for (int j = 0; j < this->columnCount; j++)
+        {
+            if(rows[i][j] != values[j]){
+                found = 0;
+            }
+        }
+        if(found){
+            where = i;
+        }
+    }
+    return {found,where};
+}
+
 
 int Table::deleteRow(vector <int> values){
     int found = 0;
@@ -1093,6 +1113,70 @@ int Table::deleteRow(vector <int> values){
         // it is indexed
         if(this->indexingStrategy == BTREE){
             // BTREE
+            pair<int,int> p = this->BplusTree.search(values[this->indexedColumnNumber]);
+            if(p.first == -1){
+                // not in Table, check in Overflow block
+                Page page = bufferManager.getPage(this->tableName,-1);
+                vector < vector< int> > rows = page.getRows();
+                int found = 1;
+                for (int i = 0; !found && i < page.getRowCount(); i++)
+                {
+                    found = 1;
+                    for (int j = 0; j < this->columnCount; j++)
+                    {
+                        if(values[j] != rows[i][j]){
+                            found = 0;
+                        }
+                    }
+                    if(found){
+                        // Page page = bufferManager.getPage(this->tableName,pageNum);
+                        // vector < vector<int> > rows = page.getRows();
+                        rows.erase(rows.begin() + i);
+                        page.writeRows(rows,page.getRowCount() - 1);
+                        page.writePage();
+                        bufferManager.updatePage(this->tableName + "_Page" + to_string(-1),page);                       
+                    }                    
+                }
+
+            }
+            else{
+                // in main block 
+                int curval = values[indexedColumnNumber];
+                int ind = p.first; // get this page
+                int val = curval; // this is cur val of indexed column
+                int startRow = 0; // start from where row is queried
+                int found = 0;
+                while (!found && curval == val && ind < this->blockCount)
+                {
+                    /* code */
+                    found = 1;
+                    Page page = bufferManager.getPage(this->tableName,ind);
+                    vector < vector <int >> rows = page.getRows();
+                    pair<int,int> p = checkSame(rows,this->rowsPerBlockCount[ind];values);   
+                    if(p.first = 1){
+                        // found here
+                        found = 1;
+                        int where = p.second;
+                        rows.erase(rows.begin() + where);
+                        this->rowsPerBlockCount[ind]--;
+                        page.writeRows(rows,page.getRowCount() - 1);
+                        page.writePage();
+                        bufferManager.updatePage(this->tableName + "_Page" + to_string(ind),page);
+                        // now update all trailing elements
+                        for (int i = where; i < rowsPerBlockCount[ind]; i++)
+                        {
+                            this->BplusTree.searchAndUpdate(rows[i][this->indexedColumNumber],ind,i);
+                        }
+                    }
+                    else{
+                        val = rows[this->rowsPerBlockCount[ind]][this->indexedColumnNumber];
+                        ind++;
+                    }
+                }
+                if(!found){
+                    cout << "NOT FOUND SAARRY :(((" << endl;
+                }
+            }
         }
         else{
             // HASH
@@ -1163,25 +1247,25 @@ int Table::deleteRow(vector <int> values){
 }
 
 int Table::deleteCol(string columnName){
-    cout << "begin operation alter"<< endl;
-    cout << columnName << " is to be deleted "<< endl;
-    for (auto d:this->columns){
-        cout << d << " ";
-    }
+    // cout << "begin operation alter"<< endl;
+    // cout << columnName << " is to be deleted "<< endl;
+    // for (auto d:this->columns){
+    //     cout << d << " ";
+    // }
     int colind = this->getColumnIndex(columnName);
 
     vector <string> newCol = this->columns;
     newCol.erase(newCol.begin()+colind);
     Table * resultantTable = new Table("A_temp"+this->tableName, newCol); 
     
-    cout << endl;
-    cout << "DIS VAL PUSH"<< endl;
+    // cout << endl;
+    // cout << "DIS VAL PUSH"<< endl;
     int blkiter=0;
     bool flag = 0;    
-    cout << "meta data altered"<< endl;
+    // cout << "meta data altered"<< endl;
     for (auto d : this->rowsPerBlockCount)
     {
-        cout << d << " PRINT D VALUE " << endl;
+        // cout << d << " PRINT D VALUE " << endl;
 
         flag = 1;
         Page lastPage = bufferManager.getPage(this->tableName, blkiter);
@@ -1192,10 +1276,10 @@ int Table::deleteCol(string columnName){
             rowset.push_back(rowset1[i]);
             // rowset[i].push_back(0);
             rowset[i].erase(rowset[i].begin()+colind);
-            for (auto lol : rowset[i]){
-                cout << lol << " ";
-            }
-            cout << "updates << " << endl;
+            // for (auto lol : rowset[i]){
+            //     cout << lol << " ";
+            // }
+            // cout << "updates << " << endl;
         }
 
         for (auto rt : rowset){
@@ -1251,7 +1335,7 @@ int Table::deleteCol(string columnName){
     resultantTable->tableName=nameOG;
     tableCatalogue.insertTable(resultantTable);
     // this->columns.emplace_back(columnName);
-    cout << "PUSHED"<< endl;
+    // cout << "PUSHED"<< endl;
     Page lkl = bufferManager.getPage(nameOG,18);
     vector <vector<int>> polo = lkl.getRows();
     for (auto lk : polo){

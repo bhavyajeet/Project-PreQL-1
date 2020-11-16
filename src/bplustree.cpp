@@ -42,13 +42,46 @@ bplusTree::bplusTree(string tableName, string fanOut, int rowCount, int indexedC
     }
     for (int i = 0; i < cursor->size; i++) {
       if (cursor->key[i] == x) {
-        cout << "Found\n";
+        // cout << "Found\n";
+        return make_pair(cursor->pagePtr[i],cursor->rowPtr[i]);
+      }
+    }
+    // cout << "Not found\n";
+	return {-1,-1};
+  }
+}
+
+void bplusTree::searchAndUpdate(int x, int pagePtr, int rowPtr) {
+  if (root == NULL) {
+    cout << "Tree is empty\n";
+	return {-1,-1};
+  } else {
+    Node *cursor = root;
+    while (cursor->IS_LEAF == false) {
+      for (int i = 0; i < cursor->size; i++) {
+        if (x < cursor->key[i]) {
+          cursor = cursor->ptr[i];
+          break;
+        }
+        if (i == cursor->size - 1) {
+          cursor = cursor->ptr[i + 1];
+          break;
+        }
+      }
+    }
+    for (int i = 0; i < cursor->size; i++) {
+      if (cursor->key[i] == x) {
+        // cout << "Found\n";
+		if(cursor->pagePtr[i] == pagePtr && cursor->rowPtr[i] == rowPtr + 1){
+			// this one has moved backward in the page
+			cursor->rowPtr[i]--;
+		}
         return make_pair(cursor->pagePtr[i],cursor->rowPtr[i]);
       }
     }
     cout << "Not found\n";
 	return {-1,-1};
-  }
+  }	
 }
 
 // Insert Operation
