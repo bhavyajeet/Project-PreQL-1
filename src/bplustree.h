@@ -53,6 +53,7 @@ class bplusTree {
   void removeInternal(int x, Node* cursor, Node* child);
   bplusTree(string tableName, string fanOut, int rowCount, int indexedColumn);
   pair<int,int>  search(int key);
+  void searchAndUpdate(int x, int pagePtr, int rowPtr);
   void insert(int x, int pagePtr, int rowPtr);
   void display(Node * nd);
   Node *getRoot();

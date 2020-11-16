@@ -33,7 +33,7 @@ Page::Page(string tableName, int pageIndex)
     this->pageName = "../data/temp/" + tableName + "_Page" + to_string(pageIndex);
     logger.log(this->pageName);
     if (tableCatalogue.isTable(tableName)){
-        cout << "arey  table hai re baba " << endl;
+        // cout << "arey  table hai re baba " << endl;
         // it is table
         Table table = *tableCatalogue.getTable(tableName);
         this->tableName = tableName;
@@ -87,7 +87,7 @@ Page::Page(string tableName, int pageIndex)
         }
         fin.close();
     }else {
-        cout << "here is the mikstake " << endl;
+        // cout << "here is the mikstake " << endl;
     }
 }
 
@@ -100,7 +100,7 @@ Page::Page(string tableName, int pageIndex)
 vector<int> Page::getRow(int rowIndex)
 {
     logger.log("Page::getRow");
-    cout << "Page " << this->pageName << " Row" << rowIndex << " ";
+    // cout << "Page " << this->pageName << " Row" << rowIndex << " ";
     vector<int> result;
     result.clear();
     // cout << "ANNA ME HERE" << endl;
@@ -141,10 +141,10 @@ int Page::writeRows(vector <vector<int>> tows,int rowCount)
 
 
 void Page::insertPageRow(vector<int> values ){
-    cout << "Page insert";
-    for (auto x: values){
-        cout << x;
-    }
+    // cout << "Page insert";
+    // for (auto x: values){
+    //     cout << x;
+    // }
     for (int i=0;i<values.size();i++)
     {
         this->rows[this->rowCount][i]= values[i];
@@ -161,14 +161,14 @@ Page::Page(string tableName, int pageIndex, vector<vector<int>> rows, int rowCou
     this->tableName = tableName; // table
     this->pageIndex = pageIndex;
     this->rows = rows;
-    cout << "======= " <<  this->tableName <<endl;
-    for (auto x: this->rows){
-        for (auto re: x){
-            cout << re << " ";
-        }
-        cout << endl;;
-    }
-    cout << "======= " <<endl;
+    // cout << "======= " <<  this->tableName <<endl;
+    // for (auto x: this->rows){
+    //     for (auto re: x){
+    //         cout << re << " ";
+    //     }
+    //     cout << endl;;
+    // }
+    // cout << "======= " <<endl;
     this->rowCount = rowCount;
     this->columnCount = rows[0].size();
     this->pageName = "../data/temp/"+this->tableName + "_Page" + to_string(pageIndex);

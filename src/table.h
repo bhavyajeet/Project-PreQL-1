@@ -59,6 +59,7 @@ public:
     void makePermanent();
     void writeRows(vector <vector<int>> rowsArr);
     bool isPermanent();
+    pair<int,int> checkSame(vector< vector<int>> rows, int rowsCount, vector<int> values);
     void getNextPage(Cursor *cursor);
     Cursor getCursor();
     int getColumnIndex(string columnName);
