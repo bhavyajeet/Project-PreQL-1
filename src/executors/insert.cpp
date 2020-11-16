@@ -6,31 +6,17 @@
 bool syntacticParseINSERT()
 {
     logger.log("syntacticParseINSERT");
-    cout << "INSERT syntactic parser\n";
-    cout << tokenizedQuery.size() << endl << endl; 
-    // if (tokenizedQuery.size() != 5)
-    // {
-    //     cout << "SYNTAX ERROR" << endl;
-    //     return false;
-    // }
+    // cout << "INSERT syntactic parser\n";
+    // cout << tokenizedQuery.size() << endl << endl; 
     parsedQuery.queryType = INSERT;
     parsedQuery.insertRelationName = tokenizedQuery[2];
     string str = tokenizedQuery[4];
-    // vector<int> v;
     parsedQuery.insertValues.clear();
-    // stringstream ss(str);
     for (int stp=0;stp<tokenizedQuery.size()-4;stp++) {
-        // string substr;
-        // cout << tokenizedQuery[stp+4]<<endl;;
-
-        // getline(ss, substr, ',');
         int val1 = stoi(tokenizedQuery[stp+4]);
         parsedQuery.insertValues.push_back(val1);
     }
  
-    // for (size_t i = 0; i < parsedQuery.insertValues.size(); i++)
-    //     cout << parsedQuery.insertValues[i] << endl;
-    //     cout << parsedQuery.insertValues.size() << endl;
     return true;
 }
 
@@ -64,10 +50,10 @@ void executeINSERT()
 {
     logger.log("executeINSERT");
     Table *  table = tableCatalogue.getTable(parsedQuery.insertRelationName);
-    cout << table ->indexedColumn << " wtf ?? " << endl;
+    // cout << table ->indexedColumn << " wtf ?? " << endl;
     table->insertRow(parsedQuery.insertValues);
     // insertbtree()
     // inserthash()
-    cout << "I Will Execute Insert One Day";
-    cout << endl << "That day is here" << endl;
+    // cout << "I Will Execute Insert One Day";
+    // cout << endl << "That day is here" << endl;
 }

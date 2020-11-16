@@ -126,12 +126,22 @@ vector< vector<int> > Page::getRows()
 }
 
 
-
+/**
+ * @brief Function called to get rows of Page
+ * @return  int rowCount
+ */
 int Page::getRowCount()
 {
     return this->rowCount;
 }
 
+/**
+ * @brief Save rows of the page
+ * 
+ * @param 2D vector of rows
+ * @param rowIndex 
+ * @return inrt
+ */
 int Page::writeRows(vector <vector<int>> tows,int rowCount)
 {
     this->rows = tows;
@@ -140,6 +150,12 @@ int Page::writeRows(vector <vector<int>> tows,int rowCount)
 }
 
 
+/**
+ * @brief Insert row into rows
+ * 
+ * @param 2D vector of rows
+ * @return inrt
+ */
 void Page::insertPageRow(vector<int> values ){
     // cout << "Page insert";
     // for (auto x: values){
@@ -161,14 +177,6 @@ Page::Page(string tableName, int pageIndex, vector<vector<int>> rows, int rowCou
     this->tableName = tableName; // table
     this->pageIndex = pageIndex;
     this->rows = rows;
-    // cout << "======= " <<  this->tableName <<endl;
-    // for (auto x: this->rows){
-    //     for (auto re: x){
-    //         cout << re << " ";
-    //     }
-    //     cout << endl;;
-    // }
-    // cout << "======= " <<endl;
     this->rowCount = rowCount;
     this->columnCount = rows[0].size();
     this->pageName = "../data/temp/"+this->tableName + "_Page" + to_string(pageIndex);
@@ -265,6 +273,3 @@ void Page::writeToPage(vector<vector<int>> matrix)
     fout.close();
     logger.log("HO GAYA SWAP");
 }
-
-// Page 0 -> [2,0,0] "PAge0" "Kundli0" ../temp/Page_0->[2,0,0]
-// Page 1 -> [1,0,0] "Page1" "Kundli1" ../temp/Page_1->[1,0,0]

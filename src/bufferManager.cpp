@@ -97,14 +97,7 @@ Page BufferManager::insertIntoPool(string tableName, int pageIndex)
     if (this->pages.size() >= BLOCK_COUNT)
         pages.pop_front();
     pages.push_back(page);
-    // cout << "Buffer returning nopool : " << page.pageName << endl;
-    // cout << "seg ?" << endl;
     vector <int> tester = page.getRow(0);
-    // for (auto x : tester){
-    //     cout << x << " ";
-    // } 
-    // cout <<  "NO POOL puss" << endl; 
-    // cout << endl; 
     return page;
 }
 
@@ -151,6 +144,13 @@ void BufferManager::updatePage(string pageName,Page newPage)
         }
 }
 
+
+/**
+ * @brief Function that unloads the pagr from bufferManager
+ * 
+ * @param  pageName
+ * @return 
+ */
 void BufferManager::unloadPage(string pageName)
 {
     cout << "trying to delete page " << pageName << " with rows " << pageName << endl;

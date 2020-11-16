@@ -41,6 +41,11 @@ int sizeOfList(bt * iter){
   return count;
 }
 
+/**
+ * @brief Function called to reHash the bucket
+ * @param key 
+ * @return  
+ */
 void hashing::reHash(int key){
   vector < vector< bt* > > temp;
   for (int i = 0; i < this->bucks.size(); i++)
@@ -71,7 +76,13 @@ void hashing::reHash(int key){
   this->pointerBucket = 0;
 }
 
-
+/**
+ * @brief Function called to insert item into Hash
+ * @param key
+ * @param pagePtr
+ * @param rowPtr
+ * @return  
+ */
 void hashing::insertItem(int key, int pagePtr, int rowPtr) 
 {
     bt* item = (bt*) malloc(sizeof(bt));
@@ -83,10 +94,6 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
     int index = hashFunction(key);
     item->prev = NULL;
     int siz = bucks[index].size();
-    // cout << "ANNAYA" << endl;
-    // cout << key << endl;
-    // cout << index << endl;
-    // cout << this->pointerBucket << endl;;
     if(index < this->pointerBucket){
       // these buckets are split, use the new hash function
       index = hashFunction2(key);
@@ -94,7 +101,6 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
         this->bucks[index].push_back(item);
       }
       siz = this->bucks[index].size();
-      // cout << "TATATTATTI " << endl;
     }
     else{
       if(this->bucks.size() > index){
@@ -136,11 +142,6 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
       }
       this->bucks[this->pointerBucket] = a1;
       this->bucks[this->pointerBucket+BUCKET] = a2;
-      // cout << "LAUDA+DEFNSJIHSajfbDJHB " << endl;
-      // cout << this->bucks[this->pointerBucket].size() << endl;
-      // cout << this->pointerBucket << endl;
-      // cout << BUCKET << endl;
-      // cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAALAUDA+DEFNSJIHSajfbDJHB " << endl;
       this->pointerBucket++;
 
       if(this->pointerBucket == BUCKET ){
@@ -152,6 +153,14 @@ void hashing::insertItem(int key, int pagePtr, int rowPtr)
     }
 } 
   
+
+/**
+ * @brief Function called to delete internally from Hash
+ * @param key
+ * @param pagePtr
+ * @param rowPtr
+ * @return bool
+ */  
 bool hashing::deleteItem(int key, int pagePtr, int rowPtr) 
 {
   // [0]8, 16, 24
@@ -203,6 +212,11 @@ bool hashing::deleteItem(int key, int pagePtr, int rowPtr)
 } 
   
 // function to display hash table 
+/**
+ * @brief Function called to search in Hash
+ * @param key
+ * @return vector of data pointers
+ */
 vector<pair<int,int>> hashing::searchElement(int key) {
   vector<pair<int,int>> ret;
   int found = 1;
@@ -236,6 +250,10 @@ vector<pair<int,int>> hashing::searchElement(int key) {
 }
 
 // function to display hash table 
+/**
+ * @brief Function called to display hash structure
+ * @return  
+ */
 void hashing::displayHash() { 
   for (int i = 0; i < this->bucks.size(); i++) { 
     if(i == this->pointerBucket){

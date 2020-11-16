@@ -40,6 +40,7 @@ Table::Table(string tableName, vector<string> columns)
     this->columnCount = columns.size();
     this->maxRowsPerBlock = (uint)((BLOCK_SIZE * 1000) / (32 * columnCount));
     this->writeRow<string>(columns);
+    this->thirdParam = "";
 }
 
 /**
@@ -234,6 +235,11 @@ void Table::renameColumn(string fromColumnName, string toColumnName)
     return;
 }
 
+/**
+ * @brief This function writes rows onto the source File Name (directly)
+ *
+ * @param vector of rows
+ */
 void Table::writeRows(vector <vector<int>> rowsArr){
     string toWrite = "";
     int a= rowsArr.size();
@@ -262,8 +268,6 @@ void Table::print()
 
     //print headings
     this->writeRow(this->columns, cout);
-    cout << "LAUDA" << endl;
-    cout << PRINT_COUNT;
     Cursor cursor(this->tableName, 0);
     vector<int> row;
     for (int rowCounter = 0; rowCounter < count; rowCounter++)
@@ -374,7 +378,11 @@ int Table::getColumnIndex(string columnName)
     }
 }
 
-
+/**
+ * @brief This function just checks indexed or not and prints it
+ *
+ * @return 0 
+ */
 int Table::checkIndex()
 {
     cout << this->tableName << ";  :" << this->indexed << "  " << endl;
@@ -382,11 +390,12 @@ int Table::checkIndex()
 }
 
 
-
 /**
  * @brief Function that returns the index of column indicated by indexName
  * 
+ * @param  columnName
  * @param  indexingStrategy
+ * @param  thirdParam: BUCKETS or FANOUT (in string)
  * @return int 
  */
 int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, string thirdParam)
@@ -401,7 +410,8 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
     {   
         this->indexed = true;
         this->indexedColumn = columnName;
-        cout << endl << endl << " I HAVE CHANGED INDEX VARISVLES " << this->indexed << "   " << this->indexedColumn << endl << endl;
+        this->thirdParam = thirdParam;
+        // cout << endl << endl << " I HAVE CHANGED INDEX VARISVLES " << this->indexed << "   " << this->indexedColumn << endl << endl;
         for (int i = 0; i < this->columnCount; i++)
         {
             if (this->columns[i] == this->indexedColumn)
@@ -441,7 +451,7 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
                 {
                     pair <int,int> p = this->BplusTree.search(rows[j][this->indexedColumnNumber]);
                     if(p.first == -1){
-                        cout << "debug statement " << rows[j][this->indexedColumnNumber]  << endl;
+                        // cout << "debug statement " << rows[j][this->indexedColumnNumber]  << endl;
                         // only insert if not already there
                         this->BplusTree.insert(rows[j][this->indexedColumnNumber],i,j);
                     }
@@ -474,6 +484,13 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
     }
 }
 
+
+/**
+ * @brief Function that inserts at the last like a normal insert
+ * 
+ * @param  2D vector
+ * @return pagePtr,rowPtr pair
+ */
 pair<int,int> Table::insertLast(vector<int> values)
 {
     uint count = this->rowCount;
@@ -518,26 +535,19 @@ pair<int,int> Table::insertLast(vector<int> values)
             printRowCount(this->rowCount);
             return {this->blockCount - 1,0};
         }
-        // else{
-        //     // inserted into last page
-        //     this->rowsPerBlockCount[this->blockCount - 1]++;
-        //     cout << endl;
-        //     Page lastPage = bufferManager.getPage(this->tableName, this->blockCount - 1);
-        //     lastPage.insertPageRow(values);
-        //     bufferManager.updatePage(this->tableName + "_Page" + to_string(this->blockCount - 1), lastPage);
-        //     printRowCount(this->rowCount);
-        //     return {this->blockCount,this->rowsPerBlockCount[this->blockCount - 1] - 1};
-        // }
     }
     else{
         return {wherePage,whereRow};
     }
 
-    // ofstream fout(FileName, ios::out);
-    // this->writeRow(values,fout);
-    // this->writeRow(values,cout);
 }
 
+/**
+ * @brief Function that inserts a row of values into Table
+ * 
+ * @param  2D vector
+ * @return int (yes or no) 
+ */
 int Table::insertRow(vector<int> values)
 {
     logger.log("Table::insert");
@@ -588,11 +598,28 @@ int Table::insertRow(vector<int> values)
 
 }
 
+/**
+ * @brief Sort function
+ * 
+ * @param  vector<int> &v1
+ * @param  vector<int> &v2
+ * @param  int k
+ * @return bool
+ */
 bool sortcol(const vector<int> &v1, const vector<int> &v2, int k)
 {
     return v1[k] < v2[k];
 }
 
+/**
+ * @brief Function that returns the index of column indicated by indexName
+ * 
+ * @param  string columnName
+ * @param  finName
+ * @param  bool whether to insert or not 
+ * @param int buffer size
+ * @return int
+ */
 int Table::sortDesc(string columnName,string finName, bool toInsert , int buffersizeM ) /* toInsert =1  buffersizeM =10*/
 {
     int blkiter = 0;
@@ -809,7 +836,15 @@ int Table::sortDesc(string columnName,string finName, bool toInsert , int buffer
     
 }
 
-
+/**
+ * @brief Function that sorts the table normally
+ * 
+ * @param  columnName
+ * @param  finName
+ * @param  toInsert
+ * @param buffersizeM
+ * @return int 
+ */
 int Table::sortNoIndex(string columnName,string finName, bool toInsert , int buffersizeM ) /* toInsert =1  buffersizeM =10*/
 {
     int blkiter = 0;
@@ -1026,7 +1061,12 @@ int Table::sortNoIndex(string columnName,string finName, bool toInsert , int buf
     
 }
 
-
+/**
+ * @brief Function that add the index of column indicated by indexName
+ * 
+ * @param  columnName
+ * @return int 
+ */
 int Table::addCol(string columnName){
     cout << "begin operation alter"<< endl;
     cout << columnName << " is to be added "<< endl;
@@ -1134,6 +1174,15 @@ int Table::addCol(string columnName){
 
 }
 
+
+/**
+ * @brief Function that checks whether same or not
+ * 
+ * @param  2D vector of rows
+ * @param  rowsCount
+ * @param  values
+ * @return pair of pagePtr, rowPtr
+ */
 pair<int,int> Table::checkSame(vector< vector<int>> rows, int rowsCount, vector<int> values){
     int found = 0;
     int where = -1;
@@ -1294,6 +1343,12 @@ int Table::deleteRow(vector <int> values){
     return found;
 }
 
+/**
+ * @brief Function that returns the index of column indicated by indexName
+ * 
+ * @param  columnName
+ * @return int 
+ */
 int Table::deleteCol(string columnName){
     // cout << "begin operation alter"<< endl;
     // cout << columnName << " is to be deleted "<< endl;

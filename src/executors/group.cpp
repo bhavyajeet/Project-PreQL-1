@@ -142,6 +142,11 @@ void executeGROUP()
 
 // /*
     Table tableOG = *tableCatalogue.getTable(parsedQuery.groupRelationName);
+    bool indexed = tableOG.indexed;
+    IndexingStrategy indexingStrategy = tableOG.indexingStrategy;
+    string thirdParam   = tableOG.thirdParam;
+    string indexedColumn = tableOG.indexedColumn;
+
     tableOG.sortNoIndex(parsedQuery.groupColumnName, "G_sort"+tableOG.tableName);
 
     Table table = *tableCatalogue.getTable("G_sort"+parsedQuery.groupRelationName);
@@ -436,6 +441,13 @@ void executeGROUP()
     else{
         cout<<"Empty Table"<<endl;
         delete resultantTable;
+    }
+
+    if(indexed){
+        Table * tabl = tableCatalogue.getTable(parsedQuery.groupRelationName);
+        if(tabl){
+            tabl->indexTable(indexedColumn,indexingStrategy,thirdParam);
+        }
     }
 // */
     return;

@@ -20,8 +20,12 @@ bplusTree::bplusTree(string tableName, string fanOut, int rowCount, int indexedC
   root = NULL;
 }
 
-
-// Search operation
+/**
+ * @brief Function called to search a key
+ *
+ * @param x 
+ * @return pagePtr, rowPtr 
+ */
  pair<int,int> bplusTree::search(int x) {
   if (root == NULL) {
     cout << "Tree is empty\n";
@@ -51,6 +55,14 @@ bplusTree::bplusTree(string tableName, string fanOut, int rowCount, int indexedC
   }
 }
 
+/**
+ * @brief Function called to search and update
+ *
+ * @param x 
+ * @param pagePtr
+ * @param rowPtr
+ * @return  
+ */
 void bplusTree::searchAndUpdate(int x, int pagePtr, int rowPtr) {
   if (root == NULL) {
     cout << "Tree is empty\n";
@@ -84,7 +96,13 @@ void bplusTree::searchAndUpdate(int x, int pagePtr, int rowPtr) {
   }	
 }
 
-// Insert Operation
+/**
+ * @brief Function called to insert into B+ Tree
+ * @param x 
+ * @param pagePtr
+ * @param rowPtr
+ * @return  
+ */
 void bplusTree::insert(int x, int pagePtr, int rowPtr) {
     cout << "WHAT IS YOUR NAME?\t" << x <<  endl;
   if (root == NULL) {
@@ -188,7 +206,15 @@ void bplusTree::insert(int x, int pagePtr, int rowPtr) {
   }
 }
 
-// Insert Operation
+/**
+ * @brief Function called to insert internally into leaf into B+ Tree
+ * @param x 
+ * @param pagePtr
+ * @param rowPtr
+ * @param cursor
+ * @param child
+ * @return  
+ */
 void bplusTree::insertInternal(int x, int pagePtr, int rowPtr, Node *cursor, Node *child) {
   if (cursor->size < this->MAX) {
     int i = 0;
@@ -263,7 +289,12 @@ void bplusTree::insertInternal(int x, int pagePtr, int rowPtr, Node *cursor, Nod
   }
 }
 
-// Find the parent
+/**
+ * @brief Function called to find parent of cursor B+ Tree
+ * @param cursor
+ * @param child
+ * @return parent
+ */
 Node *bplusTree::findParent(Node *cursor, Node *child) {
   Node *parent;
   if (cursor->IS_LEAF || (cursor->ptr[0])->IS_LEAF) {
@@ -282,7 +313,11 @@ Node *bplusTree::findParent(Node *cursor, Node *child) {
   return parent;
 }
 
-// Print the tree
+/**
+ * @brief Function called to display subTree of the B+ Tree
+ * @param cursor 
+ * @return  
+ */
 void bplusTree::display(Node *cursor) {
     cout << "ANNA" << endl;
   if (cursor != NULL) {
@@ -304,50 +339,21 @@ void bplusTree::display(Node *cursor) {
   }
 }
 
-// void bplusTree::display(Node* cursor) {
-//     /*
-// 		Depth First Display
-//     */
-
-//     /*
-//         Level Order Display
-//     */
-//     if (cursor == NULL) return;
-//     queue <Node*> q;
-//     q.push(cursor);
-
-//     while (!q.empty()) {
-//         int sz = q.size();
-//         for (int i = 0; i < sz; i++) {
-//             Node* u = q.front(); q.pop();
-
-//             //printing keys in self
-//             for (int val = 0; val < u->size; val++)
-//                 cout << u->key[val] << " ";
-
-//             cout << "|| ";//to seperate next adjacent nodes
-            
-//             if (u->IS_LEAF != true) {
-// 				for (int j = 0; j < u->size; j++)
-// 				{
-// 					q.push(u->ptr[j]);
-// 				}
-//                 // for (Node* v : u->ptr2TreeOrData.ptr2Tree) {
-//                 //     q.push(v);
-//                 // }
-//             }
-//         }
-//         cout << endl;
-//     }
-// }
-
-
 
 // Get the root
+/**
+ * @brief Function called to get the root of B+ Tree
+ * @return  root
+ */
 Node *bplusTree::getRoot() {
   return root;
 }
 
+/**
+ * @brief Function called to delete a key from B+ Tree
+ * @param x 
+ * @return  
+ */
 void bplusTree::removeKey(int x) {
 	Node* root = getRoot();
 
@@ -544,7 +550,14 @@ void bplusTree::removeKey(int x) {
 
 }
 
-
+/**
+ * @brief Function called to remove internally into leaf into B+ Tree
+ * @param x 
+ * @param cursor
+ * @param child
+ * @param child
+ * @return  
+ */
 void bplusTree::removeInternal(int x, Node* cursor, Node* child) {
 	Node* root = getRoot();
 

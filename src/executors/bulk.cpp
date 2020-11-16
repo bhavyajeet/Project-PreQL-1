@@ -39,6 +39,11 @@ void executeBULK_INSERT()
     logger.log("executeLOAD");
     cout << "bulky bulky " << endl;
     Table *table = tableCatalogue.getTable(parsedQuery.bulkInsertRelationName);
+    bool indexed = table->indexed;
+    IndexingStrategy indexingStrategy = table->indexingStrategy;
+    string thirdParam   = table->thirdParam;
+    string indexedColumn = table->indexedColumn;
+
     fstream newfile;
     newfile.open("../data/"+parsedQuery.bulkFromRelationName+".csv",ios::in);
 
@@ -124,6 +129,13 @@ void executeBULK_INSERT()
         table->rowsPerBlockCount.emplace_back(pageCounter);
         pageCounter = 0;
     }
+    if(indexed){
+        Table * tabl = tableCatalogue.getTable(parsedQuery.bulkInsertRelationName);
+        if(tabl){
+            tabl->indexTable(indexedColumn,indexingStrategy,thirdParam);
+        }
+    }
+
 }
     
 
