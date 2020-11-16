@@ -567,7 +567,12 @@ int Table::insertRow(vector<int> values)
             cout << page.getRowCount() << "\tROW COUNT" << endl;;
             if(page.getRowCount() == this->maxRowsPerBlock){
                 // block full re-index
-                
+                Page page1 = bufferManager.getPage(this->tableName,-1);
+                Page page2 = bufferManager.getPage(this->tableName,this->blockCount++);
+                page2.writeRows(page1.getRows(),page1.getRowCount());
+                page2.writePage();
+                sortNoIndex(this->indexedColumn,this->tableName,false);
+                this->indexTable(this->indexedColumn,BTREE,this->thirdParam);               
             }
             else{
                 vector <vector <int> > rows;
