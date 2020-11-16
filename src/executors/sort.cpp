@@ -60,6 +60,7 @@ bool semanticParseSORT(){
 
 void executeSORT(){
     logger.log("executeSORT");
+    cout << "Exeting"<< endl;
     Table* tableToSort = tableCatalogue.getTable(parsedQuery.sortRelationName);
 
     if (parsedQuery.sortingStrategy == ASC)
