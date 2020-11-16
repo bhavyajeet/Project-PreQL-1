@@ -203,21 +203,36 @@ bool hashing::deleteItem(int key, int pagePtr, int rowPtr)
 } 
   
 // function to display hash table 
-bt* hashing::searchElement(int key) {
+vector<pair<int,int>> hashing::searchElement(int key) {
+  vector<pair<int,int>> ret;
+  int found = 1;
   int index = hashFunction(key);
+  // cout << index << "\tLADIOAFION" << endl;
   if(index < this->pointerBucket){
-    index = hashFunction2(this->pointerBucket);
+    index = hashFunction2(key);
+    // cout << index << "\tLADIOAFION" << endl;
   }
+  // cout << index << "\t Search here" << endl;
+  // cout << this->pointerBucket << endl;
+  // cout << BUCKET << endl;
+  // cout << this->bucks[index].size() << endl;;
   for (int i = 1; i < this->bucks[index].size(); i++) { 
+    cout << "||" << this->bucks[index][i]->data << "||" << endl;
     if(this->bucks[index][i]->data == key){
-      return this->bucks[index][i];
+        found = 1;
+        cout << "FOUND" << endl;
+        cout << this->bucks[index][i]->rowPtr << endl;
+        ret.push_back({this->bucks[index][i]->pagePtr,this->bucks[index][i]->rowPtr});
     }
   }
   bt* nod = (bt*) malloc(sizeof(bt));
   nod->prev = NULL;
   nod->next = NULL;
   nod->data = -1;
-  return nod;
+  if(!found){
+    ret.push_back({-2,-2});
+  }
+  return ret;
 }
 
 // function to display hash table 

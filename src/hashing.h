@@ -46,7 +46,7 @@ public:
     void insertItem(int key, int pagePtr, int rowPtr);
   
     // searches a key into hash table 
-    bt* searchElement(int key);
+    vector<pair<int,int>> searchElement(int key);
 
     // deletes a key from hash table 
     bool deleteItem(int key, int pagePtr, int rowPtr); 
