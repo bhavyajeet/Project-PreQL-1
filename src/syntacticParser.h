@@ -22,7 +22,12 @@ enum QueryType
     SORT,
     SOURCE,
     TRANSPOSE,
-    UNDETERMINED
+    INSERT,
+    ALTER,
+    BULK_INSERT,
+    GROUP,
+    UNDETERMINED,
+    DELETE
 };
 
 enum BinaryOperator
@@ -104,11 +109,35 @@ public:
     string sortResultRelationName = "";
     string sortColumnName = "";
     string sortRelationName = "";
+    int sortBufferSize = 10;
 
     string sourceFileName = "";
 
+    string thirdParam = "";
+
     string transposeRelationName = "";
     string transposeNewRelationName = "";
+
+    string insertRelationName = "";
+    vector<int> insertValues; 
+
+    string deleteRelationName = "";
+    vector<int> deleteValues; 
+
+    string groupResultRelationName = "";
+    string groupRelationName = "";
+    string groupColumnName = "";
+    string groupOperationName = "";
+    string groupOperationColumn = "";
+
+    string alterRelationName = "";
+    string alterColumnName = "";
+    string alterOperation = "";
+
+    string bulkInsertRelationName = "";
+    string bulkFromRelationName = "";
+
+
     ParsedQuery();
     void clear();
 };
@@ -129,6 +158,11 @@ bool syntacticParseSELECTION();
 bool syntacticParseSORT();
 bool syntacticParseSOURCE();
 bool syntacticParseTRANSPOSE();
+bool syntacticParseINSERT();
+bool syntacticParseBULK_INSERT();
+bool syntacticParseGROUP();
+bool syntacticParseDELETE();
+bool syntacticParseALTER();
 bool syntacticParseLOADMATRIX();
 bool syntacticParseEXPORTMATRIX();
 

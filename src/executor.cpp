@@ -20,6 +20,11 @@ void executeCommand(){
         case SORT: executeSORT(); break;
         case SOURCE: executeSOURCE(); break;
         case TRANSPOSE: executeTRANSPOSE(); break;
+        case INSERT: executeINSERT(); break;
+        case GROUP: executeGROUP(); break;
+        case DELETE: executeDELETE(); break;
+        case ALTER : executeALTER(); break;
+        case BULK_INSERT : executeBULK_INSERT(); break;
         default: cout<<"PARSING ERROR"<<endl;
     }
 

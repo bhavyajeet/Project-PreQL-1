@@ -33,6 +33,7 @@ Page::Page(string tableName, int pageIndex)
     this->pageName = "../data/temp/" + tableName + "_Page" + to_string(pageIndex);
     logger.log(this->pageName);
     if (tableCatalogue.isTable(tableName)){
+        // cout << "arey  table hai re baba " << endl;
         // it is table
         Table table = *tableCatalogue.getTable(tableName);
         this->tableName = tableName;
@@ -42,6 +43,8 @@ Page::Page(string tableName, int pageIndex)
         this->rows.assign(maxRowCount, row);
 
         ifstream fin(pageName, ios::in);
+        // cout << "in page now: ";
+        // cout << "page index is "<< pageIndex << "     " << "rows in page is :: "<<  table.rowsPerBlockCount[pageIndex]  <<endl;
         this->rowCount = table.rowsPerBlockCount[pageIndex];
         int number;
         for (uint rowCounter = 0; rowCounter < this->rowCount; rowCounter++)
@@ -83,6 +86,8 @@ Page::Page(string tableName, int pageIndex)
             }
         }
         fin.close();
+    }else {
+        // cout << "here is the mikstake " << endl;
     }
 }
 
@@ -95,11 +100,74 @@ Page::Page(string tableName, int pageIndex)
 vector<int> Page::getRow(int rowIndex)
 {
     logger.log("Page::getRow");
+    // cout << "Page " << this->pageName << " Row" << rowIndex << " ";
     vector<int> result;
     result.clear();
+    // cout << "ANNA ME HERE" << endl;
     if (rowIndex >= this->rowCount)
         return result;
+    // cout << rowIndex << endl;
+    // cout << "GUGU" << endl;
+    // cout << this->rows[rowIndex][0];
     return this->rows[rowIndex];
+}
+
+
+/**
+ * @brief Get row from page indexed by rowIndex
+ * 
+ * @param rowIndex 
+ * @return vector<int> 
+ */
+vector< vector<int> > Page::getRows()
+{
+    logger.log("Page::getRow");
+    return this->rows;
+}
+
+
+/**
+ * @brief Function called to get rows of Page
+ * @return  int rowCount
+ */
+int Page::getRowCount()
+{
+    return this->rowCount;
+}
+
+/**
+ * @brief Save rows of the page
+ * 
+ * @param 2D vector of rows
+ * @param rowIndex 
+ * @return inrt
+ */
+int Page::writeRows(vector <vector<int>> tows,int rowCount)
+{
+    this->rows = tows;
+    this->rowCount = rowCount;
+    return 1;
+}
+
+
+/**
+ * @brief Insert row into rows
+ * 
+ * @param 2D vector of rows
+ * @return inrt
+ */
+void Page::insertPageRow(vector<int> values ){
+    // cout << "Page insert";
+    // for (auto x: values){
+    //     cout << x;
+    // }
+    for (int i=0;i<values.size();i++)
+    {
+        this->rows[this->rowCount][i]= values[i];
+    }
+    this->rowCount++;
+
+    this->writePage();
 }
 
 Page::Page(string tableName, int pageIndex, vector<vector<int>> rows, int rowCount)
@@ -122,6 +190,7 @@ Page::Page(string tableName, int pageIndex, vector<vector<int>> rows, int rowCou
 void Page::writePage()
 {
     logger.log("Page::writePage");
+    // cout << "RAndom cheez"<<endl;
     ofstream fout(this->pageName, ios::trunc);
     for (int rowCounter = 0; rowCounter < this->rowCount; rowCounter++)
     {
@@ -136,6 +205,7 @@ void Page::writePage()
         fout << endl;
     }
     fout.close();
+    // cout << "RAndom cheez"<<endl;
     logger.log("HO GAYA");
 }
 
@@ -203,6 +273,3 @@ void Page::writeToPage(vector<vector<int>> matrix)
     fout.close();
     logger.log("HO GAYA SWAP");
 }
-
-// Page 0 -> [2,0,0] "PAge0" "Kundli0" ../temp/Page_0->[2,0,0]
-// Page 1 -> [1,0,0] "Page1" "Kundli1" ../temp/Page_1->[1,0,0]
