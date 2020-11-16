@@ -5,7 +5,7 @@
  */
 bool syntacticParseSOURCE()
 {
-    logger.log("syntacticParseSOURCE");
+    logger.log("`syntacticParseSOURCE");
     if (tokenizedQuery.size() != 2)
     {
         cout << "SYNTAX ERROR" << endl;

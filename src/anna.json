@@ -1,0 +1,533 @@
+[
+    ['UG2', 'Two-Term Extended Semester',
+        [
+            ['I feel it will reduce the workload',
+                19
+            ],
+            ['I will be able to overload courses',
+                8
+            ],
+            ['11 days break will be more relaxing',
+                3
+            ],
+            [
+                "I don't mind an extended semester ",
+                8
+            ],
+            [
+                "I don't have any plans for vacation anyway",
+                5
+            ],
+            ['I am from UG2 and we are having lot of courses next semester',
+                16
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['UG2', 'Normal 4 month Semester with a break.',
+        [
+            [
+                "I don't feel that work load will be reduced in the two term semester",
+                227
+            ],
+            [
+                "The shift from 2-mid to quizzes didn't work out as expected and I don't think this will too",
+                85
+            ],
+            [
+                "I don't want a 6 month long semester",
+                222
+            ],
+            ['I feel that even extending the semester to 4 month is sufficient ',
+                103
+            ],
+            ['My placements will be hampered in the other scheme',
+                27
+            ],
+            ['My internship/research will be hampered in the other scheme',
+                115
+            ],
+            [
+                "I don't mind having 5 courses simultaneously",
+                85
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['UG3', 'Two-Term Extended Semester',
+        [
+            ['I feel it will reduce the workload',
+                14
+            ],
+            ['I will be able to overload courses',
+                9
+            ],
+            ['11 days break will be more relaxing',
+                5
+            ],
+            [
+                "I don't mind an extended semester ",
+                6
+            ],
+            [
+                "I don't have any plans for vacation anyway",
+                5
+            ],
+            ['I am from UG2 and we are having lot of courses next semester',
+                0
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['UG3', 'Normal 4 month Semester with a break.',
+        [
+            [
+                "I don't feel that work load will be reduced in the two term semester",
+                146
+            ],
+            [
+                "The shift from 2-mid to quizzes didn't work out as expected and I don't think this will too",
+                108
+            ],
+            [
+                "I don't want a 6 month long semester",
+                174
+            ],
+            ['I feel that even extending the semester to 4 month is sufficient ',
+                101
+            ],
+            ['My placements will be hampered in the other scheme',
+                27
+            ],
+            ['My internship/research will be hampered in the other scheme',
+                154
+            ],
+            [
+                "I don't mind having 5 courses simultaneously",
+                79
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['UG4', 'Two-Term Extended Semester',
+        [
+            ['I feel it will reduce the workload',
+                5
+            ],
+            ['I will be able to overload courses',
+                0
+            ],
+            ['11 days break will be more relaxing',
+                1
+            ],
+            [
+                "I don't mind an extended semester ",
+                1
+            ],
+            [
+                "I don't have any plans for vacation anyway",
+                0
+            ],
+            ['I am from UG2 and we are having lot of courses next semester',
+                0
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['UG4', 'Normal 4 month Semester with a break.',
+        [
+            [
+                "I don't feel that work load will be reduced in the two term semester",
+                141
+            ],
+            [
+                "The shift from 2-mid to quizzes didn't work out as expected and I don't think this will too",
+                97
+            ],
+            [
+                "I don't want a 6 month long semester",
+                164
+            ],
+            ['I feel that even extending the semester to 4 month is sufficient ',
+                87
+            ],
+            ['My placements will be hampered in the other scheme',
+                77
+            ],
+            ['My internship/research will be hampered in the other scheme',
+                86
+            ],
+            [
+                "I don't mind having 5 courses simultaneously",
+                106
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['UG5', 'Two-Term Extended Semester',
+        [
+            ['I feel it will reduce the workload',
+                1
+            ],
+            ['I will be able to overload courses',
+                0
+            ],
+            ['11 days break will be more relaxing',
+                0
+            ],
+            [
+                "I don't mind an extended semester ",
+                0
+            ],
+            [
+                "I don't have any plans for vacation anyway",
+                0
+            ],
+            ['I am from UG2 and we are having lot of courses next semester',
+                0
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['UG5', 'Normal 4 month Semester with a break.',
+        [
+            [
+                "I don't feel that work load will be reduced in the two term semester",
+                2
+            ],
+            [
+                "The shift from 2-mid to quizzes didn't work out as expected and I don't think this will too",
+                1
+            ],
+            [
+                "I don't want a 6 month long semester",
+                2
+            ],
+            ['I feel that even extending the semester to 4 month is sufficient ',
+                1
+            ],
+            ['My placements will be hampered in the other scheme',
+                1
+            ],
+            ['My internship/research will be hampered in the other scheme',
+                2
+            ],
+            [
+                "I don't mind having 5 courses simultaneously",
+                2
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['UG6', 'Two-Term Extended Semester',
+        [
+            ['I feel it will reduce the workload',
+                1
+            ],
+            ['I will be able to overload courses',
+                0
+            ],
+            ['11 days break will be more relaxing',
+                0
+            ],
+            [
+                "I don't mind an extended semester ",
+                0
+            ],
+            [
+                "I don't have any plans for vacation anyway",
+                0
+            ],
+            ['I am from UG2 and we are having lot of courses next semester',
+                0
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['UG6', 'Normal 4 month Semester with a break.',
+        [
+            [
+                "I don't feel that work load will be reduced in the two term semester",
+                1
+            ],
+            [
+                "The shift from 2-mid to quizzes didn't work out as expected and I don't think this will too",
+                0
+            ],
+            [
+                "I don't want a 6 month long semester",
+                1
+            ],
+            ['I feel that even extending the semester to 4 month is sufficient ',
+                0
+            ],
+            ['My placements will be hampered in the other scheme',
+                1
+            ],
+            ['My internship/research will be hampered in the other scheme',
+                1
+            ],
+            [
+                "I don't mind having 5 courses simultaneously",
+                0
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['MTech1', 'Two-Term Extended Semester',
+        [
+            ['I feel it will reduce the workload',
+                7
+            ],
+            ['I will be able to overload courses',
+                3
+            ],
+            ['11 days break will be more relaxing',
+                4
+            ],
+            [
+                "I don't mind an extended semester ",
+                7
+            ],
+            [
+                "I don't have any plans for vacation anyway",
+                3
+            ],
+            ['I am from UG2 and we are having lot of courses next semester',
+                0
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['MTech1', 'Normal 4 month Semester with a break.',
+        [
+            [
+                "I don't feel that work load will be reduced in the two term semester",
+                98
+            ],
+            [
+                "The shift from 2-mid to quizzes didn't work out as expected and I don't think this will too",
+                12
+            ],
+            [
+                "I don't want a 6 month long semester",
+                93
+            ],
+            ['I feel that even extending the semester to 4 month is sufficient ',
+                68
+            ],
+            ['My placements will be hampered in the other scheme',
+                66
+            ],
+            ['My internship/research will be hampered in the other scheme',
+                76
+            ],
+            [
+                "I don't mind having 5 courses simultaneously",
+                30
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['MTech2', 'Two-Term Extended Semester',
+        [
+            ['I feel it will reduce the workload',
+                1
+            ],
+            ['I will be able to overload courses',
+                0
+            ],
+            ['11 days break will be more relaxing',
+                0
+            ],
+            [
+                "I don't mind an extended semester ",
+                0
+            ],
+            [
+                "I don't have any plans for vacation anyway",
+                0
+            ],
+            ['I am from UG2 and we are having lot of courses next semester',
+                0
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['MTech2', 'Normal 4 month Semester with a break.',
+        [
+            [
+                "I don't feel that work load will be reduced in the two term semester",
+                95
+            ],
+            [
+                "The shift from 2-mid to quizzes didn't work out as expected and I don't think this will too",
+                66
+            ],
+            [
+                "I don't want a 6 month long semester",
+                89
+            ],
+            ['I feel that even extending the semester to 4 month is sufficient ',
+                23
+            ],
+            ['My placements will be hampered in the other scheme',
+                98
+            ],
+            ['My internship/research will be hampered in the other scheme',
+                16
+            ],
+            [
+                "I don't mind having 5 courses simultaneously",
+                16
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['MS1', 'Two-Term Extended Semester',
+        [
+            ['I feel it will reduce the workload',
+                2
+            ],
+            ['I will be able to overload courses',
+                1
+            ],
+            ['11 days break will be more relaxing',
+                0
+            ],
+            [
+                "I don't mind an extended semester ",
+                2
+            ],
+            [
+                "I don't have any plans for vacation anyway",
+                0
+            ],
+            ['I am from UG2 and we are having lot of courses next semester',
+                0
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['MS1', 'Normal 4 month Semester with a break.',
+        [
+            [
+                "I don't feel that work load will be reduced in the two term semester",
+                17
+            ],
+            [
+                "The shift from 2-mid to quizzes didn't work out as expected and I don't think this will too",
+                4
+            ],
+            [
+                "I don't want a 6 month long semester",
+                16
+            ],
+            ['I feel that even extending the semester to 4 month is sufficient ',
+                13
+            ],
+            ['My placements will be hampered in the other scheme',
+                3
+            ],
+            ['My internship/research will be hampered in the other scheme',
+                12
+            ],
+            [
+                "I don't mind having 5 courses simultaneously",
+                1
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['MS2', 'Two-Term Extended Semester',
+        [
+            ['I feel it will reduce the workload',
+                1
+            ],
+            ['I will be able to overload courses',
+                1
+            ],
+            ['11 days break will be more relaxing',
+                1
+            ],
+            [
+                "I don't mind an extended semester ",
+                0
+            ],
+            [
+                "I don't have any plans for vacation anyway",
+                0
+            ],
+            ['I am from UG2 and we are having lot of courses next semester',
+                0
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ],
+    ['MS2', 'Normal 4 month Semester with a break.',
+        [
+            [
+                "I don't feel that work load will be reduced in the two term semester",
+                10
+            ],
+            [
+                "The shift from 2-mid to quizzes didn't work out as expected and I don't think this will too",
+                3
+            ],
+            [
+                "I don't want a 6 month long semester",
+                10
+            ],
+            ['I feel that even extending the semester to 4 month is sufficient ',
+                4
+            ],
+            ['My placements will be hampered in the other scheme',
+                3
+            ],
+            ['My internship/research will be hampered in the other scheme',
+                9
+            ],
+            [
+                "I don't mind having 5 courses simultaneously",
+                0
+            ],
+            ['Other',
+                0
+            ]
+        ]
+    ]
+]

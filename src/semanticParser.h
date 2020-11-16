@@ -19,3 +19,8 @@ bool semanticParseSELECTION();
 bool semanticParseSORT();
 bool semanticParseSOURCE();
 bool semanticParseTRANSPOSE();
+bool semanticParseINSERT();
+bool semanticParseGROUP();
+bool semanticParseDELETE();
+bool semanticParseALTER();
+bool semanticParseBULK_INSERT();

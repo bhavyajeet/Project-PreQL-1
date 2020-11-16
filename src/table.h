@@ -1,4 +1,6 @@
 #include "cursor.h"
+#include "bplustree.h"
+#include "hashing.h"
 
 enum IndexingStrategy
 {
@@ -26,6 +28,7 @@ public:
     vector<string> columns;
     vector<uint> distinctValuesPerColumnCount;
     uint columnCount = 0;
+    uint indexedColumnNumber = 0;
     long long int rowCount = 0;
     uint blockCount = 0;
     uint maxRowsPerBlock = 0;
@@ -33,6 +36,8 @@ public:
     bool indexed = false;
     string indexedColumn = "";
     IndexingStrategy indexingStrategy = NOTHING;
+    bplusTree BplusTree;
+    hashing Hashing;
     
     bool extractColumnNames(string firstLine);
     bool blockify();
@@ -44,12 +49,23 @@ public:
     bool isColumn(string columnName);
     void renameColumn(string fromColumnName, string toColumnName);
     void print();
+    pair<int,int> insertLast( vector<int> values);
+    int insertRow( vector<int> values);
+    int sortNoIndex( string columnName,string finName, bool toInsert =1, int buffersizeM = 10 );
+    int sortDesc( string columnName,string finName, bool toInsert =1, int buffersizeM = 10 );
+    int addCol( string columnName);
+    int deleteCol( string columnName);
+    int deleteRow(vector <int> values);
     void makePermanent();
+    void writeRows(vector <vector<int>> rowsArr);
     bool isPermanent();
+    pair<int,int> checkSame(vector< vector<int>> rows, int rowsCount, vector<int> values);
     void getNextPage(Cursor *cursor);
     Cursor getCursor();
     int getColumnIndex(string columnName);
     void unload();
+    int checkIndex();
+    int indexTable(string columnName,IndexingStrategy indexingStrategy, string thirdParam);
 
     /**
  * @brief Static function that takes a vector of valued and prints them out in a
@@ -65,7 +81,7 @@ void writeRow(vector<T> row, ostream &fout)
     for (int columnCounter = 0; columnCounter < row.size(); columnCounter++)
     {
         if (columnCounter != 0)
-            fout << ", ";
+            fout << ",";
         fout << row[columnCounter];
     }
     fout << endl;

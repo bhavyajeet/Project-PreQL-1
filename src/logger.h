@@ -2,6 +2,7 @@
 #include<bits/stdc++.h>
 #include<sys/stat.h> 
 #include<fstream>
+#include<stdlib.h>
 
 using namespace std;
 
