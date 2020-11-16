@@ -63,6 +63,7 @@ public:
     Cursor getCursor();
     int getColumnIndex(string columnName);
     void unload();
+    int checkIndex();
     int indexTable(string columnName,IndexingStrategy indexingStrategy, string thirdParam);
 
     /**

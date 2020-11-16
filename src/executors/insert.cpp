@@ -64,6 +64,7 @@ void executeINSERT()
 {
     logger.log("executeINSERT");
     Table *  table = tableCatalogue.getTable(parsedQuery.insertRelationName);
+    cout << table ->indexedColumn << " wtf ?? " << endl;
     table->insertRow(parsedQuery.insertValues);
     // insertbtree()
     // inserthash()

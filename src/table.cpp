@@ -374,6 +374,15 @@ int Table::getColumnIndex(string columnName)
     }
 }
 
+
+int Table::checkIndex()
+{
+    cout << this->tableName << ";  :" << this->indexed << "  " << endl;
+    return 0;
+}
+
+
+
 /**
  * @brief Function that returns the index of column indicated by indexName
  * 
@@ -392,6 +401,7 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
     {
         this->indexed = true;
         this->indexedColumn = columnName;
+        cout << endl << endl << " I HAVE CHANGED INDEX VARISVLES " << this->indexed << "   " << this->indexedColumn << endl << endl;
         for (int i = 0; i < this->columnCount; i++)
         {
             if (this->columns[i] == this->indexedColumn)

@@ -1,7 +1,0 @@
-BufferManager::BufferManager
-ParseQuery::clear
-
-Reading New Command: 
-QUIT
-MatrixCatalogue::~MatrixCatalogue
-TableCatalogue::~TableCatalogue

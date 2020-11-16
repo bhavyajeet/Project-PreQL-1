@@ -46,10 +46,10 @@ bool semanticParseINDEX()
         return false;
     }
     Table* table = tableCatalogue.getTable(parsedQuery.indexRelationName);
-    if(table->indexed){
-        cout << "SEMANTIC ERROR: Table already indexed" << endl;
-        return false;
-    }
+    // if(table->indexed){
+    //     cout << "SEMANTIC ERROR: Table already indexed" << endl;
+    //     return false;
+    // }
     return true;
 }
 

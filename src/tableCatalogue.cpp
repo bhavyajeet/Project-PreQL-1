@@ -46,7 +46,7 @@ bool TableCatalogue::isColumnFromTable(string columnName, string tableName)
         cout << "rararar" << endl;
         if (table->isColumn(columnName))
             {
-                cout << "LALAL";
+                cout << "1LALAL";
                 cout << endl;
                 return true;
             }

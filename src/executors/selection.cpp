@@ -107,32 +107,95 @@ void executeSELECTION()
 {
     logger.log("executeSELECTION");
 
-    Table table = *tableCatalogue.getTable(parsedQuery.selectionRelationName);
-    Table* resultantTable = new Table(parsedQuery.selectionResultRelationName, table.columns);
-    Cursor cursor = table.getCursor();
-    vector<int> row = cursor.getNext();
-    int firstColumnIndex = table.getColumnIndex(parsedQuery.selectionFirstColumnName);
-    int secondColumnIndex;
-    if (parsedQuery.selectType == COLUMN)
-        secondColumnIndex = table.getColumnIndex(parsedQuery.selectionSecondColumnName);
-    while (!row.empty())
-    {
+    cout << "select ??" << endl;
 
-        int value1 = row[firstColumnIndex];
-        int value2;
-        if (parsedQuery.selectType == INT_LITERAL)
-            value2 = parsedQuery.selectionIntLiteral;
+    Table * table = tableCatalogue.getTable(parsedQuery.selectionRelationName);
+    Table *resultantTable = new Table(parsedQuery.selectionResultRelationName, table->columns);
+    table->checkIndex();
+    bool indflag = 1;
+    cout << table->indexedColumn << " " << table->tableName << " "<< parsedQuery.selectionFirstColumnName << endl;
+    cout << table->indexed << ": bool val" << endl;
+    if (table->indexed && parsedQuery.selectType != COLUMN && table->indexedColumn == parsedQuery.selectionFirstColumnName)
+    {
+        cout << "using some index" << endl;
+        int firstColumnIndex = table->getColumnIndex(parsedQuery.selectionFirstColumnName);
+        if (table->indexingStrategy == BTREE && parsedQuery.selectionBinaryOperator != NOT_EQUAL)
+        {
+            int valCon = parsedQuery.selectionIntLiteral;
+            cout << "TRYING TO GET FROM BPTREE " << endl;
+            pair<int, int> address = table->BplusTree.search(valCon);
+            int page = address.first;
+            int row = address.second;
+            if (parsedQuery.selectionBinaryOperator == EQUAL)
+            {
+                bool eqflag = 0; 
+                Cursor curs(table->tableName, page);
+                vector<int> row = curs.getNext();
+                while (!row.empty())
+                {
+                    if ( row[firstColumnIndex] ==  valCon )
+                    {
+                        eqflag =1;
+                        resultantTable->writeRow<int>(row);
+                    }
+                    else if ( row[firstColumnIndex] !=  valCon && eqflag){
+                        break;
+                    }
+
+                    row = curs.getNext();
+                }
+            }
+            else if (parsedQuery.selectionBinaryOperator == LESS_THAN)
+            {
+            }
+            else if (parsedQuery.selectionBinaryOperator == GREATER_THAN)
+            {
+            }
+            else if (parsedQuery.selectionBinaryOperator == LEQ)
+            {
+            }
+            else if (parsedQuery.selectionBinaryOperator == GEQ)
+            {
+            }
+        }
+        else if (table->indexingStrategy == HASH && parsedQuery.selectionBinaryOperator == EQUAL)
+        {
+            cout << "TRYING TO GET FROM HASH " << endl;
+            indflag = 0;
+            table->Hashing.searchElement(parsedQuery.selectionIntLiteral);
+        }
+    }
+
+    // no index can be used
+    if (indflag == 1)
+    {
+        cout << "NO INDEX" << endl; 
+        Cursor cursor = table->getCursor();
+        vector<int> row = cursor.getNext();
+        int firstColumnIndex = table->getColumnIndex(parsedQuery.selectionFirstColumnName);
+        int secondColumnIndex;
+        if (parsedQuery.selectType == COLUMN)
+            secondColumnIndex = table->getColumnIndex(parsedQuery.selectionSecondColumnName);
+        while (!row.empty())
+        {
+            cout << "NO INDEX" << endl; 
+            int value1 = row[firstColumnIndex];
+            int value2;
+            if (parsedQuery.selectType == INT_LITERAL)
+                value2 = parsedQuery.selectionIntLiteral;
+            else
+                value2 = row[secondColumnIndex];
+            if (evaluateBinOp(value1, value2, parsedQuery.selectionBinaryOperator))
+                resultantTable->writeRow<int>(row);
+            row = cursor.getNext();
+        }
+        if (resultantTable->blockify())
+            tableCatalogue.insertTable(resultantTable);
         else
-            value2 = row[secondColumnIndex];
-        if (evaluateBinOp(value1, value2, parsedQuery.selectionBinaryOperator))
-            resultantTable->writeRow<int>(row);
-        row = cursor.getNext();
+        {
+            cout << "Empty Table" << endl;
+            delete resultantTable;
+        }
+        return;
     }
-    if(resultantTable->blockify())
-        tableCatalogue.insertTable(resultantTable);
-    else{
-        cout<<"Empty Table"<<endl;
-        delete resultantTable;
-    }
-    return;
 }
