@@ -169,6 +169,20 @@ void BufferManager::unloadPage(string pageName)
 }
 
 
+void BufferManager::unloadPages()
+{
+    cout << "trying to delete page "  << endl;
+    logger.log("BufferManager::removePage");
+    int x = 0;
+    for (auto page : this->pages)
+        {
+            // cout << "../data/temp/" + pageName<< " == "<< page.pageName << endl;
+            cout << "UNLOADED" << endl;
+            this->pages[x].pageName = "dummyPage";                 
+            x++;
+        }
+}
+
 
 /**
  * @brief Deletes file names fileName

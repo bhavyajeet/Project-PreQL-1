@@ -51,7 +51,7 @@ public:
     void print();
     pair<int,int> insertLast( vector<int> values);
     int insertRow( vector<int> values);
-    int sortNoIndex( string columnName,string finName);
+    int sortNoIndex( string columnName,string finName, bool toInsert =1 );
     int sortGroup( string columnName);
     int addCol( string columnName);
     int deleteCol( string columnName);

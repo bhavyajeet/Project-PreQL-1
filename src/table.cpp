@@ -415,7 +415,7 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
             // thirdParam -> fanout
             this->indexingStrategy = BTREE;
             this->BplusTree = bplusTree(this->tableName, thirdParam, this->rowCount, this->indexedColumnNumber);
-            this->sortNoIndex(columnName,this->tableName);
+            this->sortNoIndex(columnName,this->tableName,0);
 
             /*
             *
@@ -428,6 +428,9 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
             // {
             //     cout << "ANNARAAAA" << endl;
             // }
+
+            bufferManager.unloadPages();
+
             for (int i = 0; i < this->blockCount; i++)
             {
                 Page page = bufferManager.getPage(this->tableName,i);
@@ -438,6 +441,7 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
                 {
                     pair <int,int> p = this->BplusTree.search(rows[j][this->indexedColumnNumber]);
                     if(p.first == -1){
+                        cout << "debug statement " << rows[j][this->indexedColumnNumber]  << endl;
                         // only insert if not already there
                         this->BplusTree.insert(rows[j][this->indexedColumnNumber],i,j);
                     }
@@ -775,7 +779,7 @@ int Table::sortGroup(string columnName)
     
 }
 
-int Table::sortNoIndex(string columnName,string finName)
+int Table::sortNoIndex(string columnName,string finName, bool toInsert ) /* toInsert =1*/
 {
     int blkiter = 0;
     int m = 3;
@@ -974,15 +978,18 @@ int Table::sortNoIndex(string columnName,string finName)
                 // cout << "no blockify ?? " << endl;
                 rename(oldname,newname);
                 resultantTable->sourceFileName = "../data/"+finName+".csv";
-                tableCatalogue.insertTable(resultantTable);
+                if (toInsert)
+                    tableCatalogue.insertTable(resultantTable);
             }
 
             break;
         }
 
         else {
-            if(resultantTable->blockify())
-            tableCatalogue.insertTable(resultantTable);
+            if(resultantTable->blockify()){
+            if (toInsert)
+                tableCatalogue.insertTable(resultantTable);
+            }
         }
     }
     
