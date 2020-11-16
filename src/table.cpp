@@ -1085,16 +1085,16 @@ int Table::addCol(string columnName){
     resultantTable->tableName=nameOG;
     tableCatalogue.insertTable(resultantTable);
     // this->columns.emplace_back(columnName);
-    // cout << "PUSHED"<< endl;
-    Page lkl = bufferManager.getPage(nameOG,18);
-    vector <vector<int>> polo = lkl.getRows();
-    for (auto lk : polo){
-        for (auto pol : lk){
-            cout << pol << " ";
-        }
-        cout << endl;
-    } 
-    cout << "PRINTED LAST PADE \n";
+    cout << "PUSHED"<< endl;
+    // Page lkl = bufferManager.getPage(nameOG,18);
+    // vector <vector<int>> polo = lkl.getRows();
+    // for (auto lk : polo){
+    //     for (auto pol : lk){
+    //         cout << pol << " ";
+    //     }
+    //     cout << endl;
+    // } 
+    // cout << "PRINTED LAST PADE \n";
     // this->columnCount++;
     // this->distinctValuesPerColumnCount.push_back(1);
     // this->maxRowsPerBlock
@@ -1353,15 +1353,15 @@ int Table::deleteCol(string columnName){
     resultantTable->tableName=nameOG;
     tableCatalogue.insertTable(resultantTable);
     // this->columns.emplace_back(columnName);
-    // cout << "PUSHED"<< endl;
-    Page lkl = bufferManager.getPage(nameOG,18);
-    vector <vector<int>> polo = lkl.getRows();
-    for (auto lk : polo){
-        for (auto pol : lk){
-            cout << pol << " ";
-        }
-        cout << endl;
-    } 
+    cout << "PUSHED"<< endl;
+    // Page lkl = bufferManager.getPage(nameOG,18);
+    // vector <vector<int>> polo = lkl.getRows();
+    // for (auto lk : polo){
+    //     for (auto pol : lk){
+    //         cout << pol << " ";
+    //     }
+    //     cout << endl;
+    // } 
     cout << "PRINTED LAST PADE \n";
 
 
