@@ -700,12 +700,20 @@ int Table::sortDesc(string columnName,string finName, bool toInsert , int buffer
             vector <Page> pageArr;
             vector <int> pageCount; 
             vector <int> pagePointer; 
-            for (int i=0; i<(m-1) and i*chunkSize < this->blockCount-tillPage ;i++){
-                // cout << "getting page " << chunkSize*i <<  " Block count:" << this->blockCount << " tillPage:"<< tillPage << " i:" << i <<  endl;
-                // pageArr.insert(pageArr.begin()+i,bufferManager.getPage(this->tableName,tillPage+chunkSize*i));
-                pageArr.insert(pageArr.begin()+i,bufferManager.getPage(readTable,tillPage+chunkSize*i));
-                pageCount.insert(pageCount.begin()+i,0);
-                pagePointer.insert(pagePointer.begin()+i,0);
+
+            for (int i=0; i<(m-1) ;i++){
+                if (i*chunkSize < this->blockCount-tillPage){
+                    cout << "getting page " << chunkSize*i <<  " Block count:" << this->blockCount << " tillPage:"<< tillPage << " i:" << i <<  endl;
+                    // pageArr.insert(pageArr.begin()+i,bufferManager.getPage(this->tableName,tillPage+chunkSize*i));
+                    pageArr.insert(pageArr.begin()+i,bufferManager.getPage(readTable,tillPage+chunkSize*i));
+                
+                    pageCount.insert(pageCount.begin()+i,0);
+                    pagePointer.insert(pagePointer.begin()+i,0);
+                }
+                else {
+                    pageCount.insert(pageCount.begin()+i,INT_MAX);
+                    pagePointer.insert(pagePointer.begin()+i,INT_MAX);  
+                }
                 
             }       
             // cout << "got all pages\n";
@@ -925,14 +933,23 @@ int Table::sortNoIndex(string columnName,string finName, bool toInsert , int buf
             vector <Page> pageArr;
             vector <int> pageCount; 
             vector <int> pagePointer; 
-            for (int i=0; i<(m-1) and i*chunkSize < this->blockCount-tillPage ;i++){
-                // cout << "getting page " << chunkSize*i <<  " Block count:" << this->blockCount << " tillPage:"<< tillPage << " i:" << i <<  endl;
-                // pageArr.insert(pageArr.begin()+i,bufferManager.getPage(this->tableName,tillPage+chunkSize*i));
-                pageArr.insert(pageArr.begin()+i,bufferManager.getPage(readTable,tillPage+chunkSize*i));
-                pageCount.insert(pageCount.begin()+i,0);
-                pagePointer.insert(pagePointer.begin()+i,0);
+
+            for (int i=0; i<(m-1) ;i++){
+                if (i*chunkSize < this->blockCount-tillPage){
+                    cout << "getting page " << chunkSize*i <<  " Block count:" << this->blockCount << " tillPage:"<< tillPage << " i:" << i <<  endl;
+                    // pageArr.insert(pageArr.begin()+i,bufferManager.getPage(this->tableName,tillPage+chunkSize*i));
+                    pageArr.insert(pageArr.begin()+i,bufferManager.getPage(readTable,tillPage+chunkSize*i));
                 
-            }       
+                    pageCount.insert(pageCount.begin()+i,0);
+                    pagePointer.insert(pagePointer.begin()+i,0);
+                }
+                else {
+                    pageCount.insert(pageCount.begin()+i,INT_MAX);
+                    pagePointer.insert(pagePointer.begin()+i,INT_MAX);  
+                }
+                
+            }  
+                  
             // cout << "got all pages\n";
             int rowsmerged =0;
             int sumrows = 0;
