@@ -118,7 +118,7 @@ bool Table::blockify()
     this->distinctValuesPerColumnCount.assign(this->columnCount, 0);
     getline(fin, line);
     stringstream s(line);
-    cout << "in blockify ZERO loop over ROWS HERE : " << this->maxRowsPerBlock << endl;
+    // cout << "in blockify ZERO loop over ROWS HERE : " << this->maxRowsPerBlock << endl;
     for (int columnCounter = 0; columnCounter < this->columnCount; columnCounter++)
     {
         if (!getline(s, word, ','))
@@ -143,7 +143,7 @@ bool Table::blockify()
         this->updateStatistics(row);
         if (pageCounter == this->maxRowsPerBlock)
         {
-            cout << "in blockify ZERO ROWS HERE : " << pageCounter << endl;
+            // cout << "in blockify ZERO ROWS HERE : " << pageCounter << endl;
             bufferManager.writePage(this->tableName, this->blockCount, rowsInPage, pageCounter);
             this->blockCount++;
             this->rowsPerBlockCount.emplace_back(pageCounter);
@@ -151,7 +151,7 @@ bool Table::blockify()
         }
     }
 
-    cout << "in blockify second loop over" << endl;
+    // cout << "in blockify second loop over" << endl;
     if (pageCounter)
     {
         bufferManager.writePage(this->tableName, this->blockCount, rowsInPage, pageCounter);
@@ -405,6 +405,8 @@ int Table::indexTable(string columnName, IndexingStrategy indexingStrategy, stri
             // thirdParam -> fanout
             this->indexingStrategy = BTREE;
             this->BplusTree = bplusTree(this->tableName, thirdParam, this->rowCount, this->indexedColumnNumber);
+            this->sortNoIndex(columnName,this->tableName);
+
             /*
             *
             *
@@ -1107,6 +1109,7 @@ int Table::deleteRow(vector <int> values){
         }
         else{
             // HASH
+
         }
     }
     else{
@@ -1131,7 +1134,7 @@ int Table::deleteRow(vector <int> values){
                 if(found){
                     this->rowsPerBlockCount[i]--;
                     rows.erase(rows.begin() + j);
-                    page.writeRows(rows,this->rowsPerBlockCount[i]);
+                    page.writeRows(rows,this->rowsPerBlockCount[i] - 1);
                     page.writePage();
                     bufferManager.updatePage(this->tableName + "_Page" + to_string(i),page);
                     cout << "Deleted from Page:\t" <<  i << endl;
