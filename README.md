@@ -1,4 +1,4 @@
-# SimpleRA
+# Project PreQL
 
 ## Usage
 
