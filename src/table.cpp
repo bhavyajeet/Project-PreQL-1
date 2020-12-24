@@ -554,17 +554,13 @@ pair<int,int> Table::insertLast(vector<int> values)
 int Table::insertRow(vector<int> values)
 {
     logger.log("Table::insert");
-    cout << "LOLOLOL\t " << this->indexingStrategy << endl;
     if(this->indexed){
         cout << "Indexed Table" << endl;
         if(this->indexingStrategy == BTREE){
             // do not insert at last, insert in the overflow page instead
-            cout << "ME INSERT" << endl;
             pair <int,int> p = this->BplusTree.search(values[this->indexedColumnNumber]);
-            cout << p.first << " " << p.second << endl;
             // pair<int,int> p = this->insertLast(values);
             Page page = bufferManager.getPage(this->tableName,-1);
-            cout << page.getRowCount() << "\tROW COUNT" << endl;;
             if(page.getRowCount() == this->maxRowsPerBlock){
                 // block full re-index
                 Page page1 = bufferManager.getPage(this->tableName,-1);
@@ -591,9 +587,6 @@ int Table::insertRow(vector<int> values)
         {
             // hash
             pair<int,int> p = this->insertLast(values);
-            cout << "HASH INDEX HUA HAI" << endl;
-            cout << "wherePage:\t" << p.first << endl;
-            cout << "whereRow:\t" << p.second << endl;
             this->Hashing.insertItem(values[this->indexedColumnNumber],p.first,p.second);
             this->Hashing.displayHash();
         }   
@@ -1181,7 +1174,6 @@ int Table::addCol(string columnName){
     resultantTable->tableName=nameOG;
     tableCatalogue.insertTable(resultantTable);
     // this->columns.emplace_back(columnName);
-    cout << "PUSHED"<< endl;
     // Page lkl = bufferManager.getPage(nameOG,18);
     // vector <vector<int>> polo = lkl.getRows();
     // for (auto lk : polo){
@@ -1297,7 +1289,7 @@ int Table::deleteRow(vector <int> values){
                     }
                 }
                 if(!found){
-                    cout << "NOT FOUND SAARRY :(((" << endl;
+                    cout << "NOT FOUND" << endl;
                 }
             }
         }
@@ -1310,8 +1302,6 @@ int Table::deleteRow(vector <int> values){
                 found = 1;
                 int pageNum = p[i].first;
                 int rowNum = p[i].second;
-                cout << "PageNum:\t" << pageNum << endl;
-                cout << "RowNum:\t" << rowNum << endl;
                 Page page = bufferManager.getPage(this->tableName,pageNum);
                 vector < vector<int> > rows = page.getRows();
                 
@@ -1324,7 +1314,6 @@ int Table::deleteRow(vector <int> values){
                 }
                 if(found){
                     // delete this
-                    cout << "DELETING" << endl;
                     Page page = bufferManager.getPage(this->tableName,pageNum);
                     vector < vector<int> > rows = page.getRows();
                     rows.erase(rows.begin() + rowNum);
@@ -1343,7 +1332,6 @@ int Table::deleteRow(vector <int> values){
             Page page = bufferManager.getPage(this->tableName,i);
             // cout << i << "`LALAL" << endl;
             vector < vector<int> > rows = page.getRows();
-            cout << this->rowsPerBlockCount[i] << endl;
             for (int j = 0; j < this->rowsPerBlockCount[i] && !found; j++)
             {
                 /* code */
@@ -1360,8 +1348,6 @@ int Table::deleteRow(vector <int> values){
                     page.writeRows(rows,this->rowsPerBlockCount[i] - 1);
                     page.writePage();
                     bufferManager.updatePage(this->tableName + "_Page" + to_string(i),page);
-                    cout << "Deleted from Page:\t" <<  i << endl;
-                    cout << "Deleted from Row:\t" << j << endl;
                 }
             }
         }
@@ -1464,7 +1450,6 @@ int Table::deleteCol(string columnName){
     resultantTable->tableName=nameOG;
     tableCatalogue.insertTable(resultantTable);
     // this->columns.emplace_back(columnName);
-    cout << "PUSHED"<< endl;
     // Page lkl = bufferManager.getPage(nameOG,18);
     // vector <vector<int>> polo = lkl.getRows();
     // for (auto lk : polo){
@@ -1473,7 +1458,6 @@ int Table::deleteCol(string columnName){
     //     }
     //     cout << endl;
     // } 
-    cout << "PRINTED LAST PADE \n";
 
 
     // this->columns.emplace_back(columnName);

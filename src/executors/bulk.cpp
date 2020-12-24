@@ -37,7 +37,6 @@ bool semanticParseBULK_INSERT()
 void executeBULK_INSERT()
 {
     logger.log("executeLOAD");
-    cout << "bulky bulky " << endl;
     Table *table = tableCatalogue.getTable(parsedQuery.bulkInsertRelationName);
     bool indexed = table->indexed;
     IndexingStrategy indexingStrategy = table->indexingStrategy;
@@ -98,7 +97,6 @@ void executeBULK_INSERT()
         if (pageCounter == table->maxRowsPerBlock && !lpflag  ){
 
             lpflag =1;        
-            cout << "WRITING TO THE LAST PAGE : "  << endl;
 
             // bufferManager.updatePage();
             bufferManager.writePage(table->tableName, table->blockCount-1, lastPageRows, pageCounter);
@@ -113,7 +111,6 @@ void executeBULK_INSERT()
 
         //writing to new page 
         else if (pageCounter == table->maxRowsPerBlock && lpflag  ){
-            cout << "WRITING TO NEW PAGE : " << table->blockCount+1 << endl;
             bufferManager.writePage(table->tableName, table->blockCount, lastPageRows , pageCounter);
             table->blockCount++;
             table->rowsPerBlockCount.emplace_back(pageCounter);
@@ -121,7 +118,6 @@ void executeBULK_INSERT()
         }
 
     }
-    cout << "in blockify second loop over" << endl;
     if (pageCounter)
     {
         bufferManager.writePage(table->tableName, table->blockCount, lastPageRows , pageCounter);

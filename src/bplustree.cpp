@@ -104,18 +104,13 @@ void bplusTree::searchAndUpdate(int x, int pagePtr, int rowPtr) {
  * @return  
  */
 void bplusTree::insert(int x, int pagePtr, int rowPtr) {
-    cout << "WHAT IS YOUR NAME?\t" << x <<  endl;
   if (root == NULL) {
-      cout << "RERERERERERE" << endl;
     root = new Node;
-    cout << "WINDI";
     root->key[0] = x;
-    cout << "RANDI";
     root->rowPtr[0] = rowPtr;
     root->pagePtr[0] = pagePtr;
     root->IS_LEAF = true;
     root->size = 1;
-    cout << "RARARARAR" << endl;
   } else {
     Node *cursor = root;
     Node *parent;
@@ -150,7 +145,6 @@ void bplusTree::insert(int x, int pagePtr, int rowPtr) {
       cursor->ptr[cursor->size] = cursor->ptr[cursor->size - 1];
       cursor->ptr[cursor->size - 1] = NULL;
     } else {
-        cout << "LAUWA ADAADFAF\t" << x  << endl;
       Node *newLeaf = new Node;
       int virtualNode[this->MAX + 1];
       int virtualPageNode[this->MAX + 1];
@@ -160,7 +154,6 @@ void bplusTree::insert(int x, int pagePtr, int rowPtr) {
         virtualPageNode[i] = cursor->pagePtr[i];
         virtualRowNode[i] = cursor->rowPtr[i];
       }
-      cout << "AUR KAISA HAI BEY" << endl;
       int i = 0, j;
       while (x > virtualNode[i] && i < this->MAX)
         i++;
@@ -319,7 +312,6 @@ Node *bplusTree::findParent(Node *cursor, Node *child) {
  * @return  
  */
 void bplusTree::display(Node *cursor) {
-    cout << "ANNA" << endl;
   if (cursor != NULL) {
     for (int i = 0; i < cursor->size; i++) {
       cout << cursor->key[i] << " " << "{{" << cursor->pagePtr[i] << "}}((" <<  cursor->rowPtr[i] << "))" << endl;

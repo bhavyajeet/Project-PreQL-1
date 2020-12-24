@@ -59,7 +59,6 @@ bool semanticParseALTER()
 void executeALTER()
 {
     logger.log("executeALTER");
-    cout <<"executeALTER"<< endl;
     Table *table = tableCatalogue.getTable(parsedQuery.alterRelationName);
     bool indexed = table->indexed;
     IndexingStrategy indexingStrategy = table->indexingStrategy;
@@ -67,14 +66,12 @@ void executeALTER()
     string indexedColumn = table->indexedColumn;
     if (parsedQuery.alterOperation == "ADD")
     {
-        cout <<"adding"<< endl;
         table->addCol(parsedQuery.alterColumnName);
     }
     else if (parsedQuery.alterOperation == "DELETE")
     {
         table->deleteCol(parsedQuery.alterColumnName);
     }
-    cout << "will alter table " << endl;
     if(indexed){
         Table * tabl = tableCatalogue.getTable(parsedQuery.alterRelationName);
         if(tabl){

@@ -72,7 +72,5 @@ void executeSORT(){
         tableToSort->sortDesc(parsedQuery.sortColumnName,parsedQuery.sortResultRelationName,1,parsedQuery.sortBufferSize);
     }
 
-    cout << "sorting aint so easy bruh";
-
     return;
 }

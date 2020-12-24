@@ -53,7 +53,6 @@ void hashing::reHash(int key){
     temp.push_back(this->bucks[i]);
   }
   this->bucks.clear();
-  cout << "OKOKOKOKOKOK" << endl;
   for (int i = 0; i < BUCKET * 2; i++)
   {
     bt* buk = (bt*) malloc(sizeof(bt));

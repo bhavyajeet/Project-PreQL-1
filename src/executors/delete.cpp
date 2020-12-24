@@ -33,12 +33,9 @@ bool semanticParseDELETE()
 void executeDELETE()
 {
     logger.log("executeDELETE");
-    cout << "MAI DELETE KARNE VALA HUN" << endl;
     for (int stp=0;stp<tokenizedQuery.size()-4;stp++) {
         int val1 = stoi(tokenizedQuery[stp+4]);
-        cout << val1 << " " << endl;
     }
-    cout << endl;
     Table * table = tableCatalogue.getTable(parsedQuery.deleteRelationName);
     int ret = table->deleteRow(parsedQuery.deleteValues);
     if(!ret){
