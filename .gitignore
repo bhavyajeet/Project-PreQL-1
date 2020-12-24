@@ -1,2 +1,6 @@
 .vsc/
 .vsc/*
+.vscode/
+.vscode/*
+src/.vscode/
+src/.vscode/*
